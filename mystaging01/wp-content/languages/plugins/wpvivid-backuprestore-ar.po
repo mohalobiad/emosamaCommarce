@@ -1,0 +1,2842 @@
+# Translation of Plugins - Migration, Backup, Staging – WPvivid Backup &amp; Migration - Stable (latest release) in Arabic
+# This file is distributed under the same license as the Plugins - Migration, Backup, Staging – WPvivid Backup &amp; Migration - Stable (latest release) package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2023-02-28 00:41:07+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=(n == 0) ? 0 : ((n == 1) ? 1 : ((n == 2) ? 2 : ((n % 100 >= 3 && n % 100 <= 10) ? 3 : ((n % 100 >= 11 && n % 100 <= 99) ? 4 : 5))));\n"
+"X-Generator: GlotPress/4.0.2\n"
+"Language: ar\n"
+"Project-Id-Version: Plugins - Migration, Backup, Staging – WPvivid Backup &amp; Migration - Stable (latest release)\n"
+
+#: admin/class-wpvivid-admin.php:1716
+msgid "Unlimited domains"
+msgstr "نطاقات لامحدودة"
+
+#: includes/snapshot/class-wpvivid-snapshots-list.php:41
+msgid "Comment"
+msgstr "التعليق"
+
+#: includes/snapshot/class-wpvivid-snapshots-list.php:40
+msgid "Prefix"
+msgstr "البادئة"
+
+#: includes/snapshot/class-wpvivid-snapshots-list.php:39
+msgid "Type"
+msgstr "النوع"
+
+#: includes/snapshot/class-wpvivid-snapshots-list.php:38
+msgid "Time"
+msgstr "الوقت"
+
+#: includes/snapshot/class-wpvivid-snapshots-list.php:37
+msgid "cb"
+msgstr "cb"
+
+#: includes/snapshot/class-wpvivid-snapshot.php:1606
+msgid "If you need any help with our plugin, start a thread on the plugin support forum and we will respond shortly."
+msgstr "إذا كنت بحاجة إلى أي مساعدة في المكون الإضافي الخاص بنا ، فابدأ موضوعًا في منتدى دعم البرنامج المساعد وسنستجيب قريبًا."
+
+#: includes/snapshot/class-wpvivid-snapshot.php:1562
+#: includes/snapshot/class-wpvivid-snapshot.php:1604
+msgid "Get Support on Forum"
+msgstr "احصل على الدعم في المنتدى"
+
+#: includes/snapshot/class-wpvivid-snapshot.php:1551
+#: includes/snapshot/class-wpvivid-snapshot.php:1592
+msgid "Restore Database Snapshots"
+msgstr "استعادة لقطات قاعدة البيانات"
+
+#: includes/snapshot/class-wpvivid-snapshot.php:1548
+#: includes/snapshot/class-wpvivid-snapshot.php:1587
+msgid "Create Database Snapshots"
+msgstr "إنشاء لقطات قاعدة البيانات"
+
+#: includes/snapshot/class-wpvivid-snapshot.php:1580
+msgid "Documentation"
+msgstr "وثائق المساعدة"
+
+#: includes/snapshot/class-wpvivid-snapshot.php:1050
+msgid "Are you sure to delete the selected snapshots? These snapshots will be deleted permanently."
+msgstr "هل أنت متأكد من حذف اللقطات المحددة؟ سيتم حذف هذه اللقطات بشكل دائم."
+
+#: includes/snapshot/class-wpvivid-snapshot.php:1000
+msgid "Are you sure you want to delete this snapshot?"
+msgstr "هل أنت متأكد من أنك تريد حذف هذه اللقطة؟"
+
+#: includes/snapshot/class-wpvivid-snapshot.php:905
+msgid "Are you sure you want to restore this snapshot?"
+msgstr "هل أنت متأكد أنك تريد استعادة هذه اللقطة؟"
+
+#: includes/snapshot/class-wpvivid-snapshot.php:80
+msgid "Database Snapshots"
+msgstr "لقطات قاعدة البيانات"
+
+#: admin/class-wpvivid-admin.php:1727
+msgid "See Plans"
+msgstr "اطلع على الخطط"
+
+#: includes/customclass/class-wpvivid-dropbox.php:685
+msgid "To add Dropbox, please get Dropbox authentication first. Once authenticated, you will be redirected to this page, then you can add storage information and save it."
+msgstr "لإضافة Dropbox، يرجى الحصول على مصادقة Dropbox أولاً. بمجرد المصادقة، سيتم إعادة توجيهك إلى هذه الصفحة، بعدها يمكنك إضافة معلومات التخزين وحفظها."
+
+#: admin/partials/wpvivid-settings-page-display.php:353
+msgid "Junk Size:"
+msgstr "حجم الملفات عير الهامة:"
+
+#: admin/partials/wpvivid-settings-page-display.php:346
+msgid "Backup Cache Size:"
+msgstr "حجم الذاكرة المخبئية للنسخ الاحتياطي:"
+
+#: admin/partials/wpvivid-settings-page-display.php:339
+msgid "Logs Size:"
+msgstr "خجم السجلات:"
+
+#: admin/partials/wpvivid-settings-page-display.php:332
+msgid "Backup Size:"
+msgstr "حجم النسخة الاحتياطية:"
+
+#: includes/upload-cleaner/class-wpvivid-uploads-cleaner.php:1754
+msgid "lsolated Folder Path: "
+msgstr "مسار المجلد المعزول: "
+
+#: includes/upload-cleaner/class-wpvivid-uploads-cleaner.php:1751
+msgid "This tab displays the isolated images and their locations. You can choose to restore or delete specific isolated images."
+msgstr "تعرض علامة التبويب هذه الصور المعزولة ومواقعها. يمكنك اختيار استعادة أو حذف صور معزولة محددة."
+
+#: includes/upload-cleaner/class-wpvivid-uploads-cleaner.php:1118
+#: includes/upload-cleaner/class-wpvivid-uploads-cleaner.php:1761
+msgid "All Folders"
+msgstr "كل المجلدات"
+
+#: includes/upload-cleaner/class-wpvivid-uploads-cleaner.php:1116
+#: includes/upload-cleaner/class-wpvivid-uploads-cleaner.php:1130
+#: includes/upload-cleaner/class-wpvivid-uploads-cleaner.php:1759
+#: includes/upload-cleaner/class-wpvivid-uploads-cleaner.php:1770
+msgid "Search"
+msgstr "البحث"
+
+#: includes/upload-cleaner/class-wpvivid-uploads-cleaner.php:1080
+msgid "Clicking the 'Scan' button to find unused images in your media folder. Currently it only scans JPG and PNG images."
+msgstr "يمكنك النقر فوق زر «الفحص» للعثور على صور غير مستخدمة في مجلد الوسائط الخاص بك. يقوم حاليا فقط بمسح صور JPG و PNG."
+
+#: includes/upload-cleaner/class-wpvivid-uploads-cleaner.php:1074
+msgid "Media path: "
+msgstr "مسار الوسائط: "
+
+#: includes/upload-cleaner/class-wpvivid-uploads-cleaner.php:1070
+msgid "In the tab, you can scan your media folder (uploads) to find unused images and isolate specific or all unused images."
+msgstr "في علامة التبويب، يمكنك فحص مجلد الوسائط (uploads) للعثور على صور غير مستخدمة وعزل جميع الصور الغير مستخدمة أو بعضها."
+
+#: includes/upload-cleaner/class-wpvivid-uploads-cleaner.php:1027
+msgid "Isolated Media"
+msgstr "الوسائط المعزولة"
+
+#: includes/upload-cleaner/class-wpvivid-uploads-cleaner.php:1026
+msgid "Scan Media"
+msgstr "فحص الوسائط"
+
+#: includes/upload-cleaner/class-wpvivid-uploads-cleaner.php:766
+#: includes/upload-cleaner/class-wpvivid-uploads-cleaner.php:804
+msgid "Restoring images..."
+msgstr "استعادة الصور..."
+
+#: includes/upload-cleaner/class-wpvivid-uploads-cleaner.php:760
+#: includes/upload-cleaner/class-wpvivid-uploads-cleaner.php:798
+msgid "Delete all images"
+msgstr "حذف كل الصور"
+
+#: includes/upload-cleaner/class-wpvivid-uploads-cleaner.php:759
+#: includes/upload-cleaner/class-wpvivid-uploads-cleaner.php:797
+msgid "Delete selected images"
+msgstr "حذف الصور المحددة"
+
+#: includes/upload-cleaner/class-wpvivid-uploads-cleaner.php:758
+#: includes/upload-cleaner/class-wpvivid-uploads-cleaner.php:796
+msgid "Restore all images"
+msgstr "استعادة كل الصور"
+
+#: includes/upload-cleaner/class-wpvivid-uploads-cleaner.php:757
+#: includes/upload-cleaner/class-wpvivid-uploads-cleaner.php:795
+msgid "Restore selected images"
+msgstr "استعادة كل الصور المحددة."
+
+#: includes/upload-cleaner/class-wpvivid-uploads-cleaner.php:351
+#: includes/upload-cleaner/class-wpvivid-uploads-cleaner.php:378
+msgid "Isolating images..."
+msgstr "الصور المعزولة..."
+
+#: includes/upload-cleaner/class-wpvivid-uploads-cleaner.php:347
+#: includes/upload-cleaner/class-wpvivid-uploads-cleaner.php:374
+#: includes/upload-cleaner/class-wpvivid-uploads-cleaner.php:762
+#: includes/upload-cleaner/class-wpvivid-uploads-cleaner.php:800
+msgid "Apply"
+msgstr "تطبيق"
+
+#: includes/upload-cleaner/class-wpvivid-uploads-cleaner.php:345
+#: includes/upload-cleaner/class-wpvivid-uploads-cleaner.php:372
+msgid "Isolate all images"
+msgstr "عزل كل الصور"
+
+#: includes/upload-cleaner/class-wpvivid-uploads-cleaner.php:344
+#: includes/upload-cleaner/class-wpvivid-uploads-cleaner.php:371
+msgid "Isolate selected images"
+msgstr "عزل الصور المحددة"
+
+#: includes/upload-cleaner/class-wpvivid-uploads-cleaner.php:343
+#: includes/upload-cleaner/class-wpvivid-uploads-cleaner.php:370
+#: includes/upload-cleaner/class-wpvivid-uploads-cleaner.php:756
+#: includes/upload-cleaner/class-wpvivid-uploads-cleaner.php:794
+msgid "Bulk Actions"
+msgstr "إجراءت بالجملة"
+
+#: includes/upload-cleaner/class-wpvivid-uploads-cleaner.php:341
+#: includes/upload-cleaner/class-wpvivid-uploads-cleaner.php:368
+#: includes/upload-cleaner/class-wpvivid-uploads-cleaner.php:754
+#: includes/upload-cleaner/class-wpvivid-uploads-cleaner.php:792
+msgid "Select bulk action"
+msgstr "تحديد الإجراء بالجملة"
+
+#: includes/staging/class-wpvivid-staging-setting.php:204
+#: includes/staging/class-wpvivid-staging-setting.php:383
+msgid "With this option checked, all staging sites you have created will be retained when the plugin is deleted, just in case you still need them later. The sites will show up again after the plugin is reinstalled."
+msgstr "من خلال تحديد هذا الخيار، سيتم الاحتفاظ بجميع المواقع المرحلية التي قمت بإنشائها عند حذف الإضافة، فقط في حال كنت لا تزال بحاجة إليها لاحقًا. ستظهر المواقع مرة أخرى بعد إعادة الإضافة."
+
+#: includes/staging/class-wpvivid-staging-setting.php:193
+#: includes/staging/class-wpvivid-staging-setting.php:372
+msgid "When checked, this option allows you to keep the current permalink structure when you create a staging site or push a staging site to live."
+msgstr "يتيح لك تحديد هذا الخيار الحفاظ على بنية الرابط hلدائم الحالي عند إنشاء موقع مرحلي (بيئة ما قبل الإنتاج) أو إطلاقه."
+
+#: includes/staging/class-wpvivid-staging-setting.php:182
+#: includes/staging/class-wpvivid-staging-setting.php:361
+msgid "When the option is checked, anyone will be able to visit the staging site without the need to login. Uncheck it to request a login to visit the staging site."
+msgstr "عند تحديد الخيار، سيتمكن أي شخص من زيارة الموقع المرحلي دون الحاجة إلى تسجيل الدخول. قم بإلغاء تحديده لطلب تسجيل الدخول لزيارة الموقع المرحلي."
+
+#: includes/staging/class-wpvivid-staging-list-ui-display.php:1147
+msgid "Are you sure to restart this staging site?"
+msgstr "هل أنت متأكد من إعادة تشغيل هذا الموقع المرحلي؟"
+
+#: includes/staging/class-wpvivid-staging-list-ui-display.php:1120
+msgid "Are you sure to delete this staging site?"
+msgstr "هل أنت متأكد من حذف هذا الموقع المرحلي؟"
+
+#: includes/staging/class-wpvivid-staging-create-ui-display.php:382
+#: includes/staging/class-wpvivid-staging-create-ui-display.php:391
+#: includes/staging/class-wpvivid-staging-create-ui-display.php:400
+msgid "Click OK to start creating the staging site."
+msgstr "انقر فوق «موافق» لبدء إنشاء الموقع المرحلي."
+
+#: includes/staging/class-wpvivid-fresh-install-create-ui-display.php:568
+msgid "Click OK to start creating fresh WordPress install."
+msgstr "انقر فوق «موافق» لبدء إنشاء تثبيت ووردبريس جديد."
+
+#: includes/customclass/class-wpvivid-ftpclass.php:390
+msgid "Warning: Root directory is forbidden to set to '/'."
+msgstr "تحذير: دليل الجذر محظور من تعيينه إلى '/'."
+
+#: admin/partials/wpvivid-backup-restore-page-display.php:2473
+#: admin/partials/wpvivid-schedule-page-display.php:203
+#: includes/class-wpvivid.php:7091
+msgid "Add a storage"
+msgstr "إضافة وحدة تخزين"
+
+#: admin/partials/wpvivid-remote-storage-page-display.php:72
+#: includes/class-wpvivid.php:7030
+msgid "Remove the remote storage"
+msgstr "حذف كل وحدات التخزين البعيدة"
+
+#: admin/partials/wpvivid-remote-storage-page-display.php:70
+#: includes/class-wpvivid.php:7028
+msgid "Edit the remote storage"
+msgstr "تحرير وحدة التخزين البعيدة"
+
+#: includes/class-wpvivid.php:6851 includes/class-wpvivid.php:6987
+msgid "Delete the backup"
+msgstr "حذف النسخة الاحتياطية"
+
+#: includes/class-wpvivid.php:6808
+msgid "Click the button to complete website restore or migration"
+msgstr "انقر فوق الزر لإكمال استعادة الموقع أو الترحيل"
+
+#: includes/class-wpvivid.php:6733 includes/class-wpvivid.php:6874
+msgid "Uploaded Backup: "
+msgstr "النسخة الاحتياطية المرفوعة: "
+
+#: includes/class-wpvivid.php:5404
+msgid "You have successfully changed your default remote storage."
+msgstr "لقد غيرت بنجاح وحدة التخزين البعيدة الافتراضية."
+
+#: includes/class-wpvivid-public-interface.php:32
+msgid "Manual"
+msgstr "يدوي"
+
+#: includes/class-wpvivid-migrate.php:1339
+msgid "Clone then Transfer"
+msgstr "استناخ ومن ثم نقل"
+
+#: includes/class-wpvivid-migrate.php:1043
+#: includes/class-wpvivid-migrate.php:1181
+msgid "Save"
+msgstr "حفظ"
+
+#: includes/class-wpvivid-migrate.php:721
+#: includes/new_backup/class-wpvivid-backup2.php:1599
+msgid "The key has expired."
+msgstr "المفتاح منتهي الصلاحية."
+
+#: includes/class-wpvivid-migrate.php:714
+#: includes/new_backup/class-wpvivid-backup2.php:1591
+msgid "The key is invalid."
+msgstr "المفتاح غير صالح."
+
+#: includes/class-wpvivid-migrate.php:702
+#: includes/new_backup/class-wpvivid-backup2.php:1577
+msgid "A key is required."
+msgstr "المفتاح مطلوب."
+
+#: includes/class-wpvivid-migrate.php:469
+msgid "24 hours"
+msgstr "24 ساعة"
+
+#: includes/class-wpvivid-migrate.php:468
+msgid "8 hours"
+msgstr "8 ساعات"
+
+#: includes/class-wpvivid-migrate.php:467
+msgid "2 hours"
+msgstr "ساعتان"
+
+#: includes/class-wpvivid-exporter.php:585
+msgid "Reset Filters"
+msgstr "إعادة تعيين عوامل التصفية"
+
+#: includes/class-wpvivid-export-import.php:1982
+msgid "Please select an existing author to start importing."
+msgstr "يرجى تحديد كاتب حالي لبدء الاستيراد."
+
+#: includes/class-wpvivid-export-import.php:1937
+msgid "Import failed."
+msgstr "فشل الاستيراد."
+
+#: includes/class-wpvivid-export-import.php:1931
+msgid "Import completed successfully."
+msgstr "انتهى الاستيراد بنجاح."
+
+#: includes/class-wpvivid-export-import.php:1830
+msgid "Are you sure you want to delete all the exported files in the /ImportandExport folder? All the export files in the folder will be permanently deleted."
+msgstr "هل أنت متأكد من أنك تريد حذف جميع الملفات التي تم تصديرها في مجلد /importandexport؟ سيتم حذف جميع ملفات التصدير في المجلد بشكل دائم."
+
+#: includes/class-wpvivid-export-import.php:624
+msgid "Show Pages"
+msgstr "إظهار الصفحات"
+
+#: includes/class-wpvivid-export-import.php:624
+msgid "Show Posts"
+msgstr "إظهار المقالات"
+
+#: includes/class-wpvivid-export-import.php:321
+msgid "You can not use word 'wpvivid' to comment the post."
+msgstr "يمكنك استخدم كلمة \"wpvivd\" للتعليق على المقالة."
+
+#: admin/partials/wpvivid-settings-page-display.php:750
+#: admin/partials/wpvivid-settings-page-display.php:805
+msgid "Seconds"
+msgstr "ثواني"
+
+#: admin/partials/wpvivid-settings-page-display.php:410
+msgid "The selected item(s) will be permanently deleted. Are you sure you want to continue?"
+msgstr "سيتم حذف العنصر (العناصر) المحددة بشكل دائم. هل أنت متأكد أنك تريد المتابعة؟"
+
+#: admin/partials/wpvivid-settings-page-display.php:208
+msgid "Out of date backups have been removed."
+msgstr "تم إزالة النسخ الاحتياطية القديمة."
+
+#: admin/partials/wpvivid-remote-storage-page-display.php:225
+msgid "Deleting a remote storage will make it unavailable until it is added again. Are you sure to continue?"
+msgstr "سيؤدي حذف التخزين عن بُعد إلى عدم توافره حتى يتم إضافته مرة أخرى. هل أنت متأكد من الاستمرار؟"
+
+#: admin/partials/wpvivid-backup-restore-page-display.php:1541
+#: admin/partials/wpvivid-backup-restore-page-display.php:1704
+msgid "Restore failed."
+msgstr "فشلت الاستعادة."
+
+#: admin/partials/wpvivid-backup-restore-page-display.php:1464
+msgid "Are you sure to continue?"
+msgstr "هل أنت متأكد بأنك ترغب بالاستمرار؟"
+
+#: admin/partials/wpvivid-backup-restore-page-display.php:761
+#: includes/class-wpvivid.php:6836 includes/class-wpvivid.php:6972
+msgid "Prepare to download the backup"
+msgstr "التحضير لتنزيل النسخة الاحتياطية"
+
+#: admin/partials/wpvivid-backup-restore-page-display.php:58
+msgid "Downloaded Size: "
+msgstr "حجم التنزيل: "
+
+#: admin/partials/wpvivid-backup-restore-page-display.php:58
+msgid "Retriving (remote storage to web server)"
+msgstr "الاسترداد (من التخزين عن بُعد إلى خادوم الويب)"
+
+#: admin/partials/wpvivid-backup-restore-page-display.php:53
+#: admin/partials/wpvivid-backup-restore-page-display.php:70
+#: admin/partials/wpvivid-backup-restore-page-display.php:79
+#: includes/class-wpvivid.php:2816 includes/class-wpvivid.php:2830
+msgid "Prepare to Download"
+msgstr "التحضير للتنزيل"
+
+#: admin/class-wpvivid-admin.php:1466
+msgid "Send succeeded."
+msgstr "تم الإرسال بنجاح."
+
+#: admin/class-wpvivid-admin.php:1351
+msgid "VPS hosting"
+msgstr "استضافة خادوم ظاهري خاص (vps)"
+
+#: admin/class-wpvivid-admin.php:1350
+msgid "share hosting"
+msgstr "استضافة مشتركة"
+
+#: admin/class-wpvivid-admin.php:697 admin/class-wpvivid-admin.php:715
+msgid "Already Done"
+msgstr "تم بالفعل"
+
+#: admin/class-wpvivid-admin.php:698 admin/class-wpvivid-admin.php:716
+msgid "Never"
+msgstr "أبدًا"
+
+#: admin/class-wpvivid-admin.php:696 admin/class-wpvivid-admin.php:714
+msgid "Maybe Later"
+msgstr "ربما لاحقاً"
+
+#: admin/class-wpvivid-admin.php:695 admin/class-wpvivid-admin.php:713
+msgid "Rate Us"
+msgstr "قيِّمنا"
+
+#: includes/staging/class-wpvivid-staging-setting.php:159
+#: includes/staging/class-wpvivid-staging-setting.php:338
+msgid "Retrying"
+msgstr "إعادة المحاولة"
+
+#: admin/partials/wpvivid-schedule-page-display.php:165
+#: includes/class-wpvivid.php:7120
+msgid "Send backups to remote storage (You can choose whether to keep the backup in localhost after it is uploaded to cloud storage in Settings.)"
+msgstr "أرسل النسخ الاحتياطية إلى التخزين عن بُعد (يمكنك اختيار ما إذا كنت تريد الاحتفاظ بالنسخ الاحتياطي في المضيف المحلي بعد رفعه إلى التخزين السحابي في الإعدادات.)"
+
+#: admin/partials/wpvivid-backup-restore-page-display.php:1083
+msgid "Are you sure to remove the selected backups? These backups will be deleted permanently."
+msgstr "هل أنت متأكد من إزالة النسخ الاحتياطية المحددة؟ سيتم حذف هذه النسخ الاحتياطية بشكل دائم."
+
+#: admin/partials/wpvivid-backup-restore-page-display.php:1031
+msgid "Are you sure to remove this backup? This backup will be deleted permanently."
+msgstr "هل أنت متأكد من إزالة هذه النسخ الاحتياطي؟ سيتم حذف هذه النسخ الاحتياطي بشكل دائم."
+
+#: includes/customclass/class-wpvivid-one-drive.php:411
+msgid "Click to get Microsoft authentication."
+msgstr "انقر للحصول على مصادقة Microsoft."
+
+#: includes/customclass/class-wpvivid-one-drive.php:399
+msgid "To add OneDrive, please get Microsoft authentication first. Once authenticated, you will be redirected to this page, then you can add storage information and save it"
+msgstr "لإضافة OneDrive، يرجى الحصول على مصادقة Microsoft أولاً. بمجرد المصادقة، سيتم إعادة توجيهك إلى هذه الصفحة، ثم يمكنك إضافة معلومات التخزين وحفظها"
+
+#: includes/customclass/class-wpvivid-google-drive.php:427
+msgid "Click to get Google authentication."
+msgstr "انقر للحصول على مصادقة Google."
+
+#: includes/customclass/class-wpvivid-google-drive.php:415
+msgid "To add Google Drive, please get Google authentication first. Once authenticated, you will be redirected to this page, then you can add storage information and save it"
+msgstr "لإضافة Google Drive، يرجى الحصول على مصادقة Google أولاً. بمجرد المصادقة، سيتم إعادة توجيهك إلى هذه الصفحة، ثم يمكنك إضافة معلومات التخزين وحفظها"
+
+#: includes/customclass/class-wpvivid-dropbox.php:722
+msgid "To add Dropbox, please get Dropbox authentication first. Once authenticated, you will be redirected to this page, then you can add storage information and save it"
+msgstr "لإضافة Dropbox، يرجى الحصول على مصادقة Dropbox أولاً. بمجرد المصادقة، سيتم إعادة توجيهك إلى هذه الصفحة، ثم يمكنك إضافة معلومات التخزين وحفظها"
+
+#: includes/customclass/class-wpvivid-dropbox.php:697
+msgid "Click to get Dropbox authentication."
+msgstr "انقر للحصول على مصادقة Dropbox."
+
+#: includes/customclass/class-wpvivid-dropbox.php:571
+#: includes/customclass/class-wpvivid-google-drive.php:298
+#: includes/customclass/class-wpvivid-one-drive.php:282
+msgid "Click the button to add the storage."
+msgstr "انقر فوق الزر لإضافة وحدة التخزين."
+
+#: includes/customclass/class-wpvivid-dropbox.php:566
+#: includes/customclass/class-wpvivid-google-drive.php:293
+#: includes/customclass/class-wpvivid-one-drive.php:277
+msgid "Add Now"
+msgstr "إضافة جديد"
+
+#: includes/class-wpvivid.php:5920 includes/class-wpvivid.php:5925
+msgid "The value of 'Delay Between Requests' can't be empty."
+msgstr "لا يمكن أن تكون قيمة «التأخير بين الطلبات» فارغة."
+
+#: includes/class-wpvivid.php:5909 includes/class-wpvivid.php:5914
+msgid "The value of 'PHP Scripts Execution Timeout' can't be empty."
+msgstr "لا يمكن أن تكون قيمة «مهلة تنفيذ نص PHP البرمجي» فارغة."
+
+#: includes/class-wpvivid.php:5898 includes/class-wpvivid.php:5903
+msgid "The value of 'Staging Memory Limit' can't be empty."
+msgstr "قيمة «حد ذاكرة التشغيل المرحلي» لا يمكن أن تكون فارغة."
+
+#: includes/class-wpvivid.php:5887 includes/class-wpvivid.php:5892
+msgid "The value of 'Max File Size' can't be empty."
+msgstr "قيمة «الحد الأقصى لحجم الملف» لا يمكن أن تكون فارغة."
+
+#: includes/class-wpvivid.php:5876 includes/class-wpvivid.php:5881
+msgid "The value of 'File Copy Count' can't be empty."
+msgstr "قيمة «عدد نُسخ الملف» لا يمكن أن تكون فارغة."
+
+#: includes/class-wpvivid.php:5865 includes/class-wpvivid.php:5870
+msgid "The value of 'DB Replace Count' can't be empty."
+msgstr "قيمة «عدد استبدلات قاعدة البيانات» لا يمكن أن تكون فارغة."
+
+#: includes/class-wpvivid.php:5854 includes/class-wpvivid.php:5859
+msgid "The value of 'DB Copy Count' can't be empty."
+msgstr "قيمة «عدد نُسخ قاعدة البيانات» لا يمكن أن تكون فارغة."
+
+#: includes/class-wpvivid.php:5841 includes/class-wpvivid.php:5846
+msgid "The value of 'Media Files Quantity Processed Per Request' can't be empty."
+msgstr "قيمة «كمية ملفات الوسائط المعالجة لكل طلب» لا يمكن أن تكون فارغة."
+
+#: includes/class-wpvivid.php:5830 includes/class-wpvivid.php:5835
+msgid "The value of 'Posts Quantity Processed Per Request' can't be empty."
+msgstr "قيمة «كمية المقالات المعالجة لكل طلب» لا يمكن أن تكون فارغة."
+
+#: includes/class-wpvivid.php:5791 includes/class-wpvivid.php:5796
+msgid "The value of 'Chunk Size' can't be empty."
+msgstr "قيمة «حجم المقدار» لا يمكن أن تكون فارغة."
+
+#: includes/class-wpvivid.php:5780 includes/class-wpvivid.php:5785
+msgid "The value of 'PHP memory limit for restoration' can't be empty."
+msgstr "قيمة «حد ذاكرة PHP للاستعادة» لا يمكن أن تكون فارغة."
+
+#: includes/class-wpvivid.php:5769 includes/class-wpvivid.php:5774
+msgid "The value of 'PHP memory limit for backup' can't be empty."
+msgstr "لا يمكن أن تكون قيمة «حد ذاكرة PHP للنسخ الاحتياطي» فارغًا."
+
+#: includes/class-wpvivid.php:5758 includes/class-wpvivid.php:5763
+msgid "The value of 'PHP scripts execution timeout for restore' can't be empty."
+msgstr "قيمة «مهلة تنفيذ نصوص PHP للاستعادة» لا يمكن أن تكون فارغة."
+
+#: includes/class-wpvivid.php:5744 includes/class-wpvivid.php:5751
+msgid "The value of 'PHP scripts execution timeout for backup' can't be empty."
+msgstr "قيمة «مهلة تنفيذ نصوص PHP للنسخ الاحتياطي» لا يمكن أن تكون فارغة."
+
+#: includes/class-wpvivid.php:5731 includes/class-wpvivid.php:5738
+msgid "The value of 'Exclude files which are larger than' can't be empty."
+msgstr "قيمة «استبعاد الملفات الأكبر من» لا يمكن أن تكون فارغة."
+
+#: includes/class-wpvivid.php:5717 includes/class-wpvivid.php:5725
+msgid "The value of 'Compress file every' can't be empty."
+msgstr "لا يمكن أن تكون قيمة «ضغط الملف كل» فارغة."
+
+#: includes/class-wpvivid-export-import.php:1622
+msgid "Back"
+msgstr "رجوع"
+
+#: admin/class-wpvivid-admin.php:825
+msgid "Because Dropbox has upgraded their API on September 30, 2021, the new API is no longer compatible with the previous app's settings. Please re-add your Dropbox storage to ensure that it works properly."
+msgstr "نظرًا لأن Dropbox قامت بترقية واجهة برمجة التطبيقات الخاصة بهم في 30 سبتمبر 2021، فإن واجهة برمجة التطبيقات الجديدة لم تعد متوافقة مع إعدادات التطبيق السابقة. يرجى إعادة إضافة تخزين Dropbox للتأكد من أنه يعمل بشكل صحيح."
+
+#: admin/class-wpvivid-admin.php:896
+msgid "In order to execute the scheduled backups properly, please set the DISABLE_WP_CRON constant to false. If you are using an external cron system, simply click 'X' to dismiss this message."
+msgstr "من أجل تنفيذ النُسخ الاحتياطية المجدولة بشكل صحيح، يرجى تعيين ثابت DISABLE_WP_CRON إلى false. إذا كنت تستخدم نظام كرون خارجي، فما عليك سوى النقر فوق \"X\" لرفض هذه الرسالة."
+
+#: includes/class-wpvivid-migrate.php:1428
+msgid "<strong>Tips: </strong>Some web hosts may restrict the connection between the two sites, so you may get a 403 error or unstable connection issue when performing auto migration. In that case, it is recommended to manually transfer the site."
+msgstr "<strong>نصائح:</strong> قد يقيد بعض مضيفون الويب الاتصال بين الموقعين، لذلك قد تواجه خطأ 403 أو مشكلة اتصال غير مستقرة عند إجراء ترحيل تلقائي. في هذه الحالة، يوصى بنقل الموقع يدويًا."
+
+#: includes/staging/class-wpvivid-staging.php:252
+#: includes/staging/class-wpvivid-staging.php:265
+msgid "Staging"
+msgstr "التشغيل المرحلي"
+
+#: includes/staging/class-wpvivid-staging.php:100
+msgid "Create A Fresh WordPress Install"
+msgstr "قم بإنشاء تثبيت ووردبريس جديد"
+
+#: includes/staging/class-wpvivid-staging.php:99
+msgid "Create A Staging Site"
+msgstr "إنشاء موقع مرحلي"
+
+#: includes/staging/class-wpvivid-staging-ui-display.php:1302
+msgid "WPvivid Plugins - Staging"
+msgstr "إضافات WPvivid - التشغيل المرحلي (بيئة ما قبل الانتاج)"
+
+#: includes/staging/class-wpvivid-staging-sites-list.php:352
+#: includes/staging/class-wpvivid-staging-sites-list.php:723
+msgid "Subsite Description"
+msgstr "وضف الموقع الفرعي"
+
+#: includes/staging/class-wpvivid-staging-sites-list.php:351
+#: includes/staging/class-wpvivid-staging-sites-list.php:722
+msgid "Subsite Title"
+msgstr "عنوان الموقع الفرعي"
+
+#: includes/staging/class-wpvivid-staging-sites-list.php:350
+msgid "Subsite Tables/Folders"
+msgstr "جداول/مجلدات الموقع الفرعي"
+
+#: includes/staging/class-wpvivid-staging-sites-list.php:349
+#: includes/staging/class-wpvivid-staging-sites-list.php:720
+msgid "Subsite URL"
+msgstr "رابط الموقع الفرعي"
+
+#: includes/staging/class-wpvivid-staging-setting.php:199
+#: includes/staging/class-wpvivid-staging-setting.php:378
+msgid "Keep staging sites when deleting the plugin"
+msgstr "الإبقاء على المواقع المرحلية (بيئة ما قبل الإنتاج) عن حذف الإضافة"
+
+#: includes/staging/class-wpvivid-staging-setting.php:188
+#: includes/staging/class-wpvivid-staging-setting.php:367
+msgid "Keep permalink when transferring website"
+msgstr "الإبقاء على الرابط الدائم عند نقل الموقع"
+
+#: includes/staging/class-wpvivid-staging-setting.php:177
+#: includes/staging/class-wpvivid-staging-setting.php:356
+msgid "Anyone can visit the staging site"
+msgstr "يمكن لأي شخص زيارة الموقع المرحلي (بيئة ما قبل الإنتاج)"
+
+#: includes/staging/class-wpvivid-staging-setting.php:171
+#: includes/staging/class-wpvivid-staging-setting.php:350
+msgid " times when encountering a time-out error"
+msgstr "مرات عند مواجهة خطأ في المهلة"
+
+#: includes/staging/class-wpvivid-staging-setting.php:155
+#: includes/staging/class-wpvivid-staging-setting.php:334
+msgid "A lower value will help speed up the process of creating a staging site. However, if your server has a limit on the number of requests, a higher value is recommended."
+msgstr "ستساعد القيمة المنخفضة في تسريع عملية إنشاء موقع مرحلي. ومع ذلك، يوصى بقيمة أعلى إذا كان لدى الخادوم الخاص بك حد لعدد الطلبات."
+
+#: includes/staging/class-wpvivid-staging-setting.php:149
+#: includes/staging/class-wpvivid-staging-setting.php:328
+msgid "Delay Between Requests"
+msgstr "التأخير بين الطلبات"
+
+#: includes/staging/class-wpvivid-staging-setting.php:144
+#: includes/staging/class-wpvivid-staging-setting.php:323
+msgid ""
+"The time-out is not your server PHP time-out. With the execution time exhausted, our plugin will shut down the progress of \n"
+"                creating a staging site. If the progress  encounters a time-out, that means you have a medium or large sized website. Please try to \n"
+"                scale the value bigger."
+msgstr "المهلة الزمنية ليست هي المهلة الزمنية الخاصة بخادوم PHP الخاص بك. مع استنفاد وقت التنفيذ، ستوقف الإضافة الخاص بنا عملية مستوى التقدم المحرز في إنشاء موقع مرحلي. في حالة واجه التقدم المحزر نفاد المهلة الزمنية، فهذا يعني أن لديك موقع إلكتروني متوسط ​​أو كبير الحجم، فيرجى محاولة تكبير نطاق القيمة."
+
+#: includes/staging/class-wpvivid-staging-setting.php:138
+#: includes/staging/class-wpvivid-staging-setting.php:317
+msgid "PHP Script Execution Timeout"
+msgstr "المهلة الزمنية لتنفيذ نص PHP البرمجي"
+
+#: includes/staging/class-wpvivid-staging-setting.php:133
+#: includes/staging/class-wpvivid-staging-setting.php:312
+msgid ""
+"Adjust this value to apply for a temporary PHP memory limit for the plugin to create a staging site. \n"
+"                We set this value to 256M by default. Increase the value if you encounter a memory exhausted error. Note: some \n"
+"                web hosting providers may not support this."
+msgstr "اضبط هذه القيمة للتطبيق للحصول على حد لذاكرة PHP للإضافة لإنشاء موقع مرحلي. قمنا بتعيين هذه القيمة مبدئيا إلى 256ميغ. قم بزيادة القيمة إذا واجهت خطأ استنفاد الذاكرة. ملاحظة: قد لا يدعم بعض مقدمي استضافة الويب هذا."
+
+#: includes/staging/class-wpvivid-staging-setting.php:127
+#: includes/staging/class-wpvivid-staging-setting.php:306
+msgid "Staging Memory Limit"
+msgstr "حد ذاكرة التشغيل المرحلي"
+
+#: includes/staging/class-wpvivid-staging-setting.php:124
+#: includes/staging/class-wpvivid-staging-setting.php:303
+msgid "Maximum size of the files copied to a staging site. All files larger than this value will be ignored. If you set the value of 0 MB, all files will be copied to a staging site."
+msgstr "الحد الأقصى لحجم الملفات المنقولة إلى موقع المرحلي. سيتم تجاهل جميع الملفات الأكبر من هذه القيمة. إذا قمت بتعيين قيمة 0 ميغابايت، فسيتم نسخ جميع الملفات إلى موقع مرحلي."
+
+#: includes/staging/class-wpvivid-staging-setting.php:118
+#: includes/staging/class-wpvivid-staging-setting.php:297
+msgid "Max File Size"
+msgstr "الحد الأقصى لحجم الملف"
+
+#: includes/staging/class-wpvivid-staging-setting.php:114
+#: includes/staging/class-wpvivid-staging-setting.php:293
+msgid ""
+"Number of files to copy that will be copied within one ajax request. The higher value makes the file copy process faster. \n"
+"                Please try a high value to find out the highest possible value. If you encounter timeout errors, try lower values until no more errors occur."
+msgstr ""
+"عدد الملفات المراد نسخها والتي ستكون ضمن طلب AJAX واحد. القيمة الأعلى تجعل عملية نسخ الملف أسرع. ↵\n"
+"يرجى تجربة قيمة عالية لمعرفة أعلى قيمة ممكنة. إذا واجهت أخطاء مهلة، فجرّب قيمًا أقل حتى لا تحصل على المزيد من الأخطاء."
+
+#: includes/staging/class-wpvivid-staging-setting.php:108
+#: includes/staging/class-wpvivid-staging-setting.php:287
+msgid "File Copy Count"
+msgstr "عدد نُسخ الملف"
+
+#: includes/staging/class-wpvivid-staging-setting.php:104
+#: includes/staging/class-wpvivid-staging-setting.php:283
+msgid ""
+"Number of DB rows, that are processed within one ajax query. The higher value makes the DB replacement process faster. \n"
+"                If timeout erros occur, decrease the value because this process consumes a lot of memory."
+msgstr ""
+"عدد صفوف قاعدة البيانات، التي تتم معالجتها ضمن استعلام Ajax واحد. القيمة الأعلى تجعل عملية استبدال قاعدة البيانات أسرع. ↵\n"
+"في حالة حدوث أخطأ المهلة، قلل القيمة لأن هذه العملية تستهلك الكثير من الذاكرة."
+
+#: includes/staging/class-wpvivid-staging-setting.php:98
+#: includes/staging/class-wpvivid-staging-setting.php:277
+msgid "DB Replace Count"
+msgstr "عدد استبدلات قاعدة  البيانات"
+
+#: includes/staging/class-wpvivid-staging-setting.php:93
+#: includes/staging/class-wpvivid-staging-setting.php:272
+msgid ""
+"Number of DB rows, that are copied within one ajax query. The higher value makes the database copy process faster. \n"
+"                Please try a high value to find out the highest possible value. If you encounter timeout errors, try lower values until no \n"
+"                more errors occur."
+msgstr ""
+"عدد صفوف قاعدة البيانات، التي يتم نسخها داخل استعلام Ajax واحد. القيمة الأعلى تجعل عملية نسخ قاعدة البيانات أسرع. ↵\n"
+"يرجى تجربة قيمة عالية لمعرفة أعلى قيمة ممكنة. إذا واجهت أخطاء مهلة، فجرّب قيمًا منخفضة حتى لا تتلقى المزيد من الأخطاء تحدث."
+
+#: includes/staging/class-wpvivid-staging-setting.php:87
+#: includes/staging/class-wpvivid-staging-setting.php:266
+msgid "DB Copy Count"
+msgstr "عدد نُسح قاعدة البيانات"
+
+#: includes/staging/class-wpvivid-staging-setting.php:29
+msgid "Staging Settings"
+msgstr "إعدادات التشغيل المرحلي"
+
+#: includes/staging/class-wpvivid-staging-log-page.php:313
+msgid "Staging Logs"
+msgstr "سجلات التشغيل المرحلي"
+
+#: includes/staging/class-wpvivid-staging-log-page.php:28
+msgid "Action\t"
+msgstr "اتخاذ إجراء "
+
+#: includes/staging/class-wpvivid-staging-log-page.php:27
+msgid "Log File Name\t"
+msgstr "اسم ملف السجل"
+
+#: admin/class-wpvivid-admin.php:1102
+msgid "Backup Logs"
+msgstr "سجلات النسخ الاحتياطي"
+
+#: admin/class-wpvivid-admin.php:1708
+msgid "Up to 50 domains"
+msgstr "ما يصل إلى 50 نطاق"
+
+#: admin/class-wpvivid-admin.php:1700
+msgid "Up to 10 domains"
+msgstr "ما صيل إلى 10 نطاقات"
+
+#: admin/class-wpvivid-admin.php:1692
+msgid "2 domains"
+msgstr "نطاقان"
+
+#: admin/class-wpvivid-admin.php:1689
+msgid "Roles & Capabilities"
+msgstr "الأدوار والصلاحيات"
+
+#: admin/class-wpvivid-admin.php:1688
+msgid "White Label"
+msgstr "تسمية بيضاء"
+
+#: admin/class-wpvivid-admin.php:1687
+msgid "Staging Pro"
+msgstr "تشغيل مرحلي احترافي"
+
+#: admin/class-wpvivid-admin.php:1686
+msgid "Mulitsite Support"
+msgstr "دعم المواقع المتعددة"
+
+#: admin/class-wpvivid-admin.php:1685
+msgid "Backup & Migration Pro"
+msgstr "النسخ الاحتياطي والترحيل الإصدار الاحترافي"
+
+#: admin/class-wpvivid-admin.php:1684
+msgid "Domains"
+msgstr "أسماء النطاقات"
+
+#: admin/class-wpvivid-admin.php:1677
+msgid "Small Business"
+msgstr "المشاريع الصغيرة"
+
+#: admin/class-wpvivid-admin.php:1675
+msgid "Blogger"
+msgstr "مدون"
+
+#: admin/class-wpvivid-admin.php:1674
+msgid "Features"
+msgstr "المميزات"
+
+#: admin/partials/wpvivid-backup-restore-page-display.php:49
+msgid "File not found"
+msgstr "لم يتم العثور على الملف"
+
+#: admin/partials/wpvivid-backup-restore-page-display.php:45
+#: admin/partials/wpvivid-backup-restore-page-display.php:53
+#: admin/partials/wpvivid-backup-restore-page-display.php:58
+#: admin/partials/wpvivid-backup-restore-page-display.php:70
+#: admin/partials/wpvivid-backup-restore-page-display.php:79
+#: includes/class-wpvivid.php:2816 includes/class-wpvivid.php:2821
+#: includes/class-wpvivid.php:2830
+msgid "File Size: "
+msgstr "حجم الملف:"
+
+#: admin/partials/wpvivid-backup-restore-page-display.php:32
+msgid "File"
+msgstr "الملف"
+
+#: includes/upload-cleaner/class-wpvivid-uploads-cleaner.php:2651
+#: includes/upload-cleaner/class-wpvivid-uploads-cleaner.php:2743
+#: includes/upload-cleaner/class-wpvivid-uploads-cleaner.php:2799
+msgid "Total Folders:"
+msgstr "إجمالي المجلدات:"
+
+#: includes/upload-cleaner/class-wpvivid-uploads-cleaner.php:2394
+#: includes/upload-cleaner/class-wpvivid-uploads-cleaner.php:2563
+#: includes/upload-cleaner/class-wpvivid-uploads-cleaner.php:2655
+#: includes/upload-cleaner/class-wpvivid-uploads-cleaner.php:2747
+#: includes/upload-cleaner/class-wpvivid-uploads-cleaner.php:2803
+msgid "Scanned:"
+msgstr "تم فحصها:"
+
+#: includes/upload-cleaner/class-wpvivid-uploads-cleaner.php:2390
+#: includes/upload-cleaner/class-wpvivid-uploads-cleaner.php:2559
+msgid "Total Posts:"
+msgstr "إجمالي المقالات:"
+
+#: includes/upload-cleaner/class-wpvivid-uploads-cleaner.php:1101
+msgid "Please don't refresh the page while running a scan."
+msgstr "يرجى عدم تحديث الصفحة أثناء الفحص."
+
+#: includes/upload-cleaner/class-wpvivid-uploads-cleaner.php:1076
+msgid "Scan"
+msgstr "فحص"
+
+#: includes/upload-cleaner/class-wpvivid-uploads-cleaner.php:1013
+msgid "WPvivid Image Cleaner"
+msgstr "منظف الصور من WPvivid "
+
+#: includes/upload-cleaner/class-wpvivid-uploads-cleaner.php:935
+#: includes/upload-cleaner/class-wpvivid-uploads-cleaner.php:948
+msgid "Image Cleaner"
+msgstr "منظف الصور"
+
+#: includes/upload-cleaner/class-wpvivid-uploads-cleaner.php:55
+#: includes/upload-cleaner/class-wpvivid-uploads-cleaner.php:463
+msgid "Size"
+msgstr "الحجم"
+
+#: includes/upload-cleaner/class-wpvivid-uploads-cleaner.php:53
+#: includes/upload-cleaner/class-wpvivid-uploads-cleaner.php:461
+msgid "Path"
+msgstr "المسار"
+
+#: includes/upload-cleaner/class-wpvivid-uploads-cleaner.php:52
+#: includes/upload-cleaner/class-wpvivid-uploads-cleaner.php:460
+msgid "Thumbnail"
+msgstr "الصويرة (الصورة المصغرة)"
+
+#: includes/upload-cleaner/class-wpvivid-upload-cleaner-setting.php:847
+msgid "Set how many media files to process per request. The value should be set depending on your server performance and the recommended value is 100."
+msgstr "حدد عدد ملفات الوسائط لمعالجة كل طلب. يجب تعيين القيمة وفقًا لأداء الخادوم الخاص بك والقيمة الموصى بها هي 100."
+
+#: includes/upload-cleaner/class-wpvivid-upload-cleaner-setting.php:842
+msgid "Media Files Quantity Processed Per Request"
+msgstr "ملفات الوسائط التي تمت معالجتها لكل طلب"
+
+#: includes/upload-cleaner/class-wpvivid-upload-cleaner-setting.php:840
+msgid "Set how many posts to process per request. The value should be set depending on your server performance and the recommended value is 20."
+msgstr "حدد عدد المشاركات لمعالجة كل طلب. يجب تعيين القيمة اعتمادًا على أداء الخادوم الخاص بك والقيمة الموصى بها هي 20."
+
+#: includes/upload-cleaner/class-wpvivid-upload-cleaner-setting.php:835
+msgid "Posts Quantity Processed Per Request"
+msgstr "كمية المقالات المعالجة لكل طلب"
+
+#: includes/upload-cleaner/class-wpvivid-upload-cleaner-setting.php:830
+msgid "With this option checked, when the image is deleted, the corresponding image url in the database that is not used anywhere on your website will also be deleted."
+msgstr "مع فحص هذا الخيار، عند حذف الصورة، سيتم أيضًا حذف عنوان URL للصورة المقابلة في قاعدة البيانات غير المستخدم في أي مكان على موقع الويب الخاص بك."
+
+#: includes/upload-cleaner/class-wpvivid-upload-cleaner-setting.php:826
+msgid "Delete Image URL"
+msgstr "حذف عنوان URL الخاص بالصورة"
+
+#: includes/upload-cleaner/class-wpvivid-upload-cleaner-setting.php:821
+msgid "Checking this option will speed up your scans but may produce lower accuracy."
+msgstr "سيؤدي تحقيق هذا الخيار إلى تسريع عمليات المسح الخاصة بك ولكن قد يؤدي إلى دقة أقل."
+
+#: includes/upload-cleaner/class-wpvivid-upload-cleaner-setting.php:817
+msgid "Enable Quick Scan"
+msgstr "تمكين الفحص السريع"
+
+#: includes/upload-cleaner/class-wpvivid-upload-cleaner-setting.php:743
+msgid "Media Cleaner Settings"
+msgstr "إعدادات منظف الوسائط"
+
+#: includes/upload-cleaner/class-wpvivid-upload-cleaner-setting.php:382
+msgid "Post Type"
+msgstr "نوع المحتوى"
+
+#: includes/upload-cleaner/class-wpvivid-upload-cleaner-setting.php:50
+msgid "File Regex"
+msgstr "التعبير النمطي للملف Regex"
+
+#: admin/partials/wpvivid-backup-restore-page-display.php:2871
+msgid "Tip:"
+msgstr "نصيحة:"
+
+#: includes/class-wpvivid.php:7319
+msgid "Please enter a valid email address."
+msgstr "الرجاء إدخال عنوان بريد إلكتروني صالح."
+
+#: includes/class-wpvivid.php:7314
+msgid "User's email address is required."
+msgstr "مطلوب عنوان البريد إلكتروني الخاص بالمستخدم."
+
+#: admin/partials/wpvivid-schedule-page-display.php:161
+#: includes/class-wpvivid.php:7116
+msgid "Save backups on localhost (web server)"
+msgstr "حفظ النُسخ الاحتياطية في مضيف محلي (خادوم ويب)"
+
+#: includes/class-wpvivid.php:6825
+msgid "Type:"
+msgstr "النوع:"
+
+#: includes/class-wpvivid.php:6125
+msgid "Invalid email address"
+msgstr "عنوان البريد الالكتروني غير صالح"
+
+#: includes/class-wpvivid.php:6097
+msgid "The selected file is not the setting file for WPvivid. Please upload the right file."
+msgstr "الملف المحدد ليس ملف الإعداد لـ WPVIDID. يرجى تحميل الملف الصحيح."
+
+#: includes/class-wpvivid.php:5960 includes/class-wpvivid.php:5964
+msgid "The pdo_mysql extension is not detected. Please install the extension first or choose wpdb option for Database connection method."
+msgstr "لم يتم الكشف عن ملحقة PDO_MYSQL. يرجى تثبيت الملحقة أولاً أو اختيار خيار WPDB لطريقة اتصال قاعدة البيانات."
+
+#: includes/class-wpvivid.php:5951
+msgid "An email address is required."
+msgstr "مطلوب عنوان البريد الإلكتروني."
+
+#: includes/class-wpvivid.php:5934 includes/class-wpvivid.php:5941
+msgid "The local storage path is required."
+msgstr "مطلوب مسار وحدة التخزين المحلية."
+
+#: includes/class-wpvivid.php:5375
+msgid "Choose one storage from the list to be the default storage."
+msgstr "اختيار وحدة تخزين واحدة من القائمة لتكون هي الإفتراضية."
+
+#: includes/class-wpvivid.php:5181
+msgid "The selected junk files have been deleted."
+msgstr "تم حذف الملفات غير المهمة المحددة."
+
+#: includes/class-wpvivid.php:5107
+msgid "Choose at least one type of junk files for deleting."
+msgstr "اختر نوعًا واحدًا على الأقل من الملفات غير المرغوب فيها للحذف."
+
+#: includes/class-wpvivid.php:4692
+msgid "Getting backup directory failed. Please try again later."
+msgstr "فشل الحصول على دليل النسخ الاحتياطي. الرجاء معاودة المحاولة في وقت لاحق."
+
+#: includes/class-wpvivid.php:4444 includes/class-wpvivid.php:4453
+#: includes/class-wpvivid.php:4476 includes/class-wpvivid.php:4487
+msgid "Last Backup: "
+msgstr "آخر نسخة احتياطية:"
+
+#: includes/class-wpvivid.php:4431 includes/class-wpvivid.php:4441
+#: includes/class-wpvivid.php:4453 includes/class-wpvivid.php:4487
+msgid "The last backup message not found."
+msgstr "تعذر العثور على الرسالة الخاصة بالنسخة الاحتياطية الأخيرة."
+
+#: includes/class-wpvivid.php:4305
+msgid "The restore file not found. Please verify the file exists."
+msgstr "لم يتم العثور على ملف استعادة. يرجى التحقق من وجود الملف."
+
+#: includes/class-wpvivid.php:4251
+msgid "restore failed error unknown"
+msgstr "تعذر الاستعادة، خطأ غير معروف"
+
+#: includes/class-wpvivid.php:3345
+msgid "Failed to get the remote storage information. Please try again later."
+msgstr "فشل الحصول على معلومات التخزين عن بُعد. الرجاء معاودة المحاولة في وقت لاحق."
+
+#: includes/class-wpvivid.php:3311
+msgid "Failed to delete the remote storage, can not retrieve the storage infomation. Please try again."
+msgstr "فشل في حذف التخزين عن بُعد، لا يمكن استرداد معلومات التخزين. حاول مرة اخرى."
+
+#: includes/class-wpvivid.php:3253
+#: includes/customclass/class-wpvivid-dropbox.php:883
+#: includes/customclass/class-wpvivid-google-drive.php:1305
+#: includes/customclass/class-wpvivid-one-drive.php:1622
+msgid "You have successfully added a remote storage."
+msgstr "لقد أضفت بنجاح مساحة تخزين عن بعد."
+
+#: includes/class-wpvivid.php:3137
+msgid "Unable to delete the locked backup. Please unlock it first and try again."
+msgstr "غير قادر على حذف النسخ الاحتياطي المقفلة. يرجى فتحه أولاً ومن ثم حاول مرة أخرى."
+
+#: includes/class-wpvivid.php:3127
+msgid "Retrieving the backup(s) information failed while deleting the selected backup(s). Please try again later."
+msgstr "فشلت استرداد معلومات النسخ الاحتياطية أثناء حذف النسخ الاحتياطية المحددة. الرجاء معاودة المحاولة في وقت لاحق."
+
+#: includes/class-wpvivid.php:1922 includes/class-wpvivid.php:2048
+#: includes/new_backup/class-wpvivid-backup2.php:919
+#: includes/new_backup/class-wpvivid-backup2.php:1325
+msgid "Task timed out."
+msgstr "نفدت المهلة الزمنية للمهمة"
+
+#: includes/class-wpvivid.php:1741 includes/class-wpvivid.php:1763
+#: includes/class-wpvivid.php:1789 includes/class-wpvivid.php:1914
+#: includes/class-wpvivid.php:2040
+#: includes/new_backup/class-wpvivid-backup2.php:910
+#: includes/new_backup/class-wpvivid-backup2.php:1317
+msgid "Too many resumption attempts."
+msgstr "الكثير من محاولات الاستئناف."
+
+#: admin/partials/wpvivid-remote-storage-page-display.php:267
+#: admin/partials/wpvivid-schedule-page-display.php:295
+#: includes/class-wpvivid-interface-mainwp.php:143
+#: includes/class-wpvivid.php:643 includes/class-wpvivid.php:5986
+#: includes/new_backup/class-wpvivid-backup2.php:114
+msgid "There is no default remote storage configured. Please set it up first."
+msgstr "لا يوجد تخزين عن بُعد افتراضي تم تكوينه. يرجى إعداده أولاً."
+
+#: includes/class-wpvivid-interface-mainwp.php:126
+#: includes/class-wpvivid-interface-mainwp.php:133
+#: includes/class-wpvivid.php:623 includes/class-wpvivid.php:632
+#: includes/new_backup/class-wpvivid-backup2.php:95
+#: includes/new_backup/class-wpvivid-backup2.php:103
+msgid "Choose at least one storage location for backups."
+msgstr "اختر موقع تخزين واحد على الأقل للنُسخ الاحتياطية."
+
+#: includes/class-wpvivid-interface-mainwp.php:119
+#: includes/class-wpvivid.php:609 includes/class-wpvivid.php:617
+#: includes/new_backup/class-wpvivid-backup2.php:87
+msgid "A backup type is required."
+msgstr "نوع النسخ الاحتياطي مطلوب"
+
+#: includes/class-wpvivid-schedule.php:284
+#: includes/class-wpvivid-schedule.php:298
+msgid "Creating scheduled tasks failed. Please try again later."
+msgstr "تعذر إنشاء المهام المجدولة. الرجاء معاودة المحاولة في وقت لاحق."
+
+#: admin/partials/wpvivid-schedule-page-display.php:67
+#: includes/class-wpvivid-schedule.php:91
+msgid "12Hours"
+msgstr "12 ساعة"
+
+#: admin/partials/wpvivid-schedule-page-display.php:79
+#: includes/class-wpvivid-schedule.php:58
+#: includes/class-wpvivid-schedule.php:103
+msgid "Monthly"
+msgstr "شهريًا"
+
+#: admin/partials/wpvivid-schedule-page-display.php:76
+#: includes/class-wpvivid-schedule.php:52
+#: includes/class-wpvivid-schedule.php:100
+msgid "Fortnightly"
+msgstr "كل أسبوعين"
+
+#: admin/partials/wpvivid-schedule-page-display.php:73
+#: includes/class-wpvivid-schedule.php:46
+#: includes/class-wpvivid-schedule.php:97
+msgid "Weekly"
+msgstr "أسبوعيًّا"
+
+#: admin/partials/wpvivid-schedule-page-display.php:70
+#: includes/class-wpvivid-schedule.php:40
+#: includes/class-wpvivid-schedule.php:94
+msgid "Daily"
+msgstr "يوميًا"
+
+#: includes/class-wpvivid-schedule.php:34
+msgid "12 Hours"
+msgstr "12 ساعة"
+
+#: includes/class-wpvivid-export-import.php:1619
+msgid "With this option checked, Pages/posts already existing will be overwritten with the updated ones in an import."
+msgstr "مع فحص هذا الخيار، سيتم كتابة الصفحات/المقالات الموجودة بالفعل مع تلك المحدثة في استيراد."
+
+#: includes/class-wpvivid-export-import.php:1615
+msgid "Overwrite existing pages"
+msgstr "الكتابة فوق الصفحات الحالية"
+
+#: includes/class-wpvivid-export-import.php:1611
+msgid "Import Setting"
+msgstr "إعداد الاستيراد"
+
+#: includes/class-wpvivid-export-import.php:1609
+msgid "- Select -"
+msgstr "- تحديد -"
+
+#: includes/class-wpvivid-export-import.php:1608
+msgid "Select an existing author:"
+msgstr "حدد كاتب موجود:"
+
+#: includes/class-wpvivid-export-import.php:1606
+msgid "Assign author"
+msgstr "تعيين كاتب"
+
+#: includes/class-wpvivid-export-import.php:1603
+msgid "The importing file info"
+msgstr "معلومات الملف المستورد"
+
+#: includes/class-wpvivid-export-import.php:1599
+msgid "Scan Uploaded Exports"
+msgstr "مسح الصادرات التي تم رفعها"
+
+#: includes/class-wpvivid-export-import.php:1595
+msgid "Upload and Import"
+msgstr "رفع واستيراد"
+
+#: includes/class-wpvivid-export-import.php:1594
+msgid "Choose an export from your computer to import: "
+msgstr "اختر صادرة من حاسوبك للاستيراد"
+
+#: includes/class-wpvivid-export-import.php:1589
+#: includes/class-wpvivid-export-import.php:1842
+#: includes/class-wpvivid-export-import.php:2140
+msgid "Delete Exported Files In Folder"
+msgstr "حذف الملفات المستوردة في المجلد"
+
+#: includes/class-wpvivid-export-import.php:1579
+msgid "To properly display the imported content, please make sure that the importing and exporting sites have the same environment, for example, same theme or pages built with the same page builder."
+msgstr "لعرض المحتوى المستورد بشكل صحيح، يرجى التأكد من أن مواقع الاستيراد والتصدير لهما نفس البيئة، على سبيل المثال، نفس القالب أو الصفحات المصممة مع نفس باني الصفحة."
+
+#: includes/class-wpvivid-export-import.php:1573
+msgid "Import posts or pages with images in bulk."
+msgstr "استيراد المقالات أو الصفحات مع الصور بكميات كبيرة."
+
+#: includes/class-wpvivid-export-import.php:1547
+msgid "File not found. Please retry again."
+msgstr "لم يتم العثور على الملف، يرجى المحاولة مرة مجددا."
+
+#: includes/class-wpvivid-export-import.php:1539
+msgid "File size not match. please retry again."
+msgstr "حجم الملف لا يتطابق. الرجاء إعادة المحاولة مرة أخرى."
+
+#: includes/class-wpvivid-export-import.php:1419
+msgid "Task time out."
+msgstr "نفدت المهلة الزمنية للمهمة"
+
+#: includes/class-wpvivid-export-import.php:1385
+msgid "Export error:"
+msgstr "خطأ في التصدير:"
+
+#: includes/class-wpvivid-export-import.php:1360
+msgid "The export task is not responding."
+msgstr "مهمة التصدير لا تستجيب."
+
+#: includes/class-wpvivid-export-import.php:1348
+msgid "Ready to export. Progress: 0%, running time: 0second."
+msgstr "جاهز للتصدير. التقدم: 0 ٪، وقت التشغيل: 0ثانية."
+
+#: includes/class-wpvivid-export-import.php:1188
+msgid "Error occurred while parsing the request data. Please try to run export task again."
+msgstr "حدث خطأ أثناء تحليل بيانات الطلب. يرجى محاولة تشغيل مهمة التصدير مرة أخرى."
+
+#: includes/class-wpvivid-export-import.php:1150
+msgid "Empty post id"
+msgstr "مُعرّف مقالة فارغ"
+
+#: includes/class-wpvivid-export-import.php:817
+msgid "Export and Download"
+msgstr "التصدير والتنزيل"
+
+#: includes/class-wpvivid-export-import.php:808
+msgid "Sample:"
+msgstr "عينة:"
+
+#: includes/class-wpvivid-export-import.php:804
+msgid "Only letters (except for wpvivid) and numbers are allowed."
+msgstr "فقط الحروف (باستثناء WPVIDID) والأرقام مسموح بها."
+
+#: includes/class-wpvivid-export-import.php:800
+msgid "Comment the export: "
+msgstr "تعليق التصدير:"
+
+#: includes/class-wpvivid-export-import.php:795
+msgid "Comment the export (optional)"
+msgstr "تعليق التصدير (اختياري)"
+
+#: includes/class-wpvivid-export-import.php:709
+#: includes/class-wpvivid-export-import.php:730
+msgid "&mdash; Select &mdash;"
+msgstr "&mdash; تحديد &mdash;"
+
+#: includes/class-wpvivid-export-import.php:686
+msgid "All Authors"
+msgstr "كل الكتاب"
+
+#: includes/class-wpvivid-export-import.php:656
+msgid "All Categories"
+msgstr "كل التصنيفات"
+
+#: includes/class-wpvivid-export-import.php:637
+msgid "Filter Posts/Pages"
+msgstr "تصفية المقالات/الصفحات"
+
+#: includes/class-wpvivid-export-import.php:629
+msgid "Choose what to export"
+msgstr "اختيار ما تصدر/ين"
+
+#: includes/class-wpvivid-export-import.php:158
+#: includes/class-wpvivid-export-import.php:181
+msgid "Next Step"
+msgstr "الخطوة التالية"
+
+#: includes/class-wpvivid-export-import.php:153
+msgid "More post types coming soon..."
+msgstr "المزيد من أنواع المحتوى قريبًا ..."
+
+#: includes/class-wpvivid-export-import.php:150
+msgid "Page"
+msgstr "صفحة"
+
+#: includes/class-wpvivid-export-import.php:147
+msgid "Post"
+msgstr "مقالة"
+
+#: includes/class-wpvivid-export-import.php:141
+msgid "Choose post type"
+msgstr "اختر نوع المحتوى"
+
+#: includes/class-wpvivid-export-import.php:125
+msgid "Try to select fewer items when you are facing a shortage of server resources (typically presented as a timeout error)."
+msgstr "حاول تحديد عدد أقل من العناصر عندما تواجه نقصًا في موارد الخادوم (عادة ما يتم تقديمه كخطأ في المهلة)."
+
+#: includes/class-wpvivid-export-import.php:125
+#: includes/class-wpvivid-export-import.php:1578
+msgid "Note:"
+msgstr "ملاحظة:"
+
+#: includes/class-wpvivid-export-import.php:124
+msgid "This will contain all of your posts, pages, comments, terms and images (original images, featured images and thumbnails)."
+msgstr "سيحتوي هذا على جميع مشاركاتك والصفحات والتعليقات والشروط والصور (الصور الأصلية والصور البارزة والصويرات (الصور المصغرة) )."
+
+#: includes/class-wpvivid-export-import.php:121
+#: includes/class-wpvivid-export-import.php:1575
+msgid "Learn more"
+msgstr "معرفة المزيد"
+
+#: includes/class-wpvivid-export-import.php:119
+msgid "Export posts or pages with images in bulk."
+msgstr "تصدير المقالات أو الصفحات مع الصور بكميات كبيرة."
+
+#: includes/class-wpvivid-export-import.php:65
+#: includes/class-wpvivid-export-import.php:78
+msgid "Export & Import"
+msgstr "التصدير والاستيراد"
+
+#: includes/class-wpvivid-exporter.php:249
+msgid "Last Modified"
+msgstr "آخر تعديل"
+
+#: includes/class-wpvivid-exporter.php:246
+msgid "Scheduled"
+msgstr "مجدولة"
+
+#: includes/class-wpvivid-exporter.php:244
+msgid "Missed schedule"
+msgstr "الجدول الفائت"
+
+#: includes/class-wpvivid-exporter.php:241
+msgid "Published"
+msgstr "منشور"
+
+#: includes/class-wpvivid-exporter.php:224
+msgid "Unpublished"
+msgstr "غير منشور"
+
+#: includes/class-wpvivid-exporter.php:109
+msgid "Comments"
+msgstr "التعليقات"
+
+#: includes/class-wpvivid-exporter.php:77
+msgid "Author"
+msgstr "الكاتب"
+
+#: includes/class-wpvivid-exporter.php:74
+msgctxt "column name"
+msgid "Title"
+msgstr "العنوان"
+
+#: includes/class-wpvivid-migrate.php:1619
+msgid "Note: The files you want to upload must be a backup created by WPvivid backup plugin. Make sure that uploading every part of a backup to the directory if the backup is split into many parts"
+msgstr "ملاحظة: يجب أن تكون الملفات التي تريد تحميلها عبارة عن نسخة احتياطية تم إنشاؤها بواسطة إضافة WPvivid. تأكد من تحميل كل جزء من النسخة الاحتياطية إلى الدليل في حالة تقسيم النسخ الاحتياطي إلى أجزاء كثيرة."
+
+#: includes/class-wpvivid-migrate.php:1606
+msgid "Upload"
+msgstr "رفع"
+
+#: includes/class-wpvivid-migrate.php:1546
+msgid "Transfer succeeded. Please scan the backup list on the destination site to display the backup, then restore the backup."
+msgstr "نجح النقل. يرجى إجراء مسح على قائمة النسخ الاحتياطي على موقع الوجهة لعرض النسخ الاحتياطي، ثم استعادة النسخة الاحتياطية."
+
+#: includes/class-wpvivid-migrate.php:1455
+#: includes/class-wpvivid-migrate.php:1479
+msgid "Choose what to migrate"
+msgstr "اختار/ي ما تريد/ين ترحيله"
+
+#: includes/class-wpvivid-migrate.php:446
+#: includes/class-wpvivid-migrate.php:1434
+msgid "3. Once done, the backup appears in backups list. Then, restore the backup."
+msgstr "3. بمجرد الانتهاء، سيظهر النسخ الاحتياطي في قائمة النسخ الاحتياطية. ثم، يمكنك استعادة النسخة الاحتياطية."
+
+#: includes/class-wpvivid-migrate.php:444
+#: includes/class-wpvivid-migrate.php:1432
+msgid "2.1 Upload the backup to the upload section of WPvivid backup plugin in destination site."
+msgstr "2.1 قم بتحميل النسخ الاحتياطي إلى قسم إضافة WPvivid للنسخ الاحتياطي في موقع الوجهة."
+
+#: includes/class-wpvivid-migrate.php:443
+#: includes/class-wpvivid-migrate.php:1431
+msgid "2. Upload the backup to destination site. There are two ways available to use:"
+msgstr "2. قم بتحميل النسخ الاحتياطي إلى موقع الوجهة. هناك طريقتان متاحتان للاستخدام:"
+
+#: includes/class-wpvivid-migrate.php:442
+#: includes/class-wpvivid-migrate.php:1430
+msgid "1. Download a backup in backups list to your computer."
+msgstr "1. قم بتنزيل نسخة احتياطية في قائمة النسخ الاحتياطية على جهاز الكمبيوتر الخاص بك."
+
+#: includes/class-wpvivid-migrate.php:441
+#: includes/class-wpvivid-migrate.php:1429
+msgid "How to migrate Wordpress site manually to a new domain(site) with WPvivid backup plugin?"
+msgstr "كيفية ترحيل موقع ووردبريس يدويًا إلى نطاق جديد (موقع) بواسطة إضافة WPvivid backup؟"
+
+#: includes/class-wpvivid-migrate.php:1422
+msgid "2. Please migrate website with the manual way when using <strong>Local by Flywheel</strong> environment."
+msgstr "2. الرجاء ترحيل الموقع بشكل يدوي حين استخدام بيئة <strong>Local by Flywheel</strong>."
+
+#: includes/class-wpvivid-migrate.php:1421
+msgid "1. In order to successfully complete the migration, you'd better deactivate <a href=\"https://wpvivid.com/best-redirect-plugins.html\" target=\"_blank\" style=\"text-decoration: none;\">301 redirect plugin</a>, <a href=\"https://wpvivid.com/8-best-wordpress-firewall-plugins.html\" target=\"_blank\" style=\"text-decoration: none;\">firewall and security plugin</a>, and <a href=\"https://wpvivid.com/best-free-wordpress-caching-plugins.html\" target=\"_blank\" style=\"text-decoration: none;\">caching plugin</a> (if they exist) before transferring website."
+msgstr "1. من أجل إكمال الترحيل بنجاح، من الأفضل إلغاء تنشيط <a href=\"https://wpvivid.com/best-redirect-plugins.html\" target=\"_blank\" style=\"text-decoration: none;\">إضافة إعادة التوجيه 301</a>, <a href=\"https://wpvivid.com/8-best-wordpress-firewall-plugins.html\" target=\"_blank\" style=\"text-decoration: none;\">وإضافات جدار الحماية والآمان</a>,  و<a href=\"https://wpvivid.com/best-free-wordpress-caching-plugins.html\" target=\"_blank\" style=\"text-decoration: none;\">إضافات التخزين المؤقت</a> (في حالة توافرهن) قبل نقل الموقع الإلكتروني."
+
+#: includes/class-wpvivid-migrate.php:429
+#: includes/class-wpvivid-migrate.php:1420
+#: includes/upload-cleaner/class-wpvivid-uploads-cleaner.php:772
+#: includes/upload-cleaner/class-wpvivid-uploads-cleaner.php:810
+#: includes/upload-cleaner/class-wpvivid-uploads-cleaner.php:1100
+msgid "Note: "
+msgstr "ملاحظة:"
+
+#: includes/class-wpvivid-migrate.php:416
+#: includes/class-wpvivid-migrate.php:1323
+msgid "Choose the content you want to transfer"
+msgstr "اختر المحتوى الذي تريد نقله"
+
+#: includes/class-wpvivid-migrate.php:392
+#: includes/class-wpvivid-migrate.php:1313
+msgid "The feature can help you transfer a Wordpress site to a new domain(site). It would be a convenient way to migrate your WP site from dev environment to live server or from old server to the new."
+msgstr "يمكن أن تساعدك هذه الميزة في نقل موقع ووردبريس إلى نطاق جديد (موقع). ستكون طريقة مريحة لترحيل موقع ووردبريس الخاص بك من بيئة التطوير إلى خادوم حي أو من الخادوم القديم إلى الجديد."
+
+#: admin/class-wpvivid-admin.php:282
+msgid "3. Go back to this page and paste the key in key box below. Lastly, click Save button."
+msgstr "3. ارجع إلى هذه الصفحة ولصق المفتاح في مربع المفتاح أدناه. أخيرًا ، انقر فوق زر حفظ."
+
+#: admin/class-wpvivid-admin.php:281
+msgid "2. Generate a key by clicking Generate button and copy it."
+msgstr "2. إنشاء مفتاح بالنقر فوق زر إنشاء ونسخه."
+
+#: admin/class-wpvivid-admin.php:280
+msgid "1. Visit Key tab page of WPvivid backup plugin of destination site."
+msgstr "1. قم بزيارة صفحة علامة تبويب المفاتيح الخاصة بإضافة WPvivid للنسخ الاحتياطي لموقع الوجهة."
+
+#: includes/class-wpvivid-migrate.php:1040
+#: includes/class-wpvivid-migrate.php:1178
+msgid "How to get a site key?"
+msgstr "كيف تحصل على مفتاح الموقع؟"
+
+#: includes/class-wpvivid-migrate.php:1040
+#: includes/class-wpvivid-migrate.php:1178
+msgid "Please paste the key below."
+msgstr "الرجاء لصق المفتاح في الأسفل."
+
+#: includes/class-wpvivid-export-import.php:1157
+#: includes/class-wpvivid-export-import.php:1198
+#: includes/class-wpvivid-interface-mainwp.php:157
+#: includes/class-wpvivid-migrate.php:773 includes/class-wpvivid.php:707
+#: includes/class-wpvivid.php:1050 includes/class-wpvivid.php:1355
+#: includes/new_backup/class-wpvivid-backup2.php:129
+#: includes/new_backup/class-wpvivid-backup2.php:1656
+msgid "A task is already running. Please wait until the running task is complete, and try again."
+msgstr "هناك مهمة تعمل بالفعل. يرجى الانتظار حتى تكتمل مهمة الجارية، وحاول مرة أخرى."
+
+#: includes/class-wpvivid-migrate.php:474
+msgid "Generate"
+msgstr "إنشاء"
+
+#: includes/class-wpvivid-migrate.php:472
+msgid "Tips: For security reason, please choose an appropriate expiration time for the key."
+msgstr "نصائح: لسبب الأمان، يرجى اختيار وقت انتهاء صلاحية مناسب للمفتاح."
+
+#: includes/class-wpvivid-migrate.php:465
+msgid "The key will expire in "
+msgstr "سينتهي المفتاح في "
+
+#: includes/class-wpvivid-migrate.php:463
+msgid "In order to allow another site to send a backup to this site, please generate a key below. Once the key is generated, this site is ready to receive a backup from another site. Then, please copy and paste the key in sending site and save it."
+msgstr "من أجل السماح لموقع آخر بإرسال نسخة احتياطية إلى هذا الموقع، يرجى إنشاء مفتاح أدناه. بمجرد إنشاء المفتاح، يكون هذا الموقع جاهزًا لتلقي نسخة احتياطية من موقع آخر. ثم، يرجى نسخ المفتاح ولصقه في إرسال الموقع وحفظه."
+
+#: includes/class-wpvivid-migrate.php:59
+msgid "Key"
+msgstr "المفتاح"
+
+#: includes/class-wpvivid-migrate.php:52
+msgid "Auto-Migration"
+msgstr "الترحيل التلقائي"
+
+#: includes/class-wpvivid-mail-report.php:1110 includes/class-wpvivid.php:6133
+msgid "Unable to send email. Please check the configuration of email server."
+msgstr "تعذر إرسال بريد إلكتروني. يرجى التحقق من إعدادت التكوين الخاصة بخادوم البريد إلكتروني."
+
+#. translators: %s: directory path
+#: includes/staging/class-wpvivid-staging.php:2494
+msgid "Unable to create directory %s. Is its parent directory writable by the server?"
+msgstr "غير قادر على إنشاء دليل %s. هل الدليل الأم قابل للكتابة بواسطة الخادم؟"
+
+#: includes/class-wpvivid-function-realize.php:161
+#: includes/class-wpvivid-function-realize.php:173
+#: includes/class-wpvivid-function-realize.php:190
+#: includes/class-wpvivid.php:758 includes/class-wpvivid.php:824
+#: includes/class-wpvivid.php:885 includes/class-wpvivid.php:6526
+#: includes/staging/class-wpvivid-staging-log-page.php:857
+#: includes/staging/class-wpvivid-staging-log-page.php:867
+#: includes/staging/class-wpvivid-staging-log-page.php:1068
+#: includes/staging/class-wpvivid-staging-log-page.php:1082
+msgid "The log not found."
+msgstr "لم يتم العثور على سجل."
+
+#: includes/class-wpvivid-function-realize.php:156
+#: includes/class-wpvivid-function-realize.php:184
+#: includes/class-wpvivid.php:750 includes/class-wpvivid.php:876
+msgid "Retrieving the backup information failed while showing log. Please try again later."
+msgstr "فشل استرداد معلومات النسخ الاحتياطي أثناء عرض السجل. الرجاء معاودة المحاولة في وقت لاحق."
+
+#: includes/class-wpvivid-interface-mainwp.php:333
+#: includes/class-wpvivid-public-interface.php:195
+#: includes/class-wpvivid.php:785 includes/class-wpvivid.php:815
+#: includes/class-wpvivid.php:910 includes/class-wpvivid.php:6551
+#: includes/staging/class-wpvivid-staging-log-page.php:892
+#: includes/staging/class-wpvivid-staging-log-page.php:1145
+msgid "Reading the log failed. Please try again."
+msgstr "فشلت عملية قراءة السجل. الرجاء المحاولة مرة أخرى."
+
+#: includes/class-wpvivid-interface-mainwp.php:271
+#: includes/class-wpvivid-interface-mainwp.php:342
+#: includes/class-wpvivid-interface-mainwp.php:395
+#: includes/class-wpvivid-public-interface.php:174
+#: includes/class-wpvivid-public-interface.php:204
+#: includes/class-wpvivid-public-interface.php:233
+#: includes/class-wpvivid.php:768 includes/class-wpvivid.php:833
+#: includes/class-wpvivid.php:894 includes/class-wpvivid.php:6535
+#: includes/staging/class-wpvivid-staging-log-page.php:876
+msgid "Unable to open the log file."
+msgstr "تعذر فتح ملف السجلات."
+
+#: includes/class-wpvivid-interface-mainwp.php:182
+#: includes/class-wpvivid-migrate.php:824 includes/class-wpvivid.php:698
+msgid "Error occurred while parsing the request data. Please try to run backup again."
+msgstr "حدث خطأ أثناء معالجة بيانات الطلب. يرجى محاولة تشغيل النسخ الاحتياطي مرة أخرى."
+
+#: includes/customclass/class-wpvivid-sftpclass.php:148
+msgid "Click the button to connect to SFTP server and add it to the storage list below."
+msgstr "انقر فوق الزر للاتصال بخادوم بروتوكول نقل الملفات الآمن (SFTP) وأضفه إلى قائمة التخزين أدناه."
+
+#: includes/customclass/class-wpvivid-sftpclass.php:121
+#: includes/customclass/class-wpvivid-sftpclass.php:236
+msgid "Enter an absolute path and a custom subdirectory (optional) for holding the backups of current website. For example, /var/customfolder/"
+msgstr "أدخل مسارًا مطلقًا ودليلًا فرعيًا مخصصًا (اختياري) للاحتفاظ بالنسخ الاحتياطية للموقع الحالي. على سبيل المثال ،/var/customfolder/"
+
+#: includes/customclass/class-wpvivid-sftpclass.php:116
+#: includes/customclass/class-wpvivid-sftpclass.php:231
+msgid "Absolute path must exist(e.g. /var)"
+msgstr "يجب وجود المسار المطلق (على سبيل المثال /var)"
+
+#: includes/customclass/class-wpvivid-sftpclass.php:109
+#: includes/customclass/class-wpvivid-sftpclass.php:224
+msgid "Enter the server port."
+msgstr "أدخل/ي منفذ الخادوم."
+
+#: includes/customclass/class-wpvivid-sftpclass.php:104
+#: includes/customclass/class-wpvivid-sftpclass.php:219
+msgid "Port"
+msgstr "المنفذ"
+
+#: includes/customclass/class-wpvivid-sftpclass.php:97
+#: includes/customclass/class-wpvivid-sftpclass.php:212
+msgid "Enter the user password."
+msgstr "أدخل كلمة مرور المستخدم."
+
+#: includes/customclass/class-wpvivid-sftpclass.php:92
+#: includes/customclass/class-wpvivid-sftpclass.php:207
+msgid "User Password"
+msgstr "كلمة مرور المستخدم"
+
+#: includes/customclass/class-wpvivid-sftpclass.php:85
+#: includes/customclass/class-wpvivid-sftpclass.php:200
+msgid "Enter the user name."
+msgstr "الرجاء ادخال اسم المستخدم"
+
+#: includes/customclass/class-wpvivid-sftpclass.php:80
+#: includes/customclass/class-wpvivid-sftpclass.php:195
+msgid "User Name"
+msgstr "اسم المستخدم"
+
+#: includes/customclass/class-wpvivid-sftpclass.php:73
+#: includes/customclass/class-wpvivid-sftpclass.php:188
+msgid "Enter the server address."
+msgstr "أدخل/ي عنوان الخادوم."
+
+#: includes/customclass/class-wpvivid-sftpclass.php:68
+#: includes/customclass/class-wpvivid-sftpclass.php:183
+msgid "Server Address"
+msgstr "عنوان الخادوم"
+
+#: includes/customclass/class-wpvivid-sftpclass.php:56
+#: includes/customclass/class-wpvivid-sftpclass.php:171
+msgid "Enter a unique alias: e.g. SFTP-001"
+msgstr "أدخل الاسم المستعار الفريد: على سبيل المثال SFTP-001"
+
+#: includes/customclass/class-wpvivid-sftpclass.php:48
+#: includes/customclass/class-wpvivid-sftpclass.php:163
+msgid "Enter Your SFTP Account"
+msgstr "أدخل/ي عنوان حساب بروتوكول نقل الملفات الآمن"
+
+#: includes/customclass/class-wpvivid-sftpclass.php:38
+msgid "SFTP"
+msgstr "بروتوكول نقل الملفات الآمن (SFTP)"
+
+#: includes/customclass/class-wpvivid-amazons3-plus.php:187
+msgid "The simplexml extension is not detected. Please install the extension first."
+msgstr "لم يتم الكشف عن الملحقة SimpleXML. الرجاء تثبيت المحلقة أولاً."
+
+#: includes/customclass/class-wpvivid-amazons3-plus.php:178
+msgid "Click the button to connect to Amazon S3 storage and add it to the storage list below."
+msgstr "انقر فوق الزر للاتصال بتخزين Amazon S3 وأضفه إلى قائمة التخزين أدناه."
+
+#: includes/customclass/class-wpvivid-amazons3-plus.php:165
+#: includes/customclass/class-wpvivid-amazons3-plus.php:289
+msgid "Check the option to use Amazon S3 server-side encryption to protect data."
+msgstr "حدد خيار استخدام التشفير من جانب خادوم Amazon S3 لحماية البيانات."
+
+#: includes/customclass/class-wpvivid-amazons3-plus.php:159
+#: includes/customclass/class-wpvivid-amazons3-plus.php:283
+msgid "Server-side encryption."
+msgstr "تشفير من جانب الخادوم."
+
+#: includes/customclass/class-wpvivid-amazons3-plus.php:151
+#: includes/customclass/class-wpvivid-amazons3-plus.php:275
+msgid "Check the option to use Amazon S3 Standard-Infrequent Access (S3 Standard-IA) storage class for data transfer."
+msgstr "تحقق من خيار استخدام فئة تخزين Amazon S3 S3-Infrequent Access (S3 Standard-IA) لنقل البيانات."
+
+#: includes/customclass/class-wpvivid-amazons3-plus.php:145
+#: includes/customclass/class-wpvivid-amazons3-plus.php:269
+msgid "Storage class: Standard (infrequent access)."
+msgstr "فئة التخزين: قياسية (وصول نادر)."
+
+#: includes/customclass/class-wpvivid-amazons3-plus.php:123
+#: includes/customclass/class-wpvivid-amazons3-plus.php:261
+msgid "Customize the directory where you want to store backups within the Bucket."
+msgstr "تخصيص الدليل حيث تريد تخزين النسخ الاحتياطية داخل الدلو."
+
+#: includes/customclass/class-wpvivid-amazons3-plus.php:111
+#: includes/customclass/class-wpvivid-amazons3-plus.php:249
+msgid "Enter an existed Bucket to create a custom backup storage directory."
+msgstr "أدخل دلو موجود لإنشاء دليل تخزين احتياطي مخصص."
+
+#: includes/customclass/class-wpvivid-amazons3-plus.php:106
+#: includes/customclass/class-wpvivid-amazons3-plus.php:244
+msgid "Amazon S3 Bucket Name(e.g. test)"
+msgstr "اسم دلو  (Bucket) Amazon S3 (على سبيل المثال ، اختبار)"
+
+#: includes/customclass/class-wpvivid-amazons3-plus.php:99
+#: includes/customclass/class-wpvivid-amazons3-plus.php:237
+msgid "How to get an Amazon S3 secret key."
+msgstr "كيفية الحصول على مفتاح Amazon S3 السري."
+
+#: includes/customclass/class-wpvivid-amazons3-plus.php:99
+#: includes/customclass/class-wpvivid-amazons3-plus.php:237
+msgid "Enter your Amazon S3 secret key."
+msgstr "أدخل مفتاح Amazon S3 السري الخاص بك."
+
+#: includes/customclass/class-wpvivid-amazons3-plus.php:94
+#: includes/customclass/class-wpvivid-amazons3-plus.php:232
+msgid "Amazon S3 secret key"
+msgstr "مفتاح Amazon S3 السري"
+
+#: includes/customclass/class-wpvivid-amazons3-plus.php:87
+#: includes/customclass/class-wpvivid-amazons3-plus.php:225
+msgid "How to get an AmazonS3 access key."
+msgstr "كيفية الحصول على مفتاح وصول  Amazon S3."
+
+#: includes/customclass/class-wpvivid-amazons3-plus.php:87
+#: includes/customclass/class-wpvivid-amazons3-plus.php:225
+msgid "Enter your Amazon S3 access key."
+msgstr "أدخل مفتاح الوصول إلى Amazon S3."
+
+#: includes/customclass/class-wpvivid-amazons3-plus.php:82
+#: includes/customclass/class-wpvivid-amazons3-plus.php:220
+msgid "Amazon S3 access key"
+msgstr "مفتاح الوصول إلى Amazon S3"
+
+#: includes/customclass/class-wpvivid-amazons3-plus.php:70
+#: includes/customclass/class-wpvivid-amazons3-plus.php:208
+msgid "Enter a unique alias: e.g. Amazon S3-001"
+msgstr "أدخل الاسم المستعار الفريد: على سبيل المثال Amazon S3-001"
+
+#: includes/customclass/class-wpvivid-amazons3-plus.php:62
+#: includes/customclass/class-wpvivid-amazons3-plus.php:200
+msgid "Enter Your Amazon S3 Account"
+msgstr "أدخل حساب Amazon S3 الخاص بك"
+
+#: includes/customclass/class-wpvivid-amazons3-plus.php:44
+msgid "Amazon S3"
+msgstr "Amazon S3"
+
+#: includes/customclass/class-wpvivid-one-drive.php:406
+msgid "Authenticate with Microsoft OneDrive"
+msgstr "المصادقة مع Microsoft OneDrive"
+
+#: includes/customclass/class-wpvivid-one-drive.php:227
+#: includes/customclass/class-wpvivid-one-drive.php:443
+msgid "Enter a unique alias: e.g. OneDrive-001"
+msgstr "أدخل الاسم المستعار الفريد: على سبيل المثال OneDrive-001"
+
+#: includes/customclass/class-wpvivid-one-drive.php:220
+#: includes/customclass/class-wpvivid-one-drive.php:436
+msgid "Enter Your Microsoft OneDrive Information"
+msgstr "أدخل معلومات Microsoft OneDrive الخاصة بك"
+
+#: includes/customclass/class-wpvivid-one-drive.php:200
+msgid "Microsoft OneDrive"
+msgstr "Microsoft OneDrive"
+
+#: includes/customclass/class-wpvivid-one-drive.php:136
+#: includes/customclass/class-wpvivid-one-drive.php:187
+msgid "You have authenticated the Microsoft OneDrive account as your remote storage."
+msgstr "لقد قمت بمصادقة حساب Microsoft OneDrive باعتباره وحدة تخزينك عن بُعد."
+
+#: includes/customclass/class-wpvivid-google-drive.php:422
+msgid "Authenticate with Google Drive"
+msgstr "المصادقة مع Google Drive"
+
+#: includes/customclass/class-wpvivid-google-drive.php:243
+#: includes/customclass/class-wpvivid-google-drive.php:460
+msgid "Enter a unique alias: e.g. Google Drive-001"
+msgstr "أدخل الاسم المستعار الفريد: على سبيل المثال Google Drive-001"
+
+#: includes/customclass/class-wpvivid-google-drive.php:236
+#: includes/customclass/class-wpvivid-google-drive.php:453
+msgid "Enter Your Google Drive Information"
+msgstr "أدخل معلومات محرك Google"
+
+#: includes/customclass/class-wpvivid-google-drive.php:216
+msgid "Google Drive"
+msgstr "Google Drive"
+
+#: includes/customclass/class-wpvivid-google-drive.php:148
+#: includes/customclass/class-wpvivid-google-drive.php:203
+msgid "You have authenticated the Google Drive account as your remote storage."
+msgstr "لقد قمت بمصادقة حساب Google Drive باعتباره وحدة تخزينك البعيدة."
+
+#: includes/customclass/class-wpvivid-google-drive.php:113
+msgid "Authentication failed, the format of the client_secrets.json file is incorrect. Please delete and re-install the plugin to recreate the file."
+msgstr "فشلت المصادقة، تنسيق ملف client_secrets.json غير صحيح. يرجى حذف المكون الإضافي وإعادة تثبيته لإعادة إنشاء الملف."
+
+#: includes/customclass/class-wpvivid-google-drive.php:109
+msgid "Authentication failed, the client_secrets.json file is missing. Please make sure the client_secrets.json file is in wpvivid-backuprestore\\includes\\customclass directory."
+msgstr "فشلت المصادقة، ملف client_secrets.json مفقود. يرجى التأكد من أن ملف client_secrets.json موجود في دليل wpvivid-backuprestore\\includes\\customclass دليل."
+
+#: includes/customclass/class-wpvivid-s3compat.php:522
+msgid "Click the button to connect to DigitalOcean Spaces storage and add it to the storage list below."
+msgstr "انقر فوق الزر للاتصال بتخزين مساحات DigitaloCean وأضفه إلى قائمة التخزين أدناه."
+
+#: includes/customclass/class-wpvivid-s3compat.php:495
+#: includes/customclass/class-wpvivid-s3compat.php:610
+msgid "Enter the DigitalOcean Endpoint for the storage"
+msgstr "أدخل نقطة النهاية الرقمية للتخزين"
+
+#: includes/customclass/class-wpvivid-s3compat.php:490
+#: includes/customclass/class-wpvivid-s3compat.php:605
+msgid "region.digitaloceanspaces.com"
+msgstr "region.digitaloceanspaces.com"
+
+#: includes/customclass/class-wpvivid-s3compat.php:483
+#: includes/customclass/class-wpvivid-s3compat.php:598
+msgid "Customize the directory where you want to store backups within the Space."
+msgstr "تخصيص الدليل حيث تريد تخزين النسخ الاحتياطية داخل المساحة."
+
+#: includes/customclass/class-wpvivid-amazons3-plus.php:118
+#: includes/customclass/class-wpvivid-amazons3-plus.php:256
+#: includes/customclass/class-wpvivid-s3compat.php:478
+#: includes/customclass/class-wpvivid-s3compat.php:593
+msgid "Custom Path"
+msgstr "مسار مخصص"
+
+#: includes/customclass/class-wpvivid-s3compat.php:471
+#: includes/customclass/class-wpvivid-s3compat.php:586
+msgid "Enter an existed Space to create a custom backup storage directory."
+msgstr "يرجى إدخال مساحة موجودة لإنشاء دليل تخزين احتياطي مخصص."
+
+#: includes/customclass/class-wpvivid-s3compat.php:466
+#: includes/customclass/class-wpvivid-s3compat.php:581
+msgid "Space Name(e.g. test)"
+msgstr "اسم المساحة (مثال: اختبار)"
+
+#: includes/customclass/class-wpvivid-s3compat.php:459
+#: includes/customclass/class-wpvivid-s3compat.php:574
+msgid "Enter your DigitalOcean Spaces secret key"
+msgstr "أدخل المفتاح السري للمساحات الرقمية الخاصة بك"
+
+#: includes/customclass/class-wpvivid-s3compat.php:454
+#: includes/customclass/class-wpvivid-s3compat.php:569
+msgid "DigitalOcean Spaces secret key"
+msgstr "المفتاح السري إلى مساحات DigitalOcean"
+
+#: includes/customclass/class-wpvivid-s3compat.php:447
+#: includes/customclass/class-wpvivid-s3compat.php:562
+msgid "Enter your DigitalOcean Spaces access key"
+msgstr "أدخل/ي مفتاح الوصول لمساحات DigitalOcean الخاصة بك"
+
+#: includes/customclass/class-wpvivid-s3compat.php:442
+#: includes/customclass/class-wpvivid-s3compat.php:557
+msgid "DigitalOcean Spaces access key"
+msgstr "مفتاح الوصول إلى مساحات DigitalOcean "
+
+#: includes/customclass/class-wpvivid-s3compat.php:430
+#: includes/customclass/class-wpvivid-s3compat.php:545
+msgid "Enter a unique alias: e.g. DOS-001"
+msgstr "أدخل الاسم المستعار الفريد: على سبيل المثال DOS-001"
+
+#: includes/customclass/class-wpvivid-s3compat.php:422
+#: includes/customclass/class-wpvivid-s3compat.php:537
+msgid "Enter Your DigitalOcean Spaces Account"
+msgstr "أدخل/ي حساب مساحات DigitalOcean الخاصة بك"
+
+#: includes/customclass/class-wpvivid-s3compat.php:413
+msgid "DigitalOcean Spaces"
+msgstr "مساحات DigitalOcean "
+
+#: includes/customclass/class-wpvivid-ftpclass.php:158
+msgid "Click the button to connect to FTP server and add it to the storage list below."
+msgstr "انقر فوق الزر للاتصال بخادوم بروتوكول نقل الملفات وأضفه إلى قائمة التخزين أدناه."
+
+#: includes/customclass/class-wpvivid-amazons3-plus.php:173
+#: includes/customclass/class-wpvivid-ftpclass.php:153
+#: includes/customclass/class-wpvivid-s3compat.php:517
+#: includes/customclass/class-wpvivid-sftpclass.php:143
+msgid "Test and Add"
+msgstr "اختبار وإضافة"
+
+#: includes/customclass/class-wpvivid-ftpclass.php:145
+#: includes/customclass/class-wpvivid-ftpclass.php:246
+msgid "Uncheck the option to use FTP active mode when transferring files. Make sure the FTP server you are configuring supports the active FTP mode."
+msgstr "قم بإلغاء تحديد الخيار لاستخدام وضع بروتوكول نقل الملفات النشط عند نقل الملفات. تأكد من أن خادوم بروتوكول نقل الملقات (FTP) الذي تقوم بتكوينه يدعم وضع بروتوكول نقل الملفات النشط ."
+
+#: includes/customclass/class-wpvivid-ftpclass.php:139
+#: includes/customclass/class-wpvivid-ftpclass.php:240
+msgid "Uncheck this to enable FTP active mode."
+msgstr "قم بإلغاء تحديد هذا لتمكين الوضع النشط لبروتوكل نقل الملفات."
+
+#: includes/customclass/class-wpvivid-ftpclass.php:117
+#: includes/customclass/class-wpvivid-ftpclass.php:232
+msgid "Enter an absolute path and a custom subdirectory (optional) for holding the backups of current website. For example, /home/username/customfolder"
+msgstr "أدخل مسارًا مطلقًا ودليلًا فرعيًا مخصصًا (اختياري) للاحتفاظ بالنسخ الاحتياطية للموقع الحالي. على سبيل المثال، /الرئيسية/اسم-المستخدم/مجلد-مخصص"
+
+#: includes/customclass/class-wpvivid-ftpclass.php:112
+#: includes/customclass/class-wpvivid-ftpclass.php:227
+msgid "Absolute path must exist(e.g. /home/username)"
+msgstr "يجب وجود المسار المطلق (على سبيل المثال /الصفحة-الرئيسية /اسم-المستخدم)"
+
+#: includes/customclass/class-wpvivid-ftpclass.php:105
+#: includes/customclass/class-wpvivid-ftpclass.php:220
+msgid "Enter the FTP server password."
+msgstr "إدخال كلمة مرور خادوم بروتوكول نقل الملفات."
+
+#: includes/customclass/class-wpvivid-ftpclass.php:100
+#: includes/customclass/class-wpvivid-ftpclass.php:215
+msgid "FTP password"
+msgstr "كلمة مرور بروتوكول نقل الملفات FTP"
+
+#: includes/customclass/class-wpvivid-ftpclass.php:93
+#: includes/customclass/class-wpvivid-ftpclass.php:208
+msgid "Enter your FTP server user name."
+msgstr "أدخل اسم مستخدم خادوم بروتوكول نقل الملفات FTP الخاص بك."
+
+#: includes/customclass/class-wpvivid-ftpclass.php:88
+#: includes/customclass/class-wpvivid-ftpclass.php:203
+msgid "FTP login"
+msgstr "اسم تسجيل بروتوكول نقل الملفات"
+
+#: includes/customclass/class-wpvivid-ftpclass.php:81
+msgid "Pro feature: Change the FTP default port number"
+msgstr "ميزة احترافية: قم بتغيير رقم المنفذ الافتراضي لبروتوكول نقل الملفات"
+
+#: includes/customclass/class-wpvivid-ftpclass.php:69
+#: includes/customclass/class-wpvivid-ftpclass.php:196
+msgid "Enter the FTP server."
+msgstr "أدخل/ي خادوم بروتوكل نقل الملفات"
+
+#: includes/customclass/class-wpvivid-ftpclass.php:64
+#: includes/customclass/class-wpvivid-ftpclass.php:191
+msgid "FTP server (server's port 21)"
+msgstr "خادوم بروتوكول نقل الملفات (منفذ الخادوم 21)"
+
+#: includes/customclass/class-wpvivid-ftpclass.php:52
+#: includes/customclass/class-wpvivid-ftpclass.php:179
+msgid "Enter an unique alias: e.g. FTP-001"
+msgstr "أدخل/ي اسم مستعار فريد: على سبيل المثال، FTP-001"
+
+#: includes/customclass/class-wpvivid-ftpclass.php:45
+#: includes/customclass/class-wpvivid-ftpclass.php:172
+msgid "Enter Your FTP Account"
+msgstr "ادخل حساب بروتوكول نقل الملفات الخاص بك"
+
+#: includes/customclass/class-wpvivid-ftpclass.php:36
+msgid "FTP"
+msgstr "بروتوكول نقل الملفات"
+
+#: includes/customclass/class-wpvivid-amazons3-plus.php:302
+#: includes/customclass/class-wpvivid-dropbox.php:746
+#: includes/customclass/class-wpvivid-ftpclass.php:259
+#: includes/customclass/class-wpvivid-google-drive.php:477
+#: includes/customclass/class-wpvivid-one-drive.php:460
+#: includes/customclass/class-wpvivid-s3compat.php:623
+#: includes/customclass/class-wpvivid-sftpclass.php:249
+msgid "Click the button to save the changes."
+msgstr "انقر فوق الزر لحفظ التغييرات."
+
+#: includes/customclass/class-wpvivid-dropbox.php:692
+msgid "Authenticate with Dropbox"
+msgstr "المصادقة مع Dropbox"
+
+#: includes/customclass/class-wpvivid-amazons3-plus.php:137
+#: includes/customclass/class-wpvivid-dropbox.php:559
+#: includes/customclass/class-wpvivid-ftpclass.php:131
+#: includes/customclass/class-wpvivid-google-drive.php:286
+#: includes/customclass/class-wpvivid-one-drive.php:270
+#: includes/customclass/class-wpvivid-s3compat.php:509
+#: includes/customclass/class-wpvivid-sftpclass.php:135
+msgid "Once checked, all this sites backups sent to a remote storage destination will be uploaded to this storage by default."
+msgstr "بمجرد تحقيق هذا الخيار، سيتم رفع جميع هذه النسخ الاحتياطية التي أرسلت إلى وجهة تخزين عن بعد إلى هذا التخزين افتراضيًا."
+
+#: includes/customclass/class-wpvivid-amazons3-plus.php:131
+#: includes/customclass/class-wpvivid-dropbox.php:553
+#: includes/customclass/class-wpvivid-ftpclass.php:125
+#: includes/customclass/class-wpvivid-google-drive.php:280
+#: includes/customclass/class-wpvivid-one-drive.php:264
+#: includes/customclass/class-wpvivid-s3compat.php:503
+#: includes/customclass/class-wpvivid-sftpclass.php:129
+msgid "Set as the default remote storage."
+msgstr "تعيين كمساحة التخزين عن بُعد الافتراضية."
+
+#: includes/customclass/class-wpvivid-dropbox.php:545
+#: includes/customclass/class-wpvivid-google-drive.php:272
+#: includes/customclass/class-wpvivid-one-drive.php:256
+msgid "Pro feature: Create a directory for storing the backups of the site"
+msgstr "ميزة احترافية: قم/قومي بإنشاء دليل لتخزين النُسخ الاحتياطية للموقع"
+
+#: includes/customclass/class-wpvivid-dropbox.php:533
+#: includes/customclass/class-wpvivid-google-drive.php:260
+#: includes/customclass/class-wpvivid-one-drive.php:244
+msgid "All backups will be uploaded to this directory."
+msgstr "سيتم تحميل جميع النُسخ الاحتياطية على هذا الدليل."
+
+#: includes/customclass/class-wpvivid-amazons3-plus.php:75
+#: includes/customclass/class-wpvivid-amazons3-plus.php:213
+#: includes/customclass/class-wpvivid-dropbox.php:521
+#: includes/customclass/class-wpvivid-dropbox.php:734
+#: includes/customclass/class-wpvivid-ftpclass.php:57
+#: includes/customclass/class-wpvivid-ftpclass.php:184
+#: includes/customclass/class-wpvivid-google-drive.php:248
+#: includes/customclass/class-wpvivid-google-drive.php:465
+#: includes/customclass/class-wpvivid-one-drive.php:232
+#: includes/customclass/class-wpvivid-one-drive.php:448
+#: includes/customclass/class-wpvivid-s3compat.php:435
+#: includes/customclass/class-wpvivid-s3compat.php:550
+#: includes/customclass/class-wpvivid-sftpclass.php:61
+#: includes/customclass/class-wpvivid-sftpclass.php:176
+msgid "A name to help you identify the storage if you have multiple remote storage connected."
+msgstr "اسم لمساعدتك في تحديد وحدة التخزين إذا كان لديك العديد من وحدات التخزين عن بُعد المتصلة."
+
+#: includes/customclass/class-wpvivid-dropbox.php:516
+#: includes/customclass/class-wpvivid-dropbox.php:729
+msgid "Enter a unique alias: e.g. Dropbox-001"
+msgstr "أدخل/ي الاسم المستعار الفريد: على سبيل المثال Dropbox-001"
+
+#: includes/customclass/class-wpvivid-dropbox.php:509
+msgid "Enter Your Dropbox Information"
+msgstr "أدخل معلومات Dropbox الخاصة بك"
+
+#: includes/customclass/class-wpvivid-dropbox.php:489
+msgid "Dropbox"
+msgstr "Dropbox"
+
+#: includes/customclass/class-wpvivid-dropbox.php:429
+#: includes/customclass/class-wpvivid-dropbox.php:477
+msgid "You have authenticated the Dropbox account as your remote storage."
+msgstr "لقد قمت المصادقة على حساب Dropbox كمساحة تخزين عن بُعد."
+
+#: includes/class-wpvivid-backup.php:1164
+#: includes/class-wpvivid-backup.php:1181
+#: includes/class-wpvivid-function-realize.php:56
+#: includes/new_backup/class-wpvivid-backup-task_2.php:2790
+#: includes/new_backup/class-wpvivid-backup-task_2.php:2810
+msgid "The backup will be canceled after backing up the current chunk ends."
+msgstr "سيتم إلغاء النسخ الاحتياطي بعد الانتهاء من نسخ المقدار الحالي."
+
+#: includes/class-wpvivid-backup.php:1145
+#: includes/class-wpvivid-backup.php:1158
+#: includes/class-wpvivid-export-import.php:1352
+#: includes/new_backup/class-wpvivid-backup-task_2.php:2771
+#: includes/new_backup/class-wpvivid-backup-task_2.php:2784
+msgid "running time: "
+msgstr "وقت التشغيل:"
+
+#: includes/class-wpvivid-backup.php:1145
+#: includes/class-wpvivid-backup.php:1158
+#: includes/class-wpvivid-export-import.php:1352
+#: includes/new_backup/class-wpvivid-backup-task_2.php:2771
+#: includes/new_backup/class-wpvivid-backup-task_2.php:2784
+msgid "Progress: "
+msgstr "التقدم المحرز:"
+
+#: includes/class-wpvivid-backup.php:1110
+#: includes/new_backup/class-wpvivid-backup-task_2.php:2735
+msgid "Ready to backup. Progress: 0%, running time: 0second."
+msgstr "جاهز للنسخ الاحتياطي. التقدم: 0 ٪، وقت التشغيل: 0 ثانية."
+
+#: includes/class-wpvivid-importer.php:1907
+#: includes/class-wpvivid-importer.php:1912
+#: includes/class-wpvivid-importer.php:2137
+#: includes/class-wpvivid-importer.php:2333
+msgid "This does not appear to be a WXR file, missing/invalid WXR version number"
+msgstr "لا يبدو أن هذا ملف WXR، رقم إصدار WXR مفقود/غير صالح"
+
+#: includes/class-wpvivid-importer.php:1851
+msgid "Details are shown above. The importer will now try again with a different parser..."
+msgstr "تظهر التفاصيل أعلاه. سيحاول المستورد الآن مرة أخرى مع معالج مختلف ..."
+
+#: includes/class-wpvivid-importer.php:1850
+#: includes/class-wpvivid-importer.php:1895
+#: includes/class-wpvivid-importer.php:1903
+msgid "There was an error when reading this WXR file"
+msgstr "كان هنالك خطأ عند قراءة ملف WXR"
+
+#: includes/class-wpvivid-importer.php:1710
+msgid "Invalid file type"
+msgstr "نوع الملف خاطئ"
+
+#: includes/class-wpvivid-importer.php:1697
+msgid "Fetching attachments is not enabled"
+msgstr "جلب المرفقات غير مُمكّن"
+
+#: includes/class-wpvivid-importer.php:1649
+#: includes/class-wpvivid-importer.php:1750
+msgid "Sorry, this file type is not permitted for security reasons."
+msgstr "عذرًا ، هذا نوع الملف غير مسموح به لأسباب أمنية."
+
+#: admin/partials/wpvivid-backup-restore-page-display.php:265
+#: includes/class-wpvivid-exporter.php:546
+#: includes/class-wpvivid-importer.php:316
+#: includes/snapshot/class-wpvivid-snapshots-list.php:261
+#: includes/staging/class-wpvivid-staging-log-page.php:248
+#: includes/staging/class-wpvivid-staging-sites-list.php:599
+#: includes/staging/class-wpvivid-staging-sites-list.php:970
+#: includes/upload-cleaner/class-wpvivid-upload-cleaner-setting.php:240
+#: includes/upload-cleaner/class-wpvivid-upload-cleaner-setting.php:572
+#: includes/upload-cleaner/class-wpvivid-uploads-cleaner.php:304
+#: includes/upload-cleaner/class-wpvivid-uploads-cleaner.php:714
+msgid "Last page"
+msgstr "الصفحة الأخيرة"
+
+#: admin/partials/wpvivid-backup-restore-page-display.php:255
+#: includes/class-wpvivid-exporter.php:536
+#: includes/class-wpvivid-importer.php:306
+#: includes/snapshot/class-wpvivid-snapshots-list.php:251
+#: includes/staging/class-wpvivid-staging-log-page.php:238
+#: includes/staging/class-wpvivid-staging-sites-list.php:589
+#: includes/staging/class-wpvivid-staging-sites-list.php:960
+#: includes/upload-cleaner/class-wpvivid-upload-cleaner-setting.php:230
+#: includes/upload-cleaner/class-wpvivid-upload-cleaner-setting.php:562
+#: includes/upload-cleaner/class-wpvivid-uploads-cleaner.php:294
+#: includes/upload-cleaner/class-wpvivid-uploads-cleaner.php:704
+msgid "Next page"
+msgstr "الصفحة التالية"
+
+#: admin/partials/wpvivid-backup-restore-page-display.php:247
+#: includes/class-wpvivid-exporter.php:528
+#: includes/class-wpvivid-importer.php:298
+#: includes/snapshot/class-wpvivid-snapshots-list.php:243
+#: includes/staging/class-wpvivid-staging-log-page.php:230
+#: includes/staging/class-wpvivid-staging-sites-list.php:581
+#: includes/staging/class-wpvivid-staging-sites-list.php:952
+#: includes/upload-cleaner/class-wpvivid-upload-cleaner-setting.php:222
+#: includes/upload-cleaner/class-wpvivid-upload-cleaner-setting.php:554
+#: includes/upload-cleaner/class-wpvivid-uploads-cleaner.php:286
+#: includes/upload-cleaner/class-wpvivid-uploads-cleaner.php:696
+msgctxt "paging"
+msgid "%1$s of %2$s"
+msgstr "%1$s من %2$s"
+
+#: admin/partials/wpvivid-backup-restore-page-display.php:237
+#: admin/partials/wpvivid-backup-restore-page-display.php:241
+#: includes/class-wpvivid-exporter.php:518
+#: includes/class-wpvivid-exporter.php:522
+#: includes/class-wpvivid-importer.php:288
+#: includes/class-wpvivid-importer.php:292
+#: includes/snapshot/class-wpvivid-snapshots-list.php:233
+#: includes/snapshot/class-wpvivid-snapshots-list.php:237
+#: includes/staging/class-wpvivid-staging-log-page.php:220
+#: includes/staging/class-wpvivid-staging-log-page.php:224
+#: includes/staging/class-wpvivid-staging-sites-list.php:571
+#: includes/staging/class-wpvivid-staging-sites-list.php:575
+#: includes/staging/class-wpvivid-staging-sites-list.php:942
+#: includes/staging/class-wpvivid-staging-sites-list.php:946
+#: includes/upload-cleaner/class-wpvivid-upload-cleaner-setting.php:212
+#: includes/upload-cleaner/class-wpvivid-upload-cleaner-setting.php:216
+#: includes/upload-cleaner/class-wpvivid-upload-cleaner-setting.php:544
+#: includes/upload-cleaner/class-wpvivid-upload-cleaner-setting.php:548
+#: includes/upload-cleaner/class-wpvivid-uploads-cleaner.php:276
+#: includes/upload-cleaner/class-wpvivid-uploads-cleaner.php:280
+#: includes/upload-cleaner/class-wpvivid-uploads-cleaner.php:686
+#: includes/upload-cleaner/class-wpvivid-uploads-cleaner.php:690
+msgid "Current Page"
+msgstr "الصفحة الحالية"
+
+#: admin/partials/wpvivid-backup-restore-page-display.php:230
+#: includes/class-wpvivid-exporter.php:511
+#: includes/class-wpvivid-importer.php:281
+#: includes/snapshot/class-wpvivid-snapshots-list.php:226
+#: includes/staging/class-wpvivid-staging-log-page.php:213
+#: includes/staging/class-wpvivid-staging-sites-list.php:564
+#: includes/staging/class-wpvivid-staging-sites-list.php:935
+#: includes/upload-cleaner/class-wpvivid-upload-cleaner-setting.php:205
+#: includes/upload-cleaner/class-wpvivid-upload-cleaner-setting.php:537
+#: includes/upload-cleaner/class-wpvivid-uploads-cleaner.php:269
+#: includes/upload-cleaner/class-wpvivid-uploads-cleaner.php:679
+msgid "Previous page"
+msgstr "الصفحة السابقة"
+
+#: admin/partials/wpvivid-backup-restore-page-display.php:219
+#: includes/class-wpvivid-exporter.php:500
+#: includes/class-wpvivid-importer.php:270
+#: includes/snapshot/class-wpvivid-snapshots-list.php:215
+#: includes/staging/class-wpvivid-staging-log-page.php:202
+#: includes/staging/class-wpvivid-staging-sites-list.php:553
+#: includes/staging/class-wpvivid-staging-sites-list.php:924
+#: includes/upload-cleaner/class-wpvivid-upload-cleaner-setting.php:194
+#: includes/upload-cleaner/class-wpvivid-upload-cleaner-setting.php:526
+#: includes/upload-cleaner/class-wpvivid-uploads-cleaner.php:258
+#: includes/upload-cleaner/class-wpvivid-uploads-cleaner.php:668
+msgid "First page"
+msgstr "الصفحة الأولى"
+
+#: admin/partials/wpvivid-backup-restore-page-display.php:188
+#: includes/class-wpvivid-exporter.php:464
+#: includes/class-wpvivid-importer.php:234
+#: includes/snapshot/class-wpvivid-snapshots-list.php:184
+#: includes/staging/class-wpvivid-staging-log-page.php:171
+#: includes/staging/class-wpvivid-staging-sites-list.php:522
+#: includes/staging/class-wpvivid-staging-sites-list.php:893
+#: includes/upload-cleaner/class-wpvivid-upload-cleaner-setting.php:163
+#: includes/upload-cleaner/class-wpvivid-upload-cleaner-setting.php:495
+#: includes/upload-cleaner/class-wpvivid-uploads-cleaner.php:227
+#: includes/upload-cleaner/class-wpvivid-uploads-cleaner.php:637
+msgid "%s item"
+msgid_plural "%s items"
+msgstr[0] "%s عنصر"
+msgstr[1] "عنصر"
+msgstr[2] "عنصران"
+msgstr[3] "%s عناصر"
+msgstr[4] "%s عنصر"
+msgstr[5] "%s عنصر"
+
+#: includes/class-wpvivid-importer.php:131 includes/class-wpvivid.php:6931
+msgid "Type: "
+msgstr "النوع:"
+
+#: includes/class-wpvivid-importer.php:52
+msgid "Media Files Size"
+msgstr "حجم ملفات الوسائط"
+
+#: includes/class-wpvivid-importer.php:51
+msgid "Count"
+msgstr "العدد"
+
+#: includes/class-wpvivid-importer.php:50
+msgid "Post Types"
+msgstr "أنواع المحتوى"
+
+#: includes/class-wpvivid-importer.php:49
+msgid "File Name"
+msgstr "اسم الملف"
+
+#: includes/class-wpvivid-backup-uploader.php:761
+msgid "Select Files"
+msgstr "تحديد الملفات"
+
+#: includes/class-wpvivid-backup-uploader.php:760
+msgctxt "Uploader: Drop files here - or - Select Files"
+msgid "or"
+msgstr "أو"
+
+#: includes/class-wpvivid-backup-uploader.php:759
+msgid "Drop files here"
+msgstr "اسحب الملفات هنا"
+
+#: includes/class-wpvivid-backup-uploader.php:701
+msgid "Scan uploaded backup or received backup"
+msgstr "فحص النُسخ الاحتياطية المرفوعة أو النسخة الاحتياطية المستلمة"
+
+#: includes/class-wpvivid-backup-uploader.php:698
+msgid "Tips: Click the button below to scan all uploaded or received backups in directory"
+msgstr "نصائح: انقر فوق الزر أدناه لفحص جميع النُسخ الاحتياطية التي تم تحميلها أو المستلمة في الدليل"
+
+#: admin/partials/wpvivid-admin-display.php:62
+msgid "Warning: There is no default remote storage available for the scheduled backups, please set up it first."
+msgstr "تحذير: لا يوجد تخزين عن بُعد افتراضي متاح للنُسخ الاحتياطية المجدولة، يرجى إعداده أولاً."
+
+#: admin/partials/wpvivid-backup-restore-page-display.php:2894
+msgid "Next Backup: "
+msgstr "النسخ الاحتياطي التالي:"
+
+#: admin/partials/wpvivid-backup-restore-page-display.php:2892
+msgid "Server Time: "
+msgstr "وقت الخادوم:"
+
+#: admin/partials/wpvivid-backup-restore-page-display.php:2890
+msgid "Schedule Status: "
+msgstr "حالة الجدولة:"
+
+#: admin/partials/wpvivid-backup-restore-page-display.php:2888
+msgid "Backup Schedule"
+msgstr "جدولة النسخ الاحتياطي"
+
+#: admin/partials/wpvivid-backup-restore-page-display.php:2871
+msgid "The settings are only for manual backup, which won't affect schedule settings."
+msgstr "الإعدادات مخصصة فقط للنسخ الاحتياطي اليدوي، والتي لن تؤثر على إعدادات الجدولة."
+
+#: admin/partials/wpvivid-backup-restore-page-display.php:2490
+msgid "This backup can only be deleted manually"
+msgstr "لا يمكن حذف هذه النسخة الاحتياطية إلا يدويًا"
+
+#: admin/partials/wpvivid-backup-restore-page-display.php:2485
+msgid "Backup Now"
+msgstr "إجراء نسخ احتياطي الآن"
+
+#: admin/partials/wpvivid-backup-restore-page-display.php:2441
+msgid "Send Backup to Remote Storage:"
+msgstr "ارسال النسخة الاحتياطية إلى وحدة تخزين بعيدة:"
+
+#: admin/partials/wpvivid-backup-restore-page-display.php:2437
+msgid "Save Backups to Local"
+msgstr "حفظ النُسخ الاحتياطية إلى المحلي"
+
+#: admin/partials/wpvivid-backup-restore-page-display.php:2409
+msgid "rename directory"
+msgstr "إعادة تسمية الدليل"
+
+#: admin/partials/wpvivid-backup-restore-page-display.php:2407
+msgid "Local Storage Directory:"
+msgstr "دليل وحدة التخزين المحلي:"
+
+#: admin/partials/wpvivid-backup-restore-page-display.php:2402
+msgid "Back Up Manually"
+msgstr "نسخ احتياطي يدوي"
+
+#: admin/partials/wpvivid-backup-restore-page-display.php:2311
+#: includes/class-wpvivid-migrate.php:405
+#: includes/class-wpvivid-migrate.php:1538
+msgid "Cancel"
+msgstr "إلغاء"
+
+#: admin/partials/wpvivid-backup-restore-page-display.php:2305
+#: includes/class-wpvivid-migrate.php:1532 includes/class-wpvivid.php:4574
+#: includes/new_backup/class-wpvivid-backup2.php:1022
+#: includes/new_backup/class-wpvivid-backup2.php:1116
+msgid "Network Connection:"
+msgstr "اتصال الشبكة:"
+
+#: admin/partials/wpvivid-backup-restore-page-display.php:2302
+#: includes/class-wpvivid-migrate.php:1529 includes/class-wpvivid.php:4571
+#: includes/new_backup/class-wpvivid-backup2.php:1019
+#: includes/new_backup/class-wpvivid-backup2.php:1113
+msgid "Speed:"
+msgstr "السرعة:"
+
+#: admin/partials/wpvivid-backup-restore-page-display.php:2301
+#: includes/class-wpvivid-migrate.php:1528 includes/class-wpvivid.php:4570
+#: includes/new_backup/class-wpvivid-backup2.php:1018
+#: includes/new_backup/class-wpvivid-backup2.php:1112
+msgid "Uploaded:"
+msgstr "تم الرفع:"
+
+#: admin/partials/wpvivid-backup-restore-page-display.php:1190
+msgid "The backup is stored on the remote storage, click on the button to download it to localhost."
+msgstr "يتم تخزين النسخ الاحتياطي على مساحة التخزين عن بُعد، انقر فوق الزر لتنزيله على المضيف المحلي."
+
+#: admin/partials/wpvivid-backup-restore-page-display.php:1189
+msgid "Retrieve the backup to localhost"
+msgstr "استرداد النسخ الاحتياطي إلى مضيف محلي"
+
+#: admin/partials/wpvivid-backup-restore-page-display.php:1185
+msgid "Restore function will replace the current site's themes, plugins, uploads, database and/or other content directories with the existing equivalents in the selected backup."
+msgstr "ستحل وظيفة الاستعادة محل قوالب الموقع الحالية والإضافات والتحميلات وقاعدة البيانات و/أو أدلة المحتوى الأخرى مع المرادفات الموجودة في النسخ الاحتياطي المحدد."
+
+#: admin/partials/wpvivid-backup-restore-page-display.php:1184
+msgid "Please do not close the page or switch to other pages when a restore task is running, as it could trigger some unexpected errors."
+msgstr "يرجى عدم إغلاق الصفحة أو التبديل إلى صفحات أخرى عند تشغيل مهمة الاستعادة، حيث يمكن أن يؤدي ذلك إلى بعض الأخطاء الغير المتوقعة."
+
+#: admin/partials/wpvivid-backup-restore-page-display.php:1183
+msgid "Restore backup from:"
+msgstr "استعادة النسخة الاحتياطية من:"
+
+#: admin/class-wpvivid-admin.php:279
+msgid "Step Three: Click 'Restore' button"
+msgstr "الخطوة الثالثة: انقر فوق الزر «استعادة»"
+
+#: admin/class-wpvivid-admin.php:278
+msgid "Step Two: Choose an option to complete restore, if any"
+msgstr "الخطوة الثانية: اختر خيارًا لإكمال الاستعادة، إن وجد"
+
+#: admin/class-wpvivid-admin.php:277
+msgid "Step One: In the backup list, click the 'Restore' button on the backup you want to restore. This will bring up the restore tab"
+msgstr "الخطوة الأولى: في قائمة النسخ الاحتياطي، انقر فوق الزر «استعادة» على النسخة الاحتياطية التي تريد استعادتها. سيؤدي هذا إلى إظهار علامة التبويب استعادة."
+
+#: admin/partials/wpvivid-backup-restore-page-display.php:1080
+#: admin/partials/wpvivid-backup-restore-page-display.php:2694
+msgid "This request might delete the backup being downloaded, are you sure you want to continue?"
+msgstr "قد يحذف هذا الطلب النسخة الاحتياطية التي يتم تنزيلها، هل أنت متأكد من أنك تريد المتابعة؟"
+
+#: admin/partials/wpvivid-backup-restore-page-display.php:1075
+#: includes/class-wpvivid-export-import.php:395
+#: includes/snapshot/class-wpvivid-snapshot.php:1046
+msgid "Please select at least one item."
+msgstr "الرجاء تحديد عنصر واحد على الأقل"
+
+#: admin/partials/wpvivid-backup-restore-page-display.php:1036
+msgid "This request will delete the backup being downloaded, are you sure you want to continue?"
+msgstr "سيقوم هذا الطلب بحذف النسخة الاحتياطية الذي يتم تنزيله، هل أنت متأكد من أنك تريد المتابعة؟"
+
+#: admin/partials/wpvivid-backup-restore-page-display.php:1027
+msgid "This backup is locked, are you sure to remove it? This backup will be deleted permanently from your hosting (localhost) and remote storages."
+msgstr "هذه النسخة الاحتياطية مغلقة، هل أنت متأكد من أنك تريد إزلتها؟ سيتم حذف هذه النسخة الاحتياطية بشكل دائم من استضافتك (مضيف محلي) ووحدات التخزين عن بُعد."
+
+#: admin/partials/wpvivid-backup-restore-page-display.php:506
+msgid "Delete the selected backups"
+msgstr "حذف النُسخ الاحتياطية المحددة"
+
+#: admin/partials/wpvivid-backup-restore-page-display.php:495
+#: includes/class-wpvivid-migrate.php:1064
+#: includes/class-wpvivid-migrate.php:1202
+msgid "Delete"
+msgstr "حذف"
+
+#: admin/partials/wpvivid-backup-restore-page-display.php:492
+msgid "Storage"
+msgstr "وحدة التخزين"
+
+#: admin/partials/wpvivid-backup-restore-page-display.php:491
+msgid "Backup"
+msgstr "نسخ الاحتياطي"
+
+#: admin/partials/wpvivid-backup-restore-page-display.php:444
+#: admin/partials/wpvivid-backup-restore-page-display.php:494
+#: admin/partials/wpvivid-backup-restore-page-display.php:1187
+#: includes/class-wpvivid.php:6845 includes/class-wpvivid.php:6981
+msgid "Restore"
+msgstr "استعادة"
+
+#: admin/partials/wpvivid-backup-restore-page-display.php:426
+msgid "Backups"
+msgstr "النُسخ الاحتياطية "
+
+#: admin/partials/wpvivid-backup-restore-page-display.php:411
+#: admin/partials/wpvivid-backup-restore-page-display.php:479
+msgid "How to restore your website from a backup(scheduled, manual, uploaded and received backup)"
+msgstr "كيفية استعادة موقع الويب الخاص بك من نسخة احتياطية (مجدولة، يدوية، نسخة احتياطية تم رفعها وتلقيها)"
+
+#: admin/partials/wpvivid-backup-restore-page-display.php:405
+#: admin/partials/wpvivid-backup-restore-page-display.php:473
+msgid "->If backups are stored in web server, the plugin will list all relevant files immediately."
+msgstr "-> إذا تم تخزين النسخ الاحتياطية في خادوم الويب، فسيقوم المكون الإضافي بإدراج جميع الملفات ذات الصلة على الفور."
+
+#: admin/partials/wpvivid-backup-restore-page-display.php:404
+#: admin/partials/wpvivid-backup-restore-page-display.php:472
+msgid "->If backups are stored in remote storage, our plugin will retrieve the backup to your web server first. This may take a little time depending on the size of backup files. Please be patient. Then you can download them to your PC."
+msgstr "-> إذا تم تخزين النُسخ الاحتياطية في وحدات التخزين البعيدة، فستقوم الإضافة الخاص بنا باسترداد هذه النُسخ إلى خادم الويب الخاص بك أولاً. قد يستغرق هذا القليل من الوقت اعتمادًا على حجم ملفات النُسخ الاحتياطية. يرجى التحلي بالصبر. بعد ذلك يمكنك تنزيلها على جهاز الكمبيوتر الخاص بك."
+
+#: admin/partials/wpvivid-backup-restore-page-display.php:402
+#: admin/partials/wpvivid-backup-restore-page-display.php:470
+msgid "About backup download"
+msgstr "حول تنزيل النسخ الاحتياطي"
+
+#: admin/partials/wpvivid-remote-storage-page-display.php:36
+#: admin/partials/wpvivid-remote-storage-page-display.php:369
+#: includes/snapshot/class-wpvivid-snapshots-list.php:42
+msgid "Actions"
+msgstr "الإجراءات"
+
+#: admin/partials/wpvivid-remote-storage-page-display.php:35
+#: admin/partials/wpvivid-remote-storage-page-display.php:368
+msgid "Remote Storage Alias"
+msgstr "الاسم المستعار الخاص بوحدة التخزين عن بعد"
+
+#: admin/partials/wpvivid-remote-storage-page-display.php:34
+#: admin/partials/wpvivid-remote-storage-page-display.php:367
+msgid "Storage Provider"
+msgstr "مزود التخزين"
+
+#: admin/partials/wpvivid-remote-storage-page-display.php:26
+#: admin/partials/wpvivid-remote-storage-page-display.php:359
+msgid "Please choose one storage to save your backups (remote storage)"
+msgstr "يرجى اختيار وحدة تخزين واحدة لحفظ النُسخ الاحتياطية الخاصة بك (التخزين عن بُعد)"
+
+#: admin/partials/wpvivid-remote-storage-page-display.php:14
+#: admin/partials/wpvivid-remote-storage-page-display.php:352
+msgid "Storage Edit"
+msgstr "تحرير وحدة التخزين"
+
+#: admin/partials/wpvivid-remote-storage-page-display.php:6
+#: admin/partials/wpvivid-remote-storage-page-display.php:350
+msgid "Storages"
+msgstr "وحدات التخزين"
+
+#: admin/partials/wpvivid-settings-page-display.php:841
+msgid "Advanced Settings"
+msgstr "الإعدات المتقدمة"
+
+#: admin/partials/wpvivid-settings-page-display.php:835
+msgid "General Settings"
+msgstr "الإعدادت العامة"
+
+#: admin/partials/wpvivid-settings-page-display.php:768
+msgid "Chunk Size"
+msgstr "حجم القطعة"
+
+#: admin/partials/wpvivid-settings-page-display.php:811
+msgid "Adjust this value to apply for a temporary PHP memory limit for WPvivid backup plugin in restore process. We set this value to 256M by default. Increase the value if you encounter a memory exhausted error. Note: some web hosting providers may not support this."
+msgstr "اضبط هذه القيمة للتطبيق للحصول على حد مؤقت لذاكرة PHP إضافة «النسخ الاحتياطي من WPVIDID» في عملية الاستعادة. قمنا بتعيين هذه القيمة على 256ميغ افتراضيًا. قم بزيادة القيمة إذا واجهت خطأ استنفاد الذاكرة. ملاحظة: قد لا يدعم بعض مقدمي استضافة الويب هذا."
+
+#: admin/partials/wpvivid-settings-page-display.php:808
+msgid "PHP Memory Limit for restoration"
+msgstr "حد ذاكرة PHP للاستعادة"
+
+#: admin/partials/wpvivid-settings-page-display.php:756
+msgid "Adjust this value to apply for a temporary PHP memory limit for WPvivid backup plugin to run a backup. We set this value to 256M by default. Increase the value if you encounter a memory exhausted error. Note: some web hosting providers may not support this."
+msgstr "اضبط هذه القيمة للتطبيق للحصول على حد مؤقت لذاكرة PHP إضافة «النسخ الاحتياطي من WPVIDID» في عملية الاستعادة. قمنا بتعيين هذه القيمة على 256ميغ افتراضيًا. قم بزيادة القيمة إذا واجهت خطأ استنفاد الذاكرة. ملاحظة: قد لا يدعم بعض مقدمي استضافة الويب هذا."
+
+#: admin/partials/wpvivid-settings-page-display.php:753
+msgid "PHP Memory Limit for backup"
+msgstr "حد ذاكرة PHP للنسخ الاحتياطي"
+
+#: admin/partials/wpvivid-settings-page-display.php:806
+msgid "The time-out is not your server PHP time-out. With the execution time exhausted, our plugin will shut the process of restore down. If the progress of restore encounters a time-out, that means you have a medium or large sized website, please try to scale the value bigger."
+msgstr "المهلة الزمنية ليست هي المهلة الزمنية الخاصة بخادوم PHP الخاص بك. مع استنفاد وقت التنفيذ، ستوقف الإضافة الخاص بنا عملية الاستعادة. في حالة واجهة التقدم المحزر في الاستعادة نفاد المهلة الزمنية، فهذا يعني أن لديك موقع ويب متوسط ​​أو كبير الحجم، فيرجى محاولة تكبير نطاق القيمة."
+
+#: admin/partials/wpvivid-settings-page-display.php:803
+msgid "PHP script execution timeout for restore"
+msgstr "مهلة تنفيذ نص PHP البرمجي من أجل الاستعادة."
+
+#: admin/partials/wpvivid-settings-page-display.php:751
+msgid "The time-out is not your server PHP time-out. With the execution time exhausted, our plugin will shut the process of backup down. If the progress of backup encounters a time-out, that means you have a medium or large sized website, please try to scale the value bigger."
+msgstr "المهلة الزمنية ليست هي المهلة الزمنية الخاصة بخادوم PHP الخاص بك. مع استنفاد وقت التنفيذ، ستوقف الإضافة الخاص بنا عملية النسخ الاحتياطي. في حالة واجهة التقدم المحزر في النسخ الاحتياطي نفاد المهلة الزمنية، فهذا يعني أن لديك موقع ويب متوسط ​​أو كبير الحجم، فيرجى محاولة تكبير نطاق القيمة."
+
+#: admin/partials/wpvivid-settings-page-display.php:748
+msgid "PHP script execution timeout for backup"
+msgstr "مهلة تنفيذ نص PHP البرمجي للنسخ الاحتياطي"
+
+#: admin/partials/wpvivid-settings-page-display.php:746
+msgid "Using the option will ignore the file larger than the certain size in MB when backing up, '0' (zero) means unlimited."
+msgstr "سيؤدي استخدام الخيار إلى تجاهل الملف الأكبر من الحجم المعين بـ م.ب عند النسخ الاحتياطي، \"0\" (صفر) يعني غير محدود."
+
+#: admin/partials/wpvivid-settings-page-display.php:743
+msgid "Exclude the files which are larger than"
+msgstr "استبعاد الملفات الأكبر من"
+
+#: admin/partials/wpvivid-settings-page-display.php:738
+msgid "Compress Files Every"
+msgstr "ضغط الملفات كل"
+
+#: admin/partials/wpvivid-settings-page-display.php:687
+msgid "It is recommended to choose PDO option if pdo_mysql extension is installed on your server, which lets you backup and restore your site faster."
+msgstr "يوصى باختيار خيار PDO إذا تم تثبيت ملحق PDO_MYSQL على الخادوم الخاص بك، مما يتيح لك النسخ الاحتياطي واستعادة موقعك بشكل أسرع."
+
+#: admin/partials/wpvivid-settings-page-display.php:681
+msgid "WPDB option has a better compatibility, but the speed of backup and restore is slower."
+msgstr "يتمتع خيار WPDB بتوافق أفضل ، لكن سرعة النسخ الاحتياطي والاستعادة أبطأ."
+
+#: admin/partials/wpvivid-settings-page-display.php:676
+msgid "Database access method."
+msgstr "طريقة الوصول إلى قاعدة البيانات."
+
+#: admin/partials/wpvivid-settings-page-display.php:470
+msgid "Importing the json file can help you set WPvivid's configuration on another wordpress site quickly."
+msgstr "يمكن أن يساعدك استيراد ملف JSON في تعيين تكوين WPVIDID على موقع ووردبريس آخر بسرعة."
+
+#: admin/partials/wpvivid-settings-page-display.php:469
+#: includes/class-wpvivid-export-import.php:1621
+#: includes/class-wpvivid-importer.php:159
+msgid "Import"
+msgstr "استيراد"
+
+#: admin/partials/wpvivid-settings-page-display.php:465
+msgid "Click 'Export' button to save WPvivid settings on your local computer."
+msgstr "انقر فوق الزر «تصدير» لحفظ إعدادات WPVIDID على الكمبيوتر المحلي."
+
+#: admin/partials/wpvivid-settings-page-display.php:464
+msgid "Export"
+msgstr "تصدير"
+
+#: admin/partials/wpvivid-settings-page-display.php:358
+msgid "Empty"
+msgstr "فارغ"
+
+#: admin/partials/wpvivid-settings-page-display.php:334
+msgid "Calculate Sizes"
+msgstr "حساب الحجم"
+
+#: admin/partials/wpvivid-backup-restore-page-display.php:2300
+#: admin/partials/wpvivid-settings-page-display.php:330
+#: includes/class-wpvivid-migrate.php:1527 includes/class-wpvivid.php:4569
+#: includes/new_backup/class-wpvivid-backup2.php:1017
+#: includes/new_backup/class-wpvivid-backup2.php:1111
+msgid "Total Size:"
+msgstr "الحجم الإجمالي:"
+
+#: admin/partials/wpvivid-settings-page-display.php:326
+msgid "Web-server disk space in use by WPvivid"
+msgstr "مساحة قرص خادوم الويب قيد الاستخدام بواسطة WPVIDID"
+
+#: admin/partials/wpvivid-settings-page-display.php:279
+msgid "Pro feature: Add another email address to get report"
+msgstr "ميزة احترافية: أضف عنوان بريد إلكتروني آخر للحصول على تقرير"
+
+#: admin/partials/wpvivid-settings-page-display.php:275
+msgid "Only send an email notification when a backup fails"
+msgstr "إرسال إشعار البريد الإلكتروني فقط عند فشل النسخ الاحتياطي."
+
+#: admin/partials/wpvivid-settings-page-display.php:271
+msgid "Always send an email notification when a backup is complete"
+msgstr "أرسل دائمًا إشعار البريد الالكتروني عند اكتمال نسخة احتياطية"
+
+#: admin/partials/wpvivid-settings-page-display.php:266
+msgid "Test Email"
+msgstr "اختبار البريد الالكتروني"
+
+#: admin/partials/wpvivid-settings-page-display.php:252
+msgid "Enable email report"
+msgstr "تمكين تقرير البريد الالكتروني"
+
+#: admin/partials/wpvivid-settings-page-display.php:187
+msgid "The action is irreversible! It will remove all backups are out-of-date (including local web server and remote storage) if they exist."
+msgstr "هذا الاجراء لا رجعة فيه! سيؤدي ذلك إلى إزالة جميع النُسخ الاحتياطية القديمة (بما في ذلك خادوم الويب المحلي والتخزين عن بُعد) إذا كانت موجودة."
+
+#: admin/partials/wpvivid-settings-page-display.php:186
+msgid "Remove"
+msgstr "إزالة"
+
+#: admin/partials/wpvivid-settings-page-display.php:174
+msgid "Remote Storage Directory:"
+msgstr "دليل التخزين عن بُعد:"
+
+#: admin/partials/wpvivid-settings-page-display.php:173
+msgid "Web Server Directory:"
+msgstr "دليل خادوم الويب:"
+
+#: admin/partials/wpvivid-settings-page-display.php:169
+msgid "Remove out-of-date backups"
+msgstr "قم بإزالة النسخ الاحتياطية القديمة"
+
+#: admin/partials/wpvivid-settings-page-display.php:164
+msgid "Display domain(url) of current site in backup name. (e.g. domain_wpvivid-5ceb938b6dca9_2019-05-27-07-36_backup_all.zip)"
+msgstr "عرض النطاق (URL) للموقع الحالي في اسم النسخ الاحتياطي. (على سبيل المثال domain_wpvivid-5ceb938b6dca9_2019-05-27-07-36_backup_all.zip)"
+
+#: admin/partials/wpvivid-settings-page-display.php:159
+msgid "Local storage directory:"
+msgstr "دليل التخزين المحلي:"
+
+#: admin/partials/wpvivid-settings-page-display.php:157
+msgid "Name your folder, this folder must be writable for creating backup files."
+msgstr "قم بتسمية المجلد الخاص بك، يجب أن يكون هذا المجلد قابلاً للكتابة لإنشاء ملفات احتياطية."
+
+#: admin/partials/wpvivid-settings-page-display.php:155
+msgid "Backup Folder"
+msgstr "مجلد النسخ الاحتياطي"
+
+#: admin/partials/wpvivid-settings-page-display.php:138
+msgid "Keep storing the backups in localhost after uploading to remote storage"
+msgstr "استمر في تخزين النسخ الاحتياطية في المضيف المحلي بعد التحميل إلى وحدة التخزين عن بعد"
+
+#: admin/partials/wpvivid-settings-page-display.php:132
+msgid "Merge all the backup files into single package when a backup completes. This will save great disk spaces, though takes longer time. We recommended you check the option especially on sites with insufficient server resources."
+msgstr "دمج جميع ملفات النسخ الاحتياطي في حزمة واحدة عند اكتمال النسخ الاحتياطي. سيؤدي ذلك إلى توفير مساحات قرص كبيرة، على الرغم من أنها تستغرق وقتًا أطول. نوصي بتحقيق الخيار وخاصة على المواقع التي تحتوي على موارد خادوم غير كافية."
+
+#: admin/partials/wpvivid-settings-page-display.php:126
+msgid "Show WPvivid backup plugin on top admin bar"
+msgstr "عرض إضافة النسخ الاحتياطي من WPVIDIDE على شريط المسؤول الأعلى"
+
+#: admin/partials/wpvivid-settings-page-display.php:120
+msgid "Calculate the size of files, folder and database before backing up"
+msgstr "احسب حجم الملفات والمجلد وقاعدة البيانات قبل النسخ الاحتياطي"
+
+#: admin/partials/wpvivid-settings-page-display.php:115
+msgid "Pro feature: Retain more backups"
+msgstr "ميزة احترافية: احتفظ بمزيد من النُسخ الاحتياطية"
+
+#: admin/partials/wpvivid-settings-page-display.php:115
+msgid "backups retained"
+msgstr "تم الاحتفاظ بالنُسخ الاحتياطية"
+
+#: admin/partials/wpvivid-backup-restore-page-display.php:362
+#: admin/partials/wpvivid-schedule-page-display.php:89
+#: admin/partials/wpvivid-schedule-page-display.php:126
+#: includes/class-wpvivid-schedule.php:113
+msgid "Custom"
+msgstr "مخصص"
+
+#: admin/partials/wpvivid-backup-restore-page-display.php:357
+#: admin/partials/wpvivid-schedule-page-display.php:120
+#: includes/class-wpvivid-migrate.php:1450
+#: includes/class-wpvivid-migrate.php:1474
+msgid "Only Database"
+msgstr "قاعدة البيانات فقط"
+
+#: admin/partials/wpvivid-backup-restore-page-display.php:353
+#: admin/partials/wpvivid-schedule-page-display.php:115
+#: includes/class-wpvivid-migrate.php:1446
+#: includes/class-wpvivid-migrate.php:1470
+msgid "WordPress Files (Exclude Database)"
+msgstr "ملفات ووردبريس (استبعاد قاعدة البيانات)"
+
+#: admin/partials/wpvivid-backup-restore-page-display.php:349
+#: admin/partials/wpvivid-schedule-page-display.php:110
+#: includes/class-wpvivid-migrate.php:1442
+#: includes/class-wpvivid-migrate.php:1466
+msgid "Database + Files (WordPress Files)"
+msgstr "قاعدة البيانات + الملفات (ملفات ووردبريس)"
+
+#: admin/partials/wpvivid-schedule-page-display.php:50
+msgid "Being subjected to mechanisms of PHP, a scheduled backup task for your site will be triggered only when the site receives at least a visit at any page."
+msgstr "إذا كنت تتعرض لآليات PHP، فإن مهمة النسخ الاحتياطي المجدولة لموقعك لن يتم تشغيلها إلا عندما يتلقى الموقع زيارة على الأقل في أي صفحة."
+
+#: admin/partials/wpvivid-schedule-page-display.php:210
+msgid "+ Add another schedule"
+msgstr "+ إضافة جدولة أخرى"
+
+#: admin/partials/wpvivid-schedule-page-display.php:173
+msgid "Highlighted icon illuminates that you have choosed a remote storage to store backups"
+msgstr "توضح الأيقونة المظللة أنك اختارت تخزينًا عن بُعد لتخزين النسخ الاحتياطية"
+
+#: admin/partials/wpvivid-schedule-page-display.php:32
+msgid "Advanced Schedule"
+msgstr "جدولة متقدمة"
+
+#: admin/partials/wpvivid-backup-restore-page-display.php:365
+#: admin/partials/wpvivid-schedule-page-display.php:24
+#: admin/partials/wpvivid-schedule-page-display.php:36
+#: admin/partials/wpvivid-schedule-page-display.php:93
+#: admin/partials/wpvivid-schedule-page-display.php:130
+#: admin/partials/wpvivid-schedule-page-display.php:213
+#: includes/class-wpvivid-migrate.php:1458
+#: includes/class-wpvivid-migrate.php:1482
+#: includes/class-wpvivid-schedule.php:117
+msgid "Pro feature: learn more"
+msgstr "ميزة احترافية: اعرف المزيد"
+
+#: admin/partials/wpvivid-schedule-page-display.php:20
+msgid "Enable Incremental Backup"
+msgstr "تمكين النسخ الاحتياطي الإضافي"
+
+#: admin/partials/wpvivid-schedule-page-display.php:15
+msgid "Enable backup schedule"
+msgstr "تمكين جدولة النسخ الاحتياطي"
+
+#: admin/partials/wpvivid-schedule-page-display.php:7
+msgid "Schedule Settings"
+msgstr "إعدادت الجدولة"
+
+#: includes/snapshot/class-wpvivid-snapshot.php:1558
+#: includes/snapshot/class-wpvivid-snapshot.php:1598
+msgid "Support"
+msgstr "الدعم"
+
+#: admin/class-wpvivid-admin.php:1678
+msgid "Ultimate"
+msgstr "نهائي"
+
+#: admin/class-wpvivid-admin.php:1676
+msgid "Freelancer"
+msgstr "مستقل"
+
+#: admin/class-wpvivid-admin.php:1650
+msgid "5. Set up remote storage for child sites in bulk (for WPvivid Backup Pro only)"
+msgstr "5. قم/قومي بإعداد وحدة تخزين بعيدة لمواقع الأطفال بكميات كبيرة (للإصدار الاحترافي من إضافة WPvivid Backup)"
+
+#: admin/class-wpvivid-admin.php:1645
+msgid "4. Install, claim and update WPvivid Backup Pro for child sites in bulk"
+msgstr "قم/قومي بتنصيب وتحديث إضافة WPVIDID Backup الإصدار الاحترافي لمواقع الأطفال (مواقع فرعية) بكميات كبيرة"
+
+#: admin/class-wpvivid-admin.php:1640
+msgid "3. Set WPvivid Backup Free and Pro settings for all child sites"
+msgstr "3. قم بتعيين إعدادات WPvivid Backup للإصدار المجاني والمحترف لجميع مواقع الأطفال"
+
+#: admin/class-wpvivid-admin.php:1636
+msgid "2. Set backup schedules for all child sites"
+msgstr "2. جدولة النسخ الاحتياطي لجميع مواقع الأطفال"
+
+#: admin/class-wpvivid-admin.php:1633
+msgid "1. Create and download backups for a specific child site"
+msgstr "1. قم بإنشاء وتنزيل النُسخ الاحتياطية لموقع طفل معين"
+
+#: admin/class-wpvivid-admin.php:1630
+msgid "Download WPvivid Backup for MainWP"
+msgstr "تنزيل WPVIDID Backup لـ MainWP"
+
+#: admin/class-wpvivid-admin.php:1627
+msgid "If you are a MainWP user, you can set up and control WPvivid Backup Free and Pro for every child site directly from your MainWP dashboard, using our WPvivid Backup for MainWP extension."
+msgstr "إذا كنت من مستخدمي MainWP ، فيمكنك إعداد WPVIDID Backup Free والتحكم في كلا الاصدارن مجاني والاحترافي لـ WPVIDID لكل موقع طفل مباشرة من لوحة معلومات MAINWP الخاصة بك، باستخدام WPvivid Backup لتمديد MAINWP."
+
+#: admin/class-wpvivid-admin.php:1519
+#: includes/staging/class-wpvivid-staging-log-page.php:352
+msgid " Next page > "
+msgstr "الصفحة التالية >"
+
+#: admin/class-wpvivid-admin.php:1508
+#: includes/staging/class-wpvivid-staging-log-page.php:341
+msgid " < Pre page "
+msgstr "< الصفحة السابقة "
+
+#: admin/class-wpvivid-admin.php:1498 includes/class-wpvivid-importer.php:53
+#: includes/staging/class-wpvivid-staging-log-page.php:331
+msgid "Action"
+msgstr "إجراء"
+
+#: admin/class-wpvivid-admin.php:1497
+#: includes/staging/class-wpvivid-staging-log-page.php:330
+msgid "Log File Name"
+msgstr "اسم ملف السجل"
+
+#: admin/class-wpvivid-admin.php:1496
+#: includes/staging/class-wpvivid-staging-log-page.php:26
+#: includes/staging/class-wpvivid-staging-log-page.php:329
+msgid "Log Type"
+msgstr "نوع السجل"
+
+#: admin/class-wpvivid-admin.php:1495 includes/class-wpvivid-exporter.php:111
+#: includes/staging/class-wpvivid-staging-log-page.php:25
+#: includes/staging/class-wpvivid-staging-log-page.php:328
+msgid "Date"
+msgstr "التاريخ"
+
+#: admin/class-wpvivid-admin.php:1382
+msgid "Website Info Value"
+msgstr "قيمة معلومات الموقع"
+
+#: admin/class-wpvivid-admin.php:1381
+msgid "Website Info Key"
+msgstr "مفتاح معلومات الموقع"
+
+#: admin/class-wpvivid-admin.php:1377
+#: admin/partials/wpvivid-backup-restore-page-display.php:45
+#: admin/partials/wpvivid-backup-restore-page-display.php:455
+#: admin/partials/wpvivid-backup-restore-page-display.php:493
+#: includes/class-wpvivid.php:2821 includes/class-wpvivid.php:6837
+#: includes/class-wpvivid.php:6973
+#: includes/staging/class-wpvivid-staging-log-page.php:29
+msgid "Download"
+msgstr "تنزيل"
+
+#: admin/class-wpvivid-admin.php:1374
+msgid "If you didn’t configure SMTP on your site, click the button below to download the relevant information (website info and error logs) to your PC when you are encountering some errors. Sending the files to us will help us diagnose what happened."
+msgstr "إذا لم تقم بتكوين «بروتوكول إرسال البريد البسيط» SMTP على موقعك، فانقر فوق الزر أدناه لتنزيل المعلومات ذات الصلة (معلومات الموقع وسجلات الأخطاء) إلى جهاز الكمبيوتر الشخصي الخاص بك عندما تواجه بعض الأخطاء. سيساعدنا إرسال الملفات إلينا على تشخيص ما حدث."
+
+#: admin/class-wpvivid-admin.php:1374
+msgid "Method 2."
+msgstr "الطريقة 2."
+
+#: admin/class-wpvivid-admin.php:1370
+msgid "Send Debug Information to Us"
+msgstr "ارسال معلومات التنقيح (إصلاح الأخطاء) لنا."
+
+#: admin/class-wpvivid-admin.php:1367
+msgid "Please describe your problem here."
+msgstr "الرجاء وصف مشكلة هنا."
+
+#: admin/class-wpvivid-admin.php:1358
+msgid "My web hosting provider is:"
+msgstr "مزود استضافة الويب الخاص بي هو:"
+
+#: admin/class-wpvivid-admin.php:1346
+msgid "I am using:"
+msgstr "أنا أستخدم:"
+
+#: admin/class-wpvivid-admin.php:1341
+msgid "Your email:"
+msgstr "بريدك الإلكتروني:"
+
+#: admin/class-wpvivid-admin.php:1340
+msgid "WPvivid support email:"
+msgstr "بريد الدعم الالكتروني الخاص بـ WPvivid: "
+
+#: admin/class-wpvivid-admin.php:1337
+msgid "If you have configured SMTP on your site, enter your email address and click the button below to send us the relevant information (website info and errors logs) when you are encountering errors. This will help us figure out what happened. Once the issue is resolved, we will inform you by your email address."
+msgstr "إذا قمت بتكوين «بروتوكول إرسال البريد البسيط» SMTP على موقعك، أدخل عنوان بريدك الإلكتروني وانقر فوق الزر أدناه لإرسال المعلومات ذات الصلة لنا (معلومات الموقع وسجلات الأخطاء) عندما تواجه أخطاء. سيساعدنا هذا على معرفة ما حدث. بمجرد حل المشكلة، سنبلغك من خلال عنوان بريدك الإلكتروني."
+
+#: admin/class-wpvivid-admin.php:1337
+msgid "Method 1."
+msgstr "الطريقة 1."
+
+#: admin/class-wpvivid-admin.php:1335
+msgid "There are two ways available to send us the debug information. The first one is recommended."
+msgstr "هناك طريقتان متاحتان لإرسال معلومات التنقيح (اصلاح الأخطاء) لنا. ينصح بالطريقة الأولى."
+
+#: admin/class-wpvivid-admin.php:1172 admin/class-wpvivid-admin.php:1259
+#: admin/partials/wpvivid-remote-storage-page-display.php:80
+#: admin/partials/wpvivid-remote-storage-page-display.php:377
+#: includes/customclass/class-wpvivid-amazons3-plus.php:297
+#: includes/customclass/class-wpvivid-dropbox.php:741
+#: includes/customclass/class-wpvivid-ftpclass.php:254
+#: includes/customclass/class-wpvivid-google-drive.php:472
+#: includes/customclass/class-wpvivid-one-drive.php:455
+#: includes/customclass/class-wpvivid-s3compat.php:618
+#: includes/customclass/class-wpvivid-sftpclass.php:244
+#: includes/upload-cleaner/class-wpvivid-upload-cleaner-setting.php:763
+msgid "Save Changes"
+msgstr "حفظ التغييرات"
+
+#: admin/class-wpvivid-admin.php:1130
+msgid "Premium"
+msgstr "الإصدار المميز"
+
+#: admin/class-wpvivid-admin.php:1120
+msgid "MainWP"
+msgstr "إضافة MainWP"
+
+#: admin/class-wpvivid-admin.php:1109
+#: admin/partials/wpvivid-backup-restore-page-display.php:433
+#: admin/partials/wpvivid-backup-restore-page-display.php:2312
+#: includes/class-wpvivid.php:6826 includes/class-wpvivid.php:6932
+msgid "Log"
+msgstr "سجل"
+
+#: admin/class-wpvivid-admin.php:1304
+msgid "Logs"
+msgstr "السجلّات"
+
+#: admin/class-wpvivid-admin.php:1096
+msgid "Debug"
+msgstr "التنقيح (إصلاح الخطأ)"
+
+#: admin/class-wpvivid-admin.php:1084
+msgid "Remote Storage"
+msgstr "وحدة تخرين عن بعد"
+
+#: admin/class-wpvivid-admin.php:1078
+msgid "Schedule"
+msgstr "جدولة"
+
+#: admin/class-wpvivid-admin.php:889
+msgid "Class PclZip is not detected. Please update or reinstall your WordPress."
+msgstr "لم يتم اكتشاف فئة PCLZIP. يرجى تحديث أو إعادة تنصيب ووردبريس الخاص بك."
+
+#: admin/class-wpvivid-admin.php:752
+msgid "As Amazon S3 and DigitalOcean Space have upgraded their connection methods, please delete the previous connections and re-add your Amazon S3/DigitalOcean Space accounts to make sure the connections work."
+msgstr "نظرًا لأن Amazon S3 و DigitalOcean Space قاموا بترقية أساليب الاتصال الخاصة بهم، يرجى حذف الاتصالات السابقة وإعادة إضافة حسابات Amazon S3/DigitalOcean Space للتأكد من أن الاتصالات تعمل."
+
+#: admin/class-wpvivid-admin.php:608
+#: admin/partials/wpvivid-backup-restore-page-display.php:1642
+#: admin/partials/wpvivid-backup-restore-page-display.php:1655
+#: admin/partials/wpvivid-backup-restore-page-display.php:1666
+msgid "Restore completed successfully."
+msgstr "اكتملة عملية الاستعادة بنجاح."
+
+#: admin/class-wpvivid-admin.php:602
+msgid "Cheers! WPvivid Backup plugin has restored successfully your website. If you found WPvivid Backup plugin helpful, a 5-star rating would be highly appreciated, which motivates us to keep providing new features."
+msgstr "مرحى! قامت إضافة WPVIDING Backup باستعادة موقع الويب الخاص بك بنجاح. إذا إضافة WPvivid Backup مفيدة، سنكون شاكرين لكم أن قمت/ي بتقييمنا بـ 5 نجمات، سيحفزنا هذا على الاستمرار في توفير ميزات جديدة."
+
+#: admin/class-wpvivid-admin.php:586
+msgid "Migration is complete and htaccess file is replaced. In order to successfully complete the migration, you'd better reinstall 301 redirect plugin, firewall and security plugin, and caching plugin if they exist."
+msgstr "تم اكتمال الترحيل واستبدال ملف htaccess. من أجل إكمال الترحيل بنجاح، من الأفضل إعادة تثبيت إي إضافة إعادة التوجيه 301، وإضافة جدار الحماية والآمن وإضافة التخزين المؤقت في حالة تواجدهن."
+
+#: admin/class-wpvivid-admin.php:276
+msgid "Calculating the size of files, folder and database timed out. If you continue to receive this error, please go to the plugin settings, uncheck 'Calculate the size of files, folder and database before backing up', save changes, then try again."
+msgstr "حساب حجم الملفات والمجلد وقاعدة البيانات. إذا استمريت/ي في تلقي هذا الخطأ، فيرجى الانتقال إلى إعدادات الإضافة، قم/قومي بإلغاء تحديد «حساب حجم الملفات والمجلد وقاعدة البيانات قبل النسخ الاحتياطي»، وحفظ التغييرات، ثم حاول/ي مرة أخرى."
+
+#: admin/class-wpvivid-admin.php:275
+msgid "Warning: The alias already exists in storage list."
+msgstr "تحذير: الاسم المستعار موجود بالفعل في قائمة التخزين."
+
+#: admin/class-wpvivid-admin.php:274
+#: includes/customclass/class-wpvivid-ftpclass.php:302
+#: includes/customclass/class-wpvivid-ftpclass.php:310
+msgid "Warning: An alias for remote storage is required."
+msgstr "تحذير: مطلوب اسم مستعار للتخزين عن بُعد."
+
+#: admin/class-wpvivid-admin.php:273
+msgid "Error:"
+msgstr "خطأ:"
+
+#: admin/class-wpvivid-admin.php:272
+msgid "Warning:"
+msgstr "تحذير:"
+
+#: admin/class-wpvivid-admin.php:234
+msgid "Migrate WordPress"
+msgstr "ترحيل ووردبريس"
+
+#: admin/class-wpvivid-admin.php:233
+msgid "Restore Your Site from a Backup"
+msgstr "استعادة موقعك من النسخ الاحتياطي"
+
+#: admin/class-wpvivid-admin.php:232
+msgid "Create a Manual Backup"
+msgstr "إنشاء نسخ احتياطي يدوي"
+
+#: admin/class-wpvivid-admin.php:231
+msgid "WPvivid Backup Settings"
+msgstr "إعدادات النسخ الاحتياطي لـ WPvivid "
+
+#: admin/class-wpvivid-admin.php:227
+#: includes/staging/class-wpvivid-staging.php:95
+msgid "How-to"
+msgstr "الكيفية"
+
+#: admin/class-wpvivid-admin.php:204
+#: includes/snapshot/class-wpvivid-snapshot.php:1543
+#: includes/staging/class-wpvivid-staging.php:83
+msgid "Troubleshooting"
+msgstr "استكشاف الأخطاء وإصلاحها"
+
+#: admin/class-wpvivid-admin.php:189
+#: includes/snapshot/class-wpvivid-snapshot.php:1536
+#: includes/staging/class-wpvivid-staging.php:76
+msgid "ChangeLog"
+msgstr "سجلّ التغييرات"
+
+#: admin/class-wpvivid-admin.php:186
+#: includes/snapshot/class-wpvivid-snapshot.php:1533
+#: includes/staging/class-wpvivid-staging.php:73
+msgid "Current Version: "
+msgstr "الإصدار الحالي:"
+
+#: admin/class-wpvivid-admin.php:169 admin/class-wpvivid-admin.php:518
+#: admin/class-wpvivid-admin.php:524 admin/class-wpvivid-admin.php:533
+#: admin/class-wpvivid-admin.php:539 admin/class-wpvivid-admin.php:1090
+msgid "Settings"
+msgstr "الإعدادات"
+
+#: admin/class-wpvivid-admin.php:146 admin/class-wpvivid-admin.php:160
+#: admin/class-wpvivid-admin.php:1072
+msgid "Backup & Restore"
+msgstr "النسخ الاحتياطي والاستعادة"
+
+#. Author URI of the plugin
+#: wpvivid-backuprestore.php
+msgid "https://wpvivid.com"
+msgstr "https://wpvivid.com"
+
+#. Description of the plugin
+#: wpvivid-backuprestore.php
+msgid "Clone or copy WP sites then move or migrate them to new host (new domain), schedule backups, transfer backups to leading remote storage. All in one."
+msgstr "قم باستنساخ أو نسخ مواقع ووردبريس ثم نقلها أو ترحيلها إلى مضيف جديد (نطاق جديد)، وجدولة النُسخ الاحتياطية، ونقل النُسخ الاحتياطية إلى وحدة تخزين بعيدة رائدة. الكل في واحد."
+
+#. Plugin Name of the plugin
+#: wpvivid-backuprestore.php admin/partials/wpvivid-admin-display.php:47
+#: includes/class-wpvivid-export-import.php:94
+msgid "WPvivid Backup Plugin"
+msgstr "إضافة WPvivid Backup"
