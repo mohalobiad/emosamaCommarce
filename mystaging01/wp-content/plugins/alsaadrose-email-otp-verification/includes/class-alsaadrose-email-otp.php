@@ -23,6 +23,10 @@ class Alsaadrose_Email_Otp {
 
     protected static $instance = null;
     protected $pending_user_context = null;
+    protected $pending_redirect_url = '';
+    protected $form_messages = array();
+    protected $form_errors   = array();
+    protected $current_token = '';
 
     public static function init() {
         if ( null === self::$instance ) {
@@ -75,6 +79,8 @@ class Alsaadrose_Email_Otp {
         add_filter( 'woocommerce_registration_redirect', array( $this, 'redirect_to_verification_page' ), 10, 2 );
         add_filter( 'authenticate', array( $this, 'maybe_block_unverified_login' ), 30, 3 );
         add_filter( 'woocommerce_email_enabled_customer_new_account', array( $this, 'maybe_disable_customer_new_account_email' ), 10, 3 );
+        add_action( 'template_redirect', array( $this, 'handle_verification_requests' ), 1 );
+        add_action( 'template_redirect', array( $this, 'maybe_do_post_verification_redirect' ), 99 );
         add_shortcode( 'alsaadrose_email_otp_verification', array( $this, 'render_shortcode' ) );
     }
 
@@ -265,46 +271,14 @@ class Alsaadrose_Email_Otp {
     }
 
     public function render_shortcode() {
-        $token = '';
+        $token = $this->current_token;
 
-        if ( isset( $_GET['otp_token'] ) ) {
+        if ( empty( $token ) && isset( $_GET['otp_token'] ) ) {
             $token = sanitize_text_field( wp_unslash( $_GET['otp_token'] ) );
         }
 
-        if ( isset( $_POST['alsaadrose_otp_token'] ) ) {
-            $token = sanitize_text_field( wp_unslash( $_POST['alsaadrose_otp_token'] ) );
-        }
-
-        $messages = array();
-        $errors   = array();
-
-        $request_method = isset( $_SERVER['REQUEST_METHOD'] ) ? strtoupper( sanitize_text_field( wp_unslash( $_SERVER['REQUEST_METHOD'] ) ) ) : '';
-
-        if ( 'POST' === $request_method && isset( $_POST['alsaadrose_otp_action'] ) ) {
-            $action = sanitize_text_field( wp_unslash( $_POST['alsaadrose_otp_action'] ) );
-
-            if ( 'verify' === $action && isset( $_POST['alsaadrose_otp_verify_nonce'] ) && wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['alsaadrose_otp_verify_nonce'] ) ), 'alsaadrose_verify_otp' ) ) {
-                $otp_input = isset( $_POST['alsaadrose_otp_code'] ) ? sanitize_text_field( wp_unslash( $_POST['alsaadrose_otp_code'] ) ) : '';
-                $result    = $this->attempt_verification( $token, $otp_input );
-
-                if ( is_wp_error( $result ) ) {
-                    $errors[] = $result->get_error_message();
-                } elseif ( isset( $result['redirect'] ) ) {
-                    wp_safe_redirect( $result['redirect'] );
-                    exit;
-                }
-            } elseif ( 'resend' === $action && isset( $_POST['alsaadrose_otp_resend_nonce'] ) && wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['alsaadrose_otp_resend_nonce'] ) ), 'alsaadrose_resend_otp' ) ) {
-                $result = $this->handle_resend( $token );
-
-                if ( is_wp_error( $result ) ) {
-                    $errors[] = $result->get_error_message();
-                } else {
-                    $messages[] = __( 'A new code has been sent to your email.', 'alsaadrose-email-otp' );
-                }
-            } else {
-                $errors[] = __( 'Security check failed. Please try again.', 'alsaadrose-email-otp' );
-            }
-        }
+        $messages = $this->form_messages;
+        $errors   = $this->form_errors;
 
         if ( empty( $token ) ) {
             $errors[] = __( 'Please use the link from your email to open this page so we can identify your account.', 'alsaadrose-email-otp' );
@@ -410,19 +384,98 @@ class Alsaadrose_Email_Otp {
         delete_user_meta( $user_id, self::META_OTP_RESEND_DAY );
         delete_user_meta( $user_id, self::META_OTP_TOKEN );
 
-        wp_set_current_user( $user_id );
-        wp_set_auth_cookie( $user_id );
-
-        $user = get_user_by( 'id', $user_id );
-        if ( $user ) {
-            do_action( 'wp_login', $user->user_login, $user );
-        }
-
-        $redirect = function_exists( 'wc_get_page_permalink' ) ? wc_get_page_permalink( 'myaccount' ) : home_url();
+        $redirect = $this->get_lost_password_url();
 
         return array(
             'redirect' => $redirect,
         );
+    }
+
+    protected function get_lost_password_url() {
+        if ( function_exists( 'wc_get_endpoint_url' ) && function_exists( 'wc_get_page_permalink' ) ) {
+            $myaccount = wc_get_page_permalink( 'myaccount' );
+            if ( $myaccount ) {
+                return wc_get_endpoint_url( 'lost-password', '', $myaccount );
+            }
+        }
+
+        return wp_lostpassword_url();
+    }
+
+    protected function queue_post_verification_redirect( $url ) {
+        if ( empty( $url ) ) {
+            return;
+        }
+
+        $this->pending_redirect_url = $url;
+
+        $session = $this->get_wc_session();
+        if ( $session ) {
+            $session->set( 'alsaadrose_email_otp_redirect', $url );
+        }
+    }
+
+    public function handle_verification_requests() {
+        $request_method = isset( $_SERVER['REQUEST_METHOD'] ) ? strtoupper( sanitize_text_field( wp_unslash( $_SERVER['REQUEST_METHOD'] ) ) ) : '';
+
+        if ( 'POST' !== $request_method || empty( $_POST['alsaadrose_otp_action'] ) ) {
+            return;
+        }
+
+        $this->current_token = isset( $_POST['alsaadrose_otp_token'] ) ? sanitize_text_field( wp_unslash( $_POST['alsaadrose_otp_token'] ) ) : '';
+        $action              = sanitize_text_field( wp_unslash( $_POST['alsaadrose_otp_action'] ) );
+
+        if ( 'verify' === $action ) {
+            if ( empty( $_POST['alsaadrose_otp_verify_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['alsaadrose_otp_verify_nonce'] ) ), 'alsaadrose_verify_otp' ) ) {
+                $this->form_errors[] = __( 'Security check failed. Please try again.', 'alsaadrose-email-otp' );
+                return;
+            }
+
+            $otp_input = isset( $_POST['alsaadrose_otp_code'] ) ? sanitize_text_field( wp_unslash( $_POST['alsaadrose_otp_code'] ) ) : '';
+            $result    = $this->attempt_verification( $this->current_token, $otp_input );
+
+            if ( is_wp_error( $result ) ) {
+                $this->form_errors[] = $result->get_error_message();
+                return;
+            }
+
+            $this->form_messages[] = __( 'Verification successful. Redirecting you to set your password…', 'alsaadrose-email-otp' );
+
+            if ( isset( $result['redirect'] ) ) {
+                $this->queue_post_verification_redirect( $result['redirect'] );
+            }
+        } elseif ( 'resend' === $action ) {
+            if ( empty( $_POST['alsaadrose_otp_resend_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['alsaadrose_otp_resend_nonce'] ) ), 'alsaadrose_resend_otp' ) ) {
+                $this->form_errors[] = __( 'Security check failed. Please try again.', 'alsaadrose-email-otp' );
+                return;
+            }
+
+            $result = $this->handle_resend( $this->current_token );
+
+            if ( is_wp_error( $result ) ) {
+                $this->form_errors[] = $result->get_error_message();
+            } else {
+                $this->form_messages[] = __( 'A new code has been sent to your email.', 'alsaadrose-email-otp' );
+            }
+        }
+    }
+
+    public function maybe_do_post_verification_redirect() {
+        $redirect = $this->pending_redirect_url;
+
+        $session = $this->get_wc_session();
+        if ( $session ) {
+            $session_redirect = $session->get( 'alsaadrose_email_otp_redirect' );
+            if ( $session_redirect ) {
+                $redirect = $session_redirect;
+                $session->set( 'alsaadrose_email_otp_redirect', null );
+            }
+        }
+
+        if ( $redirect ) {
+            wp_safe_redirect( $redirect );
+            exit;
+        }
     }
 
     protected function handle_resend( $token ) {
