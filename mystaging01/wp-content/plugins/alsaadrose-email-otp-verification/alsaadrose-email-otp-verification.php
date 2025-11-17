@@ -18,12 +18,14 @@
  *   - woocommerce_registration_auth_new_customer -> block auto-login until verified
  *   - woocommerce_registration_redirect -> send user to verification page
  *   - authenticate -> block login for unverified users
+ *   - woocommerce_email_enabled_customer_new_account -> suppress default customer new-account email when OTP is pending
  *   - shortcode [alsaadrose_email_otp_verification]
  * - Settings:
  *   - OTP expiration: 15 minutes
  *   - Max verification attempts per OTP: 5
  *   - Resend cooldown: 5 minutes
  *   - Max resends per day: 5
+ *   - Prevents duplicate “Your account has been created” email; only OTP email is sent for frontend registrations.
  */
 
 if ( ! defined( 'ABSPATH' ) ) {

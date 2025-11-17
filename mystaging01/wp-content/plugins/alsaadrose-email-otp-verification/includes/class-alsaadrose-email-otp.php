@@ -74,7 +74,48 @@ class Alsaadrose_Email_Otp {
         add_filter( 'woocommerce_registration_auth_new_customer', array( $this, 'prevent_auto_login' ), 10, 2 );
         add_filter( 'woocommerce_registration_redirect', array( $this, 'redirect_to_verification_page' ), 10, 2 );
         add_filter( 'authenticate', array( $this, 'maybe_block_unverified_login' ), 30, 3 );
+        add_filter( 'woocommerce_email_enabled_customer_new_account', array( $this, 'maybe_disable_customer_new_account_email' ), 10, 2 );
         add_shortcode( 'alsaadrose_email_otp_verification', array( $this, 'render_shortcode' ) );
+    }
+
+    public function maybe_disable_customer_new_account_email( $enabled, $email ) {
+        if ( ! $enabled || ! $email ) {
+            return $enabled;
+        }
+
+        $email_id = isset( $email->id ) ? $email->id : '';
+
+        if ( 'customer_new_account' !== $email_id ) {
+            return $enabled;
+        }
+
+        $user = null;
+
+        if ( is_callable( array( $email, 'get_user' ) ) ) {
+            $user = $email->get_user();
+        }
+
+        if ( ! $user && isset( $email->object ) ) {
+            if ( $email->object instanceof WP_User ) {
+                $user = $email->object;
+            } elseif ( is_numeric( $email->object ) ) {
+                $user = get_user_by( 'id', (int) $email->object );
+            } elseif ( is_array( $email->object ) && isset( $email->object['user_id'] ) ) {
+                $user = get_user_by( 'id', (int) $email->object['user_id'] );
+            }
+        }
+
+        if ( ! $user instanceof WP_User ) {
+            return $enabled;
+        }
+
+        $verified = (int) get_user_meta( $user->ID, self::META_VERIFIED, true );
+
+        if ( $verified ) {
+            return $enabled;
+        }
+
+        return false;
     }
 
     public function load_textdomain() {
