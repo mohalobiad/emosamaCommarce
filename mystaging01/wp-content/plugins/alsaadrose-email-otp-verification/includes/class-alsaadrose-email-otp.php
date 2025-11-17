@@ -80,6 +80,7 @@ class Alsaadrose_Email_Otp {
         add_filter( 'authenticate', array( $this, 'maybe_block_unverified_login' ), 30, 3 );
         add_filter( 'woocommerce_email_enabled_customer_new_account', array( $this, 'maybe_disable_customer_new_account_email' ), 10, 3 );
         add_action( 'template_redirect', array( $this, 'handle_verification_requests' ), 1 );
+        add_action( 'template_redirect', array( $this, 'maybe_force_reset_form_view' ), 20 );
         add_action( 'template_redirect', array( $this, 'maybe_do_post_verification_redirect' ), 99 );
         add_shortcode( 'alsaadrose_email_otp_verification', array( $this, 'render_shortcode' ) );
     }
@@ -395,11 +396,36 @@ class Alsaadrose_Email_Otp {
         if ( function_exists( 'wc_get_endpoint_url' ) && function_exists( 'wc_get_page_permalink' ) ) {
             $myaccount = wc_get_page_permalink( 'myaccount' );
             if ( $myaccount ) {
-                return wc_get_endpoint_url( 'lost-password', '', $myaccount );
+                $url = wc_get_endpoint_url( 'lost-password', '', $myaccount );
+                return $this->append_reset_form_query_args( $url );
             }
         }
 
-        return wp_lostpassword_url();
+        return $this->append_reset_form_query_args( wp_lostpassword_url() );
+    }
+
+    protected function append_reset_form_query_args( $url ) {
+        if ( empty( $url ) ) {
+            return $url;
+        }
+
+        $url = remove_query_arg( 'show-reset-form', $url );
+        $url = add_query_arg( 'show-reset-form', 'true', $url );
+
+        $has_action = false;
+        $parts      = wp_parse_url( $url );
+
+        if ( isset( $parts['query'] ) ) {
+            $query_params = array();
+            parse_str( $parts['query'], $query_params );
+            $has_action = array_key_exists( 'action', $query_params );
+        }
+
+        if ( ! $has_action ) {
+            $url = add_query_arg( 'action', '', $url );
+        }
+
+        return $url;
     }
 
     protected function queue_post_verification_redirect( $url ) {
@@ -476,6 +502,33 @@ class Alsaadrose_Email_Otp {
             wp_safe_redirect( $redirect );
             exit;
         }
+    }
+
+    public function maybe_force_reset_form_view() {
+        if ( ! function_exists( 'is_wc_endpoint_url' ) || ! is_wc_endpoint_url( 'lost-password' ) ) {
+            return;
+        }
+
+        $key   = isset( $_GET['key'] ) ? sanitize_text_field( wp_unslash( $_GET['key'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+        $login = isset( $_GET['login'] ) ? sanitize_text_field( wp_unslash( $_GET['login'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+
+        if ( empty( $key ) || empty( $login ) ) {
+            return;
+        }
+
+        if ( isset( $_GET['show-reset-form'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+            return;
+        }
+
+        if ( ! function_exists( 'wc_get_current_url' ) ) {
+            return;
+        }
+
+        $current_url = esc_url_raw( wc_get_current_url() );
+        $redirect    = $this->append_reset_form_query_args( $current_url );
+
+        wp_safe_redirect( $redirect );
+        exit;
     }
 
     protected function handle_resend( $token ) {

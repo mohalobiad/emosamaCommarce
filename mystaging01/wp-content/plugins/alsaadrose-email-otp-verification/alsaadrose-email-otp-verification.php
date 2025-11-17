@@ -20,6 +20,7 @@
  *   - authenticate -> block login for unverified users
  *   - woocommerce_email_enabled_customer_new_account -> suppress default customer new-account email when OTP is pending
  *   - template_redirect -> process OTP/resend submissions and run the lost-password redirect immediately after success
+ *   - template_redirect -> ensure lost-password reset links append ?show-reset-form=true&action so the Woodmart template shows the password fields
  *   - shortcode [alsaadrose_email_otp_verification]
  * - Settings:
  *   - OTP expiration: 15 minutes
@@ -28,6 +29,7 @@
  *   - Max resends per day: 5
  *   - Prevents duplicate “Your account has been created” email; only OTP email is sent for frontend registrations.
  *   - Successful verification redirects customers to the WooCommerce lost-password endpoint so they can set their password.
+ *   - Lost-password URLs always append ?show-reset-form=true&action so reset links land on the password form step used by the theme.
 */
 
 if ( ! defined( 'ABSPATH' ) ) {
