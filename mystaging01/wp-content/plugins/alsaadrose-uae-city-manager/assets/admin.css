@@ -1,0 +1,51 @@
+.aucm-wrap .aucm-city-chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 15px;
+}
+
+.aucm-chip {
+        display: inline-flex;
+        align-items: center;
+        background: #f3f4f5;
+        border-radius: 999px;
+        padding: 4px 8px 4px 16px;
+        position: relative;
+}
+
+.aucm-chip__label {
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        font-size: 13px;
+        gap: 6px;
+}
+
+.aucm-chip__divider {
+        opacity: 0.6;
+}
+
+.aucm-chip__remove {
+        margin-left: 8px;
+}
+
+.aucm-chip__remove .button-link {
+        font-size: 18px;
+        line-height: 1;
+        padding: 0 4px;
+        color: #b32d2e;
+        text-decoration: none;
+}
+
+.aucm-chip__remove .button-link:hover {
+        color: #86181a;
+}
+
+.aucm-chip.is-editing {
+        box-shadow: 0 0 0 2px #2271b1;
+}
