@@ -182,11 +182,31 @@ class Alsaadrose_Email_Otp {
 
         $subject = sprintf( __( 'Verify your %s account', 'alsaadrose-email-otp' ), get_bloginfo( 'name' ) );
 
-        $body    = sprintf( __( 'Welcome to %1$s! Your verification code is: %2$s', 'alsaadrose-email-otp' ), get_bloginfo( 'name' ), $otp );
-        $body   .= "\n\n" . __( 'Please enter this code on the verification page to activate your account.', 'alsaadrose-email-otp' );
-        $body   .= "\n" . $verification_link;
+        $site_name = get_bloginfo( 'name' );
 
-        $headers = array( 'Content-Type: text/plain; charset=UTF-8' );
+        $body  = '<html><body style="font-family: Arial, sans-serif; color: #222; background-color: #f6f6f6; padding: 20px;">';
+        $body .= '<table width="100%" cellspacing="0" cellpadding="0" style="max-width: 520px; margin: 0 auto; background: #ffffff; border-radius: 12px; overflow: hidden; box-shadow: 0 5px 25px rgba(0,0,0,0.08);">';
+        $body .= '<tr><td style="background-color:#2d3748; padding: 24px 32px; text-align:center;">';
+        $body .= '<h1 style="margin:0; font-size:22px; color:#ffffff;">' . sprintf( __( 'Welcome to %s', 'alsaadrose-email-otp' ), esc_html( $site_name ) ) . '</h1>';
+        $body .= '</td></tr>';
+        $body .= '<tr><td style="padding: 30px 32px; font-size: 15px; line-height: 1.6; color:#4a5568;">';
+        $body .= '<p style="margin-top:0;">' . __( 'We are excited to have you on board! To keep your account secure, please use the following verification code within the next 15 minutes:', 'alsaadrose-email-otp' ) . '</p>';
+        $body .= '<div style="text-align:center; margin: 28px 0;">';
+        $body .= '<span style="display:inline-block; font-size: 32px; letter-spacing: 6px; font-weight: 600; color:#1a202c; padding: 14px 26px; border-radius: 8px; background:#edf2f7;">' . esc_html( $otp ) . '</span>';
+        $body .= '</div>';
+        $body .= '<p>' . __( 'Enter this code on the verification page to activate your account.', 'alsaadrose-email-otp' ) . '</p>';
+        $body .= '<p style="margin-bottom: 0;">' . sprintf( __( 'If the button below does not work, copy and paste this link into your browser: %s', 'alsaadrose-email-otp' ), '<br><a href="' . esc_url( $verification_link ) . '" style="color:#3182ce; word-break: break-all;">' . esc_html( $verification_link ) . '</a>' ) . '</p>';
+        $body .= '<div style="text-align:center; margin-top: 28px;">';
+        $body .= '<a href="' . esc_url( $verification_link ) . '" style="display:inline-block; background:#3182ce; color:#fff; padding: 12px 32px; border-radius: 50px; text-decoration:none; font-weight:600;">' . __( 'Verify my account', 'alsaadrose-email-otp' ) . '</a>';
+        $body .= '</div>';
+        $body .= '</td></tr>';
+        $body .= '<tr><td style="background:#f7fafc; padding: 18px 32px; font-size: 13px; color:#718096; text-align:center;">';
+        $body .= __( 'If you did not create an account, you can safely ignore this email.', 'alsaadrose-email-otp' );
+        $body .= '</td></tr>';
+        $body .= '</table>';
+        $body .= '</body></html>';
+
+        $headers = array( 'Content-Type: text/html; charset=UTF-8' );
 
         wp_mail( $user->user_email, $subject, $body, $headers );
     }
