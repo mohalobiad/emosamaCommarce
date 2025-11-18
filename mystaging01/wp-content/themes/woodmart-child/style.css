@@ -78,3 +78,76 @@
 .page-id-16328 .alsaadrose-email-otp-form {
     margin-top: 10px !important;   /* تقدر تخليها 0 لو حابب أعلى */
 }
+
+/* ===== Woodmart slider #slider-62 responsive overrides ===== */
+#slider-62 .wd-carousel-wrap,
+#slider-62 .wd-carousel,
+#slider-62 .wd-slide,
+#slider-62 .swiper-slide {
+    width: 100% !important;
+    min-width: 100% !important;
+    max-width: 100% !important;
+}
+
+#slider-62 .wd-slide,
+#slider-62 .wd-carousel-wrap,
+#slider-62 .wd-carousel {
+    height: auto;
+}
+
+#slider-62 .wd-slide-bg {
+    background-size: cover !important;
+    background-position: center center !important;
+    background-repeat: no-repeat !important;
+}
+
+#slider-62 .wd-slide[style],
+#slider-62 .swiper-slide[style] {
+    width: 100% !important;
+    min-width: 100% !important;
+}
+
+@media (max-width: 768px) {
+    #slider-62 .wd-carousel-wrap,
+    #slider-62 .wd-carousel,
+    #slider-62 .wd-slide,
+    #slider-62 .swiper-slide {
+        height: 480px !important;
+    }
+
+    #slider-62 .wd-slide-inner {
+        max-width: 100% !important;
+    }
+
+    #slider-62 .wd-slide-inner .container,
+    #slider-62 .wd-slide-inner .wd-container,
+    #slider-62 .wd-slide-inner .woodmart-slide-inner {
+        max-width: none !important;
+        width: 100% !important;
+        padding: 20px !important;
+    }
+
+    #slider-62 .woodmart-title-container,
+    #slider-62 .wd-text-block,
+    #slider-62 .wd-button-wrapper {
+        max-width: 90% !important;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    #slider-62 .woodmart-title-container .title {
+        font-size: 26px !important;
+        line-height: 1.3 !important;
+    }
+
+    #slider-62 .wd-text-block p {
+        font-size: 15px !important;
+        line-height: 1.6 !important;
+    }
+
+    #slider-62 .wd-button-wrapper .btn {
+        padding: 10px 22px !important;
+        font-size: 14px !important;
+        line-height: 1.2 !important;
+    }
+}
