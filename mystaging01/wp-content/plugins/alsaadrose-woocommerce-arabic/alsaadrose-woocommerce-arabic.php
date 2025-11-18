@@ -380,6 +380,45 @@ function tpplt_wc_product_get_desc_ar( $desc, $product ) {
 add_filter( 'woocommerce_product_get_description', 'tpplt_wc_product_get_desc_ar', 9999, 2 );
 
 /**
+ * Allow XLSX uploads wherever WooCommerce expects CSV files.
+ *
+ * @param array $filetypes Allowed file types.
+ *
+ * @return array
+ */
+function tpplt_allow_xlsx_filetypes( $filetypes ) {
+    $filetypes['xlsx'] = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
+
+    return $filetypes;
+}
+add_filter( 'woocommerce_csv_import_valid_filetypes', 'tpplt_allow_xlsx_filetypes' );
+add_filter( 'woocommerce_csv_product_import_valid_filetypes', 'tpplt_allow_xlsx_filetypes' );
+
+/**
+ * Use the custom importer that can read XLSX files by converting them to CSV.
+ *
+ * @param string $importer_class Default importer class name.
+ *
+ * @return string
+ */
+function tpplt_register_xlsx_enabled_importer( $importer_class ) {
+    if ( ! class_exists( 'TPPLT_Product_Importer', false ) ) {
+        $path = plugin_dir_path( __FILE__ ) . 'includes/class-tpplt-xlsx-importer.php';
+
+        if ( file_exists( $path ) ) {
+            require_once $path;
+        }
+    }
+
+    if ( class_exists( 'TPPLT_Product_Importer', false ) ) {
+        return 'TPPLT_Product_Importer';
+    }
+
+    return $importer_class;
+}
+add_filter( 'woocommerce_product_csv_importer_class', 'tpplt_register_xlsx_enabled_importer' );
+
+/**
  * Register custom mapping options for WooCommerce CSV import.
  *
  * @param array $options Existing mapping options.
