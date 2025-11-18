@@ -1,145 +1,80 @@
-/*
- Theme Name:   Woodmart Child
- Description:  Woodmart Child Theme
- Author:       XTemos
- Author URI:   http://xtemos.com
- Template:     woodmart
- Version:      1.0.0
- Text Domain:  woodmart
-*/
-
-/*
- * Verify Account page layout + styling
- * ----------------------------------
- * The OTP screen should stand on its own without the blog sidebar and
- * look like a centered card.
- */
-.page-id-16328 .wd-sidebar.sidebar-container {
-    display: none;
-}
-
-.page-id-16328 .main-page-wrapper {
-    background: #f5f7fb;
-    padding-bottom: 100px;
-}
-
-.page-id-16328 .site-content .container {
-    display: block;
-}
-
-.page-id-16328 .wd-content-area.site-content {
-    max-width: 840px;
-    width: 100%;
-    margin: 0 auto;
-    padding: 40px 20px 0;
-}
-
-.page-id-16328 .entry-content {
-    display: flex;
-    justify-content: center;
-}
-
+/* ===== Verify Your Account page layout ===== */
 .page-id-16328 .alsaadrose-email-otp-form {
-    width: 100%;
-    max-width: 560px;
-    margin: 40px auto 0;
-    padding: 48px 36px 36px;
+    max-width: 480px;            /* عرض الكارد */
+    margin: 0px auto 80px;           /* توسيط الكارد بالنص */
+    padding: 30px 24px;
     background: #ffffff;
-    border-radius: 22px;
-    box-shadow: 0 25px 65px rgba(15, 23, 42, 0.12);
-    text-align: center;
-    position: relative;
+    border-radius: 14px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+    text-align: center;          /* توسيط النص والأزرار */
 }
 
-.page-id-16328 .alsaadrose-email-otp-form::before {
-    content: "";
-    position: absolute;
-    inset: 18px;
-    border-radius: 18px;
-    border: 1px solid rgba(24, 31, 56, 0.08);
-    pointer-events: none;
+/* عنوان الحقل */
+.page-id-16328 .alsaadrose-email-otp-verify-form label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: 500;
+    font-size: 16px;
 }
 
-.page-id-16328 .alsaadrose-email-otp-form form {
+/* حقل إدخال الكود – أصغر ومَوسّط */
+.page-id-16328 #alsaadrose-otp-code {
+    display: block;
+    width: 100%;
+    max-width: 320px;            /* هذا اللي يتحكم بالطول */
+    margin: 0 auto 20px;
+    padding: 10px 18px;
+    border-radius: 999px;
+    border: 1px solid #e1e1e1;
+}
+
+/* الفورمين بالنص */
+.page-id-16328 .alsaadrose-email-otp-verify-form,
+.page-id-16328 .alsaadrose-email-otp-resend-form {
     margin: 0;
 }
 
-.page-id-16328 .alsaadrose-email-otp-verify-form,
-.page-id-16328 .alsaadrose-email-otp-resend-form {
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-    align-items: center;
-}
-
-.page-id-16328 .alsaadrose-email-otp-verify-form {
-    margin-bottom: 30px;
-}
-
-.page-id-16328 .alsaadrose-email-otp-verify-form label {
-    font-weight: 600;
-    font-size: 20px;
-    text-align: center;
-    margin-bottom: 4px;
-    color: #111827;
-}
-
-.page-id-16328 .alsaadrose-email-otp-verify-form input[type="text"] {
-    display: block;
-    max-width: 360px;
-    width: 100%;
-    margin: 10px auto 10px;
-    padding: 16px 24px;
-    border-radius: 14px;
-    text-align: center;
-    font-size: 22px;
-    letter-spacing: 4px;
-    font-weight: 600;
-    border: 1px solid rgba(27, 41, 80, 0.2);
-    box-shadow: inset 0 1px 3px rgba(15, 23, 42, 0.12);
-}
-
+/* الأزرار */
 .page-id-16328 .alsaadrose-email-otp-verify-form button,
 .page-id-16328 .alsaadrose-email-otp-resend-form button {
-    min-width: 200px;
-    margin-top: 8px;
-    padding: 12px 26px;
+    min-width: 150px;
+    padding: 10px 20px;
     border-radius: 999px;
-    font-weight: 600;
-    box-shadow: 0 8px 25px rgba(22, 92, 229, 0.25);
+    border: none;
+    cursor: pointer;
+}
+
+/* زر Verify أساسي، زر Resend ثانوي */
+.page-id-16328 .alsaadrose-email-otp-verify-form button {
+    background: #000;
+    color: #fff;
+    margin-bottom: 10px;
 }
 
 .page-id-16328 .alsaadrose-email-otp-resend-form button {
-    background-color: transparent;
-    color: #1d4ed8;
-    border: 2px solid rgba(29, 78, 216, 0.4);
-    box-shadow: none;
+    background: #f3f3f3;
+    color: #333;
 }
 
-.page-id-16328 .alsaadrose-email-otp-verify-form button {
-    background: linear-gradient(135deg, #2563eb, #9333ea);
-    border: none;
+/* مسافة بسيطة بين الزرين */
+.page-id-16328 .alsaadrose-email-otp-resend-form {
+    margin-top: 8px;
 }
 
-.page-id-16328 .alsaadrose-email-otp-verify-form button:hover {
-    opacity: 0.92;
+/* اضبط المسافة العمودية في صفحة Verify Your Account فقط */
+
+/* قلّل المسافة تحت بلوك العنوان */
+.page-id-16328 .wd-page-title.page-title {
+    padding-bottom: 5px !important;
+    margin-bottom: 0 !important;
 }
 
-.page-id-16328 .alsaadrose-email-otp-resend-form button:hover {
-    border-color: #1d4ed8;
-    color: #0f172a;
+/* قلّل الـ padding فوق الـ main */
+.page-id-16328 #main-content.wd-content-layout.content-layout-wrapper.container {
+    padding-top: 10px !important;
 }
 
-@media (max-width: 575px) {
-    .page-id-16328 .alsaadrose-email-otp-form {
-        margin: 20px auto;
-        padding: 36px 22px 26px;
-    }
-
-    .page-id-16328 .alsaadrose-email-otp-verify-form input[type="text"] {
-        font-size: 20px;
-        letter-spacing: 2px;
-    }
+/* خَلِّ الكارد قريب من بداية الـ main */
+.page-id-16328 .alsaadrose-email-otp-form {
+    margin-top: 10px !important;   /* تقدر تخليها 0 لو حابب أعلى */
 }
-
