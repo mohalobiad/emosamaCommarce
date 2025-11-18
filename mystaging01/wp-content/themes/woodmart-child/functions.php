@@ -650,3 +650,134 @@ function woodmart_child_remove_company_address_field( $fields ) {
 }
 add_filter( 'woocommerce_default_address_fields', 'woodmart_child_remove_company_address_field', PHP_INT_MAX );
 
+
+/**
+ * Ensure every My Account lost-password URL opens the Woodmart reset form.
+ *
+ * Woodmart expects the query string to contain both `show-reset-form=true`
+ * and a bare `action` parameter in order to render the second step of the
+ * password reset flow. WooCommerce does not add these parameters by default,
+ * so we normalize every generated URL and redirect legacy requests.
+ */
+function woodmart_child_append_reset_form_query_args( $url ) {
+    if ( empty( $url ) ) {
+        return $url;
+    }
+
+    $fragment = '';
+
+    if ( false !== strpos( $url, '#' ) ) {
+        list( $url, $fragment ) = explode( '#', $url, 2 );
+        $fragment = '#' . $fragment;
+    }
+
+    $url = remove_query_arg( 'show-reset-form', $url );
+    $url = add_query_arg( 'show-reset-form', 'true', $url );
+
+    $has_action = false;
+    $parts      = wp_parse_url( $url );
+
+    if ( isset( $parts['query'] ) ) {
+        $query_args = array();
+        parse_str( $parts['query'], $query_args );
+        $has_action = array_key_exists( 'action', $query_args );
+    }
+
+    if ( ! $has_action ) {
+        $url .= ( false === strpos( $url, '?' ) ? '?' : '&' ) . 'action';
+    }
+
+    return $url . $fragment;
+}
+
+/**
+ * Determine if a URL points to the WooCommerce My Account lost-password endpoint.
+ *
+ * @param string $url URL to inspect.
+ * @return bool
+ */
+function woodmart_child_is_myaccount_lost_password_url( $url ) {
+    if ( empty( $url ) || ! function_exists( 'wc_get_page_permalink' ) || ! function_exists( 'wc_get_endpoint_url' ) ) {
+        return false;
+    }
+
+    $account_page = wc_get_page_permalink( 'myaccount' );
+
+    if ( empty( $account_page ) ) {
+        return false;
+    }
+
+    $endpoint_path = wp_parse_url( wc_get_endpoint_url( 'lost-password', '', $account_page ), PHP_URL_PATH );
+    $url_path      = wp_parse_url( $url, PHP_URL_PATH );
+
+    if ( empty( $endpoint_path ) || empty( $url_path ) ) {
+        return false;
+    }
+
+    return untrailingslashit( $endpoint_path ) === untrailingslashit( $url_path );
+}
+
+/**
+ * Force WooCommerce reset-password emails/CTAs to use the Woodmart parameters.
+ *
+ * @param string      $url  Base reset URL provided by WooCommerce.
+ * @param WP_User|int $user Target user object or ID.
+ * @return string
+ */
+function woodmart_child_filter_reset_password_link( $url, $user ) {
+    unset( $user );
+
+    return woodmart_child_append_reset_form_query_args( $url );
+}
+add_filter( 'woocommerce_reset_password_link', 'woodmart_child_filter_reset_password_link', 20, 2 );
+
+/**
+ * Make every generated My Account lost-password link open the reset form step.
+ *
+ * @param string $url      The generated URL.
+ * @param string $redirect Optional redirect path.
+ * @return string
+ */
+function woodmart_child_filter_lostpassword_url( $url, $redirect ) {
+    unset( $redirect );
+
+    if ( ! woodmart_child_is_myaccount_lost_password_url( $url ) ) {
+        return $url;
+    }
+
+    return woodmart_child_append_reset_form_query_args( $url );
+}
+add_filter( 'lostpassword_url', 'woodmart_child_filter_lostpassword_url', PHP_INT_MAX, 2 );
+
+/**
+ * Redirect requests that land on the lost-password endpoint without the expected parameters.
+ */
+function woodmart_child_force_reset_form_view() {
+    if ( ! function_exists( 'is_wc_endpoint_url' ) || ! function_exists( 'wc_get_current_url' ) ) {
+        return;
+    }
+
+    if ( ! is_wc_endpoint_url( 'lost-password' ) ) {
+        return;
+    }
+
+    $key   = isset( $_GET['key'] ) ? sanitize_text_field( wp_unslash( $_GET['key'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+    $login = isset( $_GET['login'] ) ? sanitize_text_field( wp_unslash( $_GET['login'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+
+    if ( empty( $key ) || empty( $login ) ) {
+        return;
+    }
+
+    $has_show   = isset( $_GET['show-reset-form'] ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+    $has_action = isset( $_GET['action'] ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+
+    if ( $has_show && $has_action ) {
+        return;
+    }
+
+    $redirect = woodmart_child_append_reset_form_query_args( esc_url_raw( wc_get_current_url() ) );
+
+    wp_safe_redirect( $redirect );
+    exit;
+}
+add_action( 'template_redirect', 'woodmart_child_force_reset_form_view', 0 );
