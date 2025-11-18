@@ -28,8 +28,9 @@
  *   - Resend cooldown: 5 minutes
  *   - Max resends per day: 5
  *   - Prevents duplicate “Your account has been created” email; only OTP email is sent for frontend registrations.
- *   - Successful verification redirects customers to the WooCommerce lost-password endpoint so they can set their password.
- *   - Lost-password URLs always append ?show-reset-form=true&action so reset links land on the password form step used by the theme.
+ *   - Successful verification logs customers in and redirects them back to the Verify Account page in a dedicated “Set password” view.
+ *   - Lost-password URLs still append ?show-reset-form=true&action so reset links outside the OTP flow land on the password form step used by the theme.
+ *   - The [alsaadrose_email_otp_verification] shortcode now outputs both the OTP form and, when otp_set_password=1, the new password form.
 */
 
 if ( ! defined( 'ABSPATH' ) ) {
