@@ -1,0 +1,132 @@
+/*
+ * Responsive overrides for Woodmart slider ID 62.
+ * This stylesheet is scoped to #slider-62 only so other sliders remain unaffected.
+ */
+#slider-62,
+#slider-62 .wd-carousel-wrap,
+#slider-62 .wd-carousel,
+#slider-62 .swiper-wrapper,
+#slider-62 .wd-slide {
+    width: 100% !important;
+    min-width: 100% !important;
+    max-width: 100% !important;
+}
+
+#slider-62 .wd-carousel-wrap,
+#slider-62 .wd-carousel {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    overflow: hidden;
+}
+
+#slider-62 .wd-slide,
+#slider-62 .wd-slide-bg {
+    min-height: 100%;
+    height: 100%;
+}
+
+#slider-62 .wd-slide-bg {
+    background-size: cover !important;
+    background-position: center center !important;
+    background-repeat: no-repeat !important;
+}
+
+#slider-62 .wd-slide-inner {
+    width: 100%;
+    max-width: 100%;
+}
+
+#slider-62 .wd-slide-inner .woodmart-title-container .title,
+#slider-62 .woodmart-title-container .title {
+    font-weight: 600;
+    letter-spacing: 0.3px;
+}
+
+#slider-62 .wd-slide-inner .wd-text-block p {
+    line-height: 1.5;
+    margin-bottom: 15px;
+}
+
+#slider-62 .wd-button-wrapper {
+    margin-top: 15px;
+}
+
+#slider-62 .wd-button-wrapper .btn {
+    border-radius: 30px;
+}
+
+#slider-62 .wd-slide[style] {
+    width: 100% !important;
+    min-width: 100% !important;
+}
+
+#slider-62 .container,
+#slider-62 .wd-slide-inner,
+#slider-62 .wd-content-container {
+    max-width: 100% !important;
+}
+
+@media (max-width: 1024px) {
+    #slider-62 .wd-carousel-wrap,
+    #slider-62 .wd-carousel,
+    #slider-62 .wd-slide {
+        min-height: 480px !important;
+    }
+}
+
+@media (max-width: 768px) {
+    #slider-62 .wd-carousel-wrap,
+    #slider-62 .wd-carousel,
+    #slider-62 .wd-slide {
+        height: 480px !important;
+    }
+
+    #slider-62 .wd-slide-inner {
+        max-width: 90% !important;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 20px !important;
+        background-color: rgba(255, 255, 255, 0.92);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        border-radius: 18px;
+    }
+
+    #slider-62 .wd-slide-inner .woodmart-title-container .title,
+    #slider-62 .woodmart-title-container .title {
+        font-size: 26px !important;
+        line-height: 1.3 !important;
+    }
+
+    #slider-62 .wd-text-block p,
+    #slider-62 .wd-text-block,
+    #slider-62 .wd-slide-inner p {
+        font-size: 15px !important;
+    }
+
+    #slider-62 .wd-button-wrapper .btn {
+        padding: 10px 22px !important;
+        font-size: 14px !important;
+    }
+
+    #slider-62 .container,
+    #slider-62 .wd-content-container {
+        padding-left: 15px !important;
+        padding-right: 15px !important;
+    }
+
+    html[dir="rtl"] #slider-62 .wd-slide-inner,
+    html[dir="rtl"] #slider-62 .wd-text-block,
+    html[dir="rtl"] #slider-62 .wd-button-wrapper,
+    html[dir="rtl"] #slider-62 .title-wrapper,
+    html[dir="rtl"] #slider-62 .woodmart-title-container {
+        text-align: right !important;
+    }
+
+    html:not([dir="rtl"]) #slider-62 .wd-slide-inner,
+    html:not([dir="rtl"]) #slider-62 .wd-text-block,
+    html:not([dir="rtl"]) #slider-62 .wd-button-wrapper,
+    html:not([dir="rtl"]) #slider-62 .title-wrapper,
+    html:not([dir="rtl"]) #slider-62 .woodmart-title-container {
+        text-align: left !important;
+    }
+}

@@ -125,6 +125,168 @@ function woodmart_child_override_default_address_fields( $fields ) {
 add_filter( 'woocommerce_default_address_fields', 'woodmart_child_override_default_address_fields', PHP_INT_MAX );
 
 /**
+ * Determine if the current view contains Woodmart slider ID 62.
+ *
+ * @return bool
+ */
+function woodmart_child_page_has_slider_62() {
+static $has_slider = null;
+
+if ( null !== $has_slider ) {
+return $has_slider;
+}
+
+$has_slider = false;
+
+if ( is_admin() ) {
+return $has_slider;
+}
+
+$needles = array(
+'#slider-62',
+'slider-62',
+'slider_id="62"',
+"slider_id='62'",
+'"slider_id":62',
+'"slider":62',
+);
+
+$posts_to_scan = array();
+
+global $wp_query;
+if ( $wp_query instanceof WP_Query && ! empty( $wp_query->posts ) ) {
+foreach ( $wp_query->posts as $queried_post ) {
+if ( $queried_post instanceof WP_Post ) {
+$posts_to_scan[ $queried_post->ID ] = $queried_post;
+}
+}
+}
+
+$extra_ids = array_filter(
+array_unique(
+array(
+get_queried_object_id(),
+(int) get_option( 'page_on_front' ),
+(int) get_option( 'page_for_posts' ),
+)
+)
+);
+
+foreach ( $extra_ids as $extra_id ) {
+if ( $extra_id && ! isset( $posts_to_scan[ $extra_id ] ) ) {
+$post_object = get_post( $extra_id );
+if ( $post_object instanceof WP_Post ) {
+$posts_to_scan[ $extra_id ] = $post_object;
+}
+}
+}
+
+foreach ( $posts_to_scan as $post_object ) {
+$content_variations = array(
+$post_object->post_content,
+get_post_meta( $post_object->ID, '_elementor_data', true ),
+get_post_meta( $post_object->ID, '_wpb_shortcodes_custom_css', true ),
+);
+
+foreach ( $content_variations as $content ) {
+if ( ! is_string( $content ) || '' === $content ) {
+continue;
+}
+
+foreach ( $needles as $needle ) {
+if ( false !== stripos( $content, $needle ) ) {
+$has_slider = true;
+break 3;
+}
+}
+}
+}
+
+return (bool) apply_filters( 'woodmart_child_has_slider_62', $has_slider );
+}
+
+/**
+ * Enqueue slider 62 specific assets only when the slider is present.
+ */
+function woodmart_child_maybe_enqueue_slider_62_assets() {
+if ( ! woodmart_child_page_has_slider_62() ) {
+return;
+}
+
+$stylesheet_path = get_stylesheet_directory() . '/slider-62-responsive.css';
+$stylesheet_uri  = get_stylesheet_directory_uri() . '/slider-62-responsive.css';
+$version         = file_exists( $stylesheet_path ) ? filemtime( $stylesheet_path ) : wp_get_theme()->get( 'Version' );
+
+wp_enqueue_style( 'woodmart-child-slider-62', $stylesheet_uri, array( 'woodmart-style' ), $version );
+
+$script_handle = 'woodmart-child-slider-62-inline';
+wp_register_script( $script_handle, '', array(), $version, true );
+wp_enqueue_script( $script_handle );
+
+$inline_script = <<< 'JS'
+(function (w, d) {
+function forceFullWidth() {
+var slider = d.getElementById('slider-62');
+if (!slider) {
+return;
+}
+
+var slides = slider.querySelectorAll('.wd-slide');
+if (!slides.length) {
+return;
+}
+
+var applyWidth = function (slide) {
+slide.style.removeProperty('width');
+slide.style.setProperty('width', '100%', 'important');
+};
+
+if (typeof slides.forEach === 'function') {
+slides.forEach(applyWidth);
+} else {
+Array.prototype.forEach.call(slides, applyWidth);
+}
+}
+
+function initObserver() {
+var slider = d.getElementById('slider-62');
+if (!slider || slider.__wdSlider62Observer || typeof MutationObserver === 'undefined') {
+return;
+}
+
+var observer = new MutationObserver(function () {
+forceFullWidth();
+});
+
+observer.observe(slider, { attributes: true, subtree: true, attributeFilter: ['style'] });
+slider.__wdSlider62Observer = observer;
+}
+
+function boot() {
+forceFullWidth();
+initObserver();
+}
+
+if (d.readyState === 'loading') {
+d.addEventListener('DOMContentLoaded', function () {
+setTimeout(boot, 200);
+});
+} else {
+setTimeout(boot, 200);
+}
+
+w.addEventListener('load', boot);
+if (w && typeof w.addEventListener === 'function') {
+w.addEventListener('woodmartSwiperInit', boot);
+}
+})(window, document);
+JS;
+
+wp_add_inline_script( $script_handle, $inline_script );
+}
+add_action( 'wp_enqueue_scripts', 'woodmart_child_maybe_enqueue_slider_62_assets', 10020 );
+
+/**
  * Lock an individual checkout country field to United Arab Emirates.
  *
  * @param array $field Single field configuration.
