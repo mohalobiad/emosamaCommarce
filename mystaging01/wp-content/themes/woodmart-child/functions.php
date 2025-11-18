@@ -59,6 +59,13 @@ function woodmart_child_get_uae_country_option() {
  * @return array
  */
 function woodmart_child_get_uae_city_options() {
+        if ( function_exists( 'aucm_get_checkout_city_options' ) ) {
+                $options = aucm_get_checkout_city_options();
+                if ( ! empty( $options ) ) {
+                        return apply_filters( 'woodmart_child_uae_city_options', $options );
+                }
+        }
+
         $cities = array(
                 'Abu Dhabi',
                 'Al Ain',
@@ -94,7 +101,7 @@ function woodmart_child_get_uae_city_options() {
                 $options[ $city ] = __( $city, 'woodmart-child' );
         }
 
-        return $options;
+        return apply_filters( 'woodmart_child_uae_city_options', $options );
 }
 
 /**
