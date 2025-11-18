@@ -82,6 +82,8 @@ class Alsaadrose_Email_Otp {
         add_action( 'template_redirect', array( $this, 'handle_verification_requests' ), 1 );
         add_action( 'template_redirect', array( $this, 'maybe_force_reset_form_view' ), 20 );
         add_action( 'template_redirect', array( $this, 'maybe_do_post_verification_redirect' ), 99 );
+        add_filter( 'woocommerce_reset_password_link', array( $this, 'filter_reset_password_link' ), 10, 2 );
+        add_filter( 'lostpassword_url', array( $this, 'filter_lostpassword_url' ), 20, 2 );
         add_shortcode( 'alsaadrose_email_otp_verification', array( $this, 'render_shortcode' ) );
     }
 
@@ -429,6 +431,13 @@ class Alsaadrose_Email_Otp {
             return $url;
         }
 
+        $fragment = '';
+
+        if ( false !== strpos( $url, '#' ) ) {
+            list( $url, $fragment ) = explode( '#', $url, 2 );
+            $fragment = '#' . $fragment;
+        }
+
         $url = remove_query_arg( 'show-reset-form', $url );
         $url = add_query_arg( 'show-reset-form', 'true', $url );
 
@@ -442,10 +451,10 @@ class Alsaadrose_Email_Otp {
         }
 
         if ( ! $has_action ) {
-            $url = add_query_arg( 'action', '', $url );
+            $url .= ( false === strpos( $url, '?' ) ? '?' : '&' ) . 'action';
         }
 
-        return $url;
+        return $url . $fragment;
     }
 
     protected function queue_post_verification_redirect( $url ) {
@@ -549,6 +558,49 @@ class Alsaadrose_Email_Otp {
 
         wp_safe_redirect( $redirect );
         exit;
+    }
+
+    /**
+     * Ensure WooCommerce reset-password links (emails + set-password CTA) land on the Woodmart reset form.
+     */
+    public function filter_reset_password_link( $url, $user ) {
+        return $this->append_reset_form_query_args( $url );
+    }
+
+    /**
+     * Append show-reset-form/action args whenever WordPress builds the My Account lost-password URL.
+     */
+    public function filter_lostpassword_url( $url, $redirect ) {
+        if ( ! $this->is_myaccount_lost_password_url( $url ) ) {
+            return $url;
+        }
+
+        return $this->append_reset_form_query_args( $url );
+    }
+
+    protected function is_myaccount_lost_password_url( $url ) {
+        if ( empty( $url ) ) {
+            return false;
+        }
+
+        if ( ! function_exists( 'wc_get_page_permalink' ) || ! function_exists( 'wc_get_endpoint_url' ) ) {
+            return false;
+        }
+
+        $account_page = wc_get_page_permalink( 'myaccount' );
+
+        if ( empty( $account_page ) ) {
+            return false;
+        }
+
+        $endpoint_path = wp_parse_url( wc_get_endpoint_url( 'lost-password', '', $account_page ), PHP_URL_PATH );
+        $url_path      = wp_parse_url( $url, PHP_URL_PATH );
+
+        if ( empty( $endpoint_path ) || empty( $url_path ) ) {
+            return false;
+        }
+
+        return untrailingslashit( $endpoint_path ) === untrailingslashit( $url_path );
     }
 
     protected function handle_resend( $token ) {
