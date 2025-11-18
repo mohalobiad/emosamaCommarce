@@ -27,6 +27,7 @@ class Alsaadrose_Email_Otp {
     protected $form_messages = array();
     protected $form_errors   = array();
     protected $current_token = '';
+    protected $set_password_query_arg = 'otp_set_password'; // Query arg that toggles the set-password view on the verification page.
 
     public static function init() {
         if ( null === self::$instance ) {
@@ -111,6 +112,19 @@ class Alsaadrose_Email_Otp {
         }
 
         return null;
+    }
+
+    protected function login_user( $user_id ) {
+        if ( ! $user_id ) {
+            return;
+        }
+
+        wp_set_current_user( $user_id );
+        wp_set_auth_cookie( $user_id, true );
+
+        if ( function_exists( 'wc_set_customer_auth_cookie' ) ) {
+            wc_set_customer_auth_cookie( $user_id );
+        }
     }
 
     public function handle_customer_created( $customer_id, $new_customer_data = array(), $password_generated = false ) {
@@ -293,6 +307,10 @@ class Alsaadrose_Email_Otp {
         return $user;
     }
 
+    /**
+     * Output the OTP UI. The same shortcode handles both the OTP entry form and the post-verification
+     * password form (?otp_set_password=1) so customers never leave the Verify Account page.
+     */
     public function render_shortcode() {
         $token = $this->current_token;
 
@@ -303,8 +321,14 @@ class Alsaadrose_Email_Otp {
         $messages = $this->form_messages;
         $errors   = $this->form_errors;
 
-        if ( empty( $token ) ) {
+        $is_set_password_view = $this->is_set_password_view();
+
+        if ( ! $is_set_password_view && empty( $token ) ) {
             $errors[] = __( 'Please use the link from your email to open this page so we can identify your account.', 'alsaadrose-email-otp' );
+        }
+
+        if ( $is_set_password_view && ! is_user_logged_in() ) {
+            $errors[] = __( 'Your session has expired. Please log in again to continue.', 'alsaadrose-email-otp' );
         }
 
         ob_start();
@@ -318,23 +342,60 @@ class Alsaadrose_Email_Otp {
                 <div class="alsaadrose-email-otp-error"><?php echo wp_kses_post( $error ); ?></div>
             <?php endforeach; ?>
 
-            <form method="post" class="alsaadrose-email-otp-verify-form">
-                <label for="alsaadrose-otp-code"><?php esc_html_e( 'Enter verification code', 'alsaadrose-email-otp' ); ?></label>
-                <input type="text" id="alsaadrose-otp-code" name="alsaadrose_otp_code" pattern="\d{6}" maxlength="6" required value="" />
-                <input type="hidden" name="alsaadrose_otp_token" value="<?php echo esc_attr( $token ); ?>" />
-                <?php wp_nonce_field( 'alsaadrose_verify_otp', 'alsaadrose_otp_verify_nonce' ); ?>
-                <button type="submit" name="alsaadrose_otp_action" value="verify"><?php esc_html_e( 'Verify', 'alsaadrose-email-otp' ); ?></button>
-            </form>
+            <?php if ( $is_set_password_view ) : ?>
+                <?php if ( is_user_logged_in() ) : ?>
+                    <form method="post" class="alsaadrose-email-otp-set-password-form woocommerce-ResetPassword lost_reset_password">
+                        <p><?php esc_html_e( 'Enter a new password below.', 'alsaadrose-email-otp' ); ?></p>
 
-            <form method="post" class="alsaadrose-email-otp-resend-form">
-                <input type="hidden" name="alsaadrose_otp_token" value="<?php echo esc_attr( $token ); ?>" />
-                <?php wp_nonce_field( 'alsaadrose_resend_otp', 'alsaadrose_otp_resend_nonce' ); ?>
-                <button type="submit" name="alsaadrose_otp_action" value="resend"><?php esc_html_e( 'Resend Code', 'alsaadrose-email-otp' ); ?></button>
-            </form>
+                        <p class="woocommerce-form-row woocommerce-form-row--first form-row form-row-first">
+                            <label for="password_1"><?php esc_html_e( 'New password', 'alsaadrose-email-otp' ); ?></label>
+                            <span class="password-input">
+                                <input type="password" class="woocommerce-Input woocommerce-Input--text input-text" name="password_1" id="password_1" autocomplete="new-password" required />
+                            </span>
+                        </p>
+
+                        <p class="woocommerce-form-row woocommerce-form-row--last form-row form-row-last">
+                            <label for="password_2"><?php esc_html_e( 'Re-enter new password', 'alsaadrose-email-otp' ); ?></label>
+                            <span class="password-input">
+                                <input type="password" class="woocommerce-Input woocommerce-Input--text input-text" name="password_2" id="password_2" autocomplete="new-password" required />
+                            </span>
+                        </p>
+
+                        <?php wp_nonce_field( 'alsaadrose_set_password', 'alsaadrose_set_password_nonce' ); ?>
+                        <input type="hidden" name="alsaadrose_otp_action" value="set_password" />
+
+                        <p class="woocommerce-form-row form-row">
+                            <button type="submit" class="woocommerce-Button button" value="save"><?php esc_html_e( 'Save password', 'alsaadrose-email-otp' ); ?></button>
+                        </p>
+                    </form>
+                <?php endif; ?>
+            <?php else : ?>
+                <form method="post" class="alsaadrose-email-otp-verify-form">
+                    <label for="alsaadrose-otp-code"><?php esc_html_e( 'Enter verification code', 'alsaadrose-email-otp' ); ?></label>
+                    <input type="text" id="alsaadrose-otp-code" name="alsaadrose_otp_code" pattern="\d{6}" maxlength="6" required value="" />
+                    <input type="hidden" name="alsaadrose_otp_token" value="<?php echo esc_attr( $token ); ?>" />
+                    <?php wp_nonce_field( 'alsaadrose_verify_otp', 'alsaadrose_otp_verify_nonce' ); ?>
+                    <button type="submit" name="alsaadrose_otp_action" value="verify"><?php esc_html_e( 'Verify', 'alsaadrose-email-otp' ); ?></button>
+                </form>
+
+                <form method="post" class="alsaadrose-email-otp-resend-form">
+                    <input type="hidden" name="alsaadrose_otp_token" value="<?php echo esc_attr( $token ); ?>" />
+                    <?php wp_nonce_field( 'alsaadrose_resend_otp', 'alsaadrose_otp_resend_nonce' ); ?>
+                    <button type="submit" name="alsaadrose_otp_action" value="resend"><?php esc_html_e( 'Resend Code', 'alsaadrose-email-otp' ); ?></button>
+                </form>
+            <?php endif; ?>
         </div>
         <?php
 
         return ob_get_clean();
+    }
+
+    protected function is_set_password_view() {
+        if ( isset( $_GET[ $this->set_password_query_arg ] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+            return '1' === sanitize_text_field( wp_unslash( $_GET[ $this->set_password_query_arg ] ) );
+        }
+
+        return false;
     }
 
     protected function get_user_id_by_token( $token ) {
@@ -407,7 +468,10 @@ class Alsaadrose_Email_Otp {
         delete_user_meta( $user_id, self::META_OTP_RESEND_DAY );
         delete_user_meta( $user_id, self::META_OTP_TOKEN );
 
-        $redirect = $this->get_lost_password_url();
+        // Successful OTP checks now log the customer in and send them to the shortcode-driven password form.
+        $this->login_user( $user_id );
+
+        $redirect = $this->get_set_password_url();
 
         return array(
             'redirect' => $redirect,
@@ -424,6 +488,18 @@ class Alsaadrose_Email_Otp {
         }
 
         return $this->append_reset_form_query_args( wp_lostpassword_url() );
+    }
+
+    protected function get_set_password_url() {
+        $url = $this->get_verification_page_url();
+
+        if ( empty( $url ) ) {
+            $url = home_url( '/verify-account/' );
+        }
+
+        $url = remove_query_arg( array( 'otp_token', $this->set_password_query_arg ), $url );
+
+        return add_query_arg( $this->set_password_query_arg, '1', $url );
     }
 
     protected function append_reset_form_query_args( $url ) {
@@ -512,6 +588,9 @@ class Alsaadrose_Email_Otp {
             } else {
                 $this->form_messages[] = __( 'A new code has been sent to your email.', 'alsaadrose-email-otp' );
             }
+        } elseif ( 'set_password' === $action ) {
+            // Logged-in customers land here after OTP success to save their password without leaving the page.
+            $this->handle_set_password_request();
         }
     }
 
@@ -531,6 +610,60 @@ class Alsaadrose_Email_Otp {
             wp_safe_redirect( $redirect );
             exit;
         }
+    }
+
+    /**
+     * Process the password form submission (posted via template_redirect -> handle_verification_requests).
+     */
+    protected function handle_set_password_request() {
+        if ( empty( $_POST['alsaadrose_set_password_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['alsaadrose_set_password_nonce'] ) ), 'alsaadrose_set_password' ) ) {
+            $this->form_errors[] = __( 'Security check failed. Please try again.', 'alsaadrose-email-otp' );
+            return;
+        }
+
+        if ( ! is_user_logged_in() ) {
+            $this->form_errors[] = __( 'Your session has expired. Please log in again to continue.', 'alsaadrose-email-otp' );
+            return;
+        }
+
+        $password_1 = isset( $_POST['password_1'] ) ? (string) wp_unslash( $_POST['password_1'] ) : '';
+        $password_2 = isset( $_POST['password_2'] ) ? (string) wp_unslash( $_POST['password_2'] ) : '';
+
+        if ( empty( $password_1 ) || empty( $password_2 ) ) {
+            $this->form_errors[] = __( 'Please enter and confirm your new password.', 'alsaadrose-email-otp' );
+            return;
+        }
+
+        if ( $password_1 !== $password_2 ) {
+            $this->form_errors[] = __( 'The passwords do not match. Please try again.', 'alsaadrose-email-otp' );
+            return;
+        }
+
+        $user_id = get_current_user_id();
+
+        if ( ! $user_id ) {
+            $this->form_errors[] = __( 'We could not confirm your account. Please try again.', 'alsaadrose-email-otp' );
+            return;
+        }
+
+        wp_set_password( $password_1, $user_id );
+
+        $this->login_user( $user_id );
+
+        $this->form_messages[] = __( 'Password updated successfully. Redirecting to your account…', 'alsaadrose-email-otp' );
+
+        $this->queue_post_verification_redirect( $this->get_myaccount_url() );
+    }
+
+    protected function get_myaccount_url() {
+        if ( function_exists( 'wc_get_page_permalink' ) ) {
+            $url = wc_get_page_permalink( 'myaccount' );
+            if ( $url ) {
+                return $url;
+            }
+        }
+
+        return home_url( '/my-account/' );
     }
 
     public function maybe_force_reset_form_view() {
