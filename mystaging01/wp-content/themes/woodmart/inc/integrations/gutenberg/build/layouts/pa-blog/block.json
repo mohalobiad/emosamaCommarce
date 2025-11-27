@@ -1,8 +1,0 @@
-{
-  "apiVersion": 2,
-  "title": "Blog archive",
-  "name": "wd/pa-blog",
-  "description": "Show blog content",
-  "category": "xtemos_posts_elements",
-  "textdomain": "woodmart"
-}

@@ -1,8 +1,0 @@
-{
-  "apiVersion": 2,
-  "title": "Image",
-  "name": "wd/image",
-  "description": "Image component for visual content.",
-  "category": "xtemos",
-  "textdomain": "woodmart"
-}

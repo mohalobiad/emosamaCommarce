@@ -1,8 +1,0 @@
-{
-  "apiVersion": 2,
-  "title": "Sidebar",
-  "name": "wd/sidebar",
-  "description": "Shows default or custom widget area.",
-  "category": "xtemos",
-  "textdomain": "woodmart"
-}

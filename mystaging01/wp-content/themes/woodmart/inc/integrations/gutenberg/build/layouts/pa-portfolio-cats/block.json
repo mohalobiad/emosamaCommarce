@@ -1,8 +1,0 @@
-{
-  "apiVersion": 2,
-  "title": "Portfolio categories filters",
-  "name": "wd/pa-portfolio-cats",
-  "description": "Shows filters for portfolio categories",
-  "category": "xtemos_posts_elements",
-  "textdomain": "woodmart"
-}

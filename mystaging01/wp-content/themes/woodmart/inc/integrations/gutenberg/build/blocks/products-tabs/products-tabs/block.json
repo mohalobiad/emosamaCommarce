@@ -1,8 +1,0 @@
-{
-  "apiVersion": 2,
-  "title": "AJAX Products tabs",
-  "name": "wd/products-tabs",
-  "description": "Product tabs with real-time content loading.",
-  "category": "xtemos",
-  "textdomain": "woodmart"
-}

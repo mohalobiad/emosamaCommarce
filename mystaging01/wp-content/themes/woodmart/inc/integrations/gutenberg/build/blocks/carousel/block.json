@@ -1,8 +1,0 @@
-{
-  "apiVersion": 2,
-  "title": "Carousel",
-  "name": "wd/carousel",
-  "description": "Parent block for the creation of responsive carousel sliders.",
-  "category": "xtemos",
-  "textdomain": "woodmart"
-}
