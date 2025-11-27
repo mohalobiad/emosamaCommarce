@@ -89,5 +89,43 @@
     margin-top: 10px !important;   /* تقدر تخليها 0 لو حابب أعلى */
 }
 
+/* ===== Checkout coupon row styling ===== */
+.woocommerce-checkout-review-order-table .wd-checkout-coupon {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+}
+
+.woocommerce-checkout-review-order-table .wd-checkout-coupon .input-text {
+    min-width: 200px;
+}
+
+.woocommerce-checkout-review-order-table .wd-checkout-coupon .button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 10px 22px;
+    border-radius: 999px;
+    font-weight: 600;
+    border: none;
+    background-color: var(--wd-primary-color, #83b735);
+    color: #fff;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.woocommerce-checkout-review-order-table .wd-checkout-coupon .button:hover,
+.woocommerce-checkout-review-order-table .wd-checkout-coupon .button:focus {
+    background-color: var(--wd-primary-color-80, #6aa32b);
+    color: #fff;
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1);
+}
 
 
+
+
+/* Hide any remaining coupon form on the cart page action row */
+.wd-cart-action-row .coupon.wd-coupon-form {
+    display: none !important;
+}
