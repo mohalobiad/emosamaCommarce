@@ -103,3 +103,8 @@
 
 
 
+
+/* Hide any remaining coupon form on the cart page action row */
+.wd-cart-action-row .coupon.wd-coupon-form {
+    display: none !important;
+}
