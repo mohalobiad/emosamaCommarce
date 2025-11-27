@@ -1,0 +1,93 @@
+/*
+ Theme Name:   Woodmart Child
+ Description:  Woodmart Child Theme
+ Author:       XTemos
+ Author URI:   http://xtemos.com
+ Template:     woodmart
+ Version:      1.0.0
+ Text Domain:  woodmart
+*/
+
+/* ===== Verify Your Account page layout ===== */
+.page-id-16331 .alsaadrose-email-otp-form {
+    max-width: 480px;            /* عرض الكارد */
+    margin: 0px auto 80px;           /* توسيط الكارد بالنص */
+    padding: 30px 24px;
+    background: #ffffff;
+    border-radius: 14px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+    text-align: center;          /* توسيط النص والأزرار */
+}
+
+/* عنوان الحقل */
+.page-id-16331 .alsaadrose-email-otp-verify-form label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: 500;
+    font-size: 16px;
+}
+
+/* حقل إدخال الكود – أصغر ومَوسّط */
+.page-id-16331 #alsaadrose-otp-code {
+    display: block;
+    width: 100%;
+    max-width: 320px;            /* هذا اللي يتحكم بالطول */
+    margin: 0 auto 20px;
+    padding: 10px 18px;
+    border-radius: 999px;
+    border: 1px solid #e1e1e1;
+}
+
+/* الفورمين بالنص */
+.page-id-16331 .alsaadrose-email-otp-verify-form,
+.page-id-16331 .alsaadrose-email-otp-resend-form {
+    margin: 0;
+}
+
+/* الأزرار */
+.page-id-16331 .alsaadrose-email-otp-verify-form button,
+.page-id-16331 .alsaadrose-email-otp-resend-form button {
+    min-width: 150px;
+    padding: 10px 20px;
+    border-radius: 999px;
+    border: none;
+    cursor: pointer;
+}
+
+/* زر Verify أساسي، زر Resend ثانوي */
+.page-id-16331 .alsaadrose-email-otp-verify-form button {
+    background: #000;
+    color: #fff;
+    margin-bottom: 10px;
+}
+
+.page-id-16331 .alsaadrose-email-otp-resend-form button {
+    background: #f3f3f3;
+    color: #333;
+}
+
+/* مسافة بسيطة بين الزرين */
+.page-id-16331 .alsaadrose-email-otp-resend-form {
+    margin-top: 8px;
+}
+
+/* اضبط المسافة العمودية في صفحة Verify Your Account فقط */
+
+/* قلّل المسافة تحت بلوك العنوان */
+.page-id-16331 .wd-page-title.page-title {
+    padding-bottom: 5px !important;
+    margin-bottom: 0 !important;
+}
+
+/* قلّل الـ padding فوق الـ main */
+.page-id-16331 #main-content.wd-content-layout.content-layout-wrapper.container {
+    padding-top: 10px !important;
+}
+
+/* خَلِّ الكارد قريب من بداية الـ main */
+.page-id-16331 .alsaadrose-email-otp-form {
+    margin-top: 10px !important;   /* تقدر تخليها 0 لو حابب أعلى */
+}
+
+
+
