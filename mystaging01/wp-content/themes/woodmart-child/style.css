@@ -89,5 +89,17 @@
     margin-top: 10px !important;   /* تقدر تخليها 0 لو حابب أعلى */
 }
 
+/* ===== Checkout coupon row styling ===== */
+.woocommerce-checkout-review-order-table .wd-checkout-coupon {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+}
+
+.woocommerce-checkout-review-order-table .wd-checkout-coupon .input-text {
+    min-width: 200px;
+}
+
 
 
