@@ -106,18 +106,17 @@ defined( 'ABSPATH' ) || exit;
 
                 <?php do_action( 'woocommerce_review_order_after_order_total' ); ?>
 
-                <?php if ( wc_coupons_enabled() ) : ?>
-                        <tr class="cart-coupon">
-                                <th><?php esc_html_e( 'Coupon', 'woocommerce' ); ?></th>
-                                <td>
-                                        <div class="wd-checkout-coupon">
-                                                <label class="screen-reader-text" for="checkout_coupon_code"><?php esc_html_e( 'Coupon code', 'woocommerce' ); ?></label>
-                                                <input type="text" name="coupon_code" class="input-text" placeholder="<?php esc_attr_e( 'Coupon code', 'woocommerce' ); ?>" id="checkout_coupon_code" value="" />
-                                                <button type="submit" class="button<?php echo esc_attr( wc_wp_theme_get_element_class_name( 'button' ) ? ' ' . wc_wp_theme_get_element_class_name( 'button' ) : '' ); ?>" name="apply_coupon" value="<?php esc_attr_e( 'Apply coupon', 'woocommerce' ); ?>"><?php esc_html_e( 'Apply coupon', 'woocommerce' ); ?></button>
-                                        </div>
-                                </td>
-                        </tr>
-                <?php endif; ?>
+               <?php if ( wc_coupons_enabled() ) : ?>
+                       <tr class="cart-coupon">
+                               <td colspan="2">
+                                       <div class="wd-checkout-coupon">
+                                               <label class="screen-reader-text" for="checkout_coupon_code"><?php esc_html_e( 'Coupon code', 'woocommerce' ); ?></label>
+                                               <input type="text" name="coupon_code" class="input-text" placeholder="<?php esc_attr_e( 'Coupon code', 'woocommerce' ); ?>" id="checkout_coupon_code" value="" />
+                                               <button type="submit" class="button<?php echo esc_attr( wc_wp_theme_get_element_class_name( 'button' ) ? ' ' . wc_wp_theme_get_element_class_name( 'button' ) : '' ); ?> wd-apply-coupon" name="apply_coupon" value="<?php esc_attr_e( 'Apply coupon', 'woocommerce' ); ?>"><?php esc_html_e( 'Apply coupon', 'woocommerce' ); ?></button>
+                                       </div>
+                               </td>
+                       </tr>
+               <?php endif; ?>
 
         </tfoot>
 </table>
