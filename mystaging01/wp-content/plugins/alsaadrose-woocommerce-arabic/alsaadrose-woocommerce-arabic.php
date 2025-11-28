@@ -123,6 +123,169 @@ function tpplt_save_product_meta( $post_id ) {
 add_action( 'save_post_product', 'tpplt_save_product_meta' );
 
 /**
+ * Output admin-side helpers for Arabic attribute fields.
+ */
+function tpplt_admin_attribute_fields_ar() {
+    if ( ! function_exists( 'get_current_screen' ) ) {
+        return;
+    }
+
+    $screen = get_current_screen();
+
+    if ( ! $screen || 'product' !== $screen->post_type ) {
+        return;
+    }
+
+    global $post;
+
+    $attributes_data = array();
+
+    if ( $post instanceof WP_Post ) {
+        $saved_attributes = get_post_meta( $post->ID, '_tpplt_attributes_ar', true );
+
+        if ( is_array( $saved_attributes ) ) {
+            $attributes_data = $saved_attributes;
+        }
+    }
+
+    ?>
+    <script type="text/javascript">
+        jQuery( function( $ ) {
+            const tppltAttributeArData = <?php echo wp_json_encode( $attributes_data ); ?> || {};
+
+            function tppltGetAttributeAr( index ) {
+                if ( tppltAttributeArData && Object.prototype.hasOwnProperty.call( tppltAttributeArData, index ) ) {
+                    return tppltAttributeArData[ index ];
+                }
+
+                const key = String( index );
+
+                if ( tppltAttributeArData && Object.prototype.hasOwnProperty.call( tppltAttributeArData, key ) ) {
+                    return tppltAttributeArData[ key ];
+                }
+
+                return { name: '', values: '' };
+            }
+
+            function tppltAddArFields() {
+                $( '.product_attributes .woocommerce_attribute' ).each( function() {
+                    const $box  = $( this );
+                    const index = $box.attr( 'rel' );
+
+                    if ( typeof index === 'undefined' || $box.data( 'tppltArReady' ) ) {
+                        return;
+                    }
+
+                    $box.data( 'tppltArReady', true );
+
+                    const saved = tppltGetAttributeAr( index ) || { name: '', values: '' };
+
+                    const $nameTd = $box.find( 'td.attribute_name' ).first();
+
+                    if ( $nameTd.length ) {
+                        const $nameWrap = $( '<div class="tpplt-ar-field tpplt-ar-field-name" />' );
+                        $nameWrap.append( '<label><strong><?php echo esc_js( __( 'Arabic Name', 'tpplt' ) ); ?></strong></label>' );
+                        $nameWrap.append( $( '<input type="text" class="widefat tpplt-attribute-name-ar" />' )
+                            .attr( 'name', 'attribute_names_ar[' + index + ']' )
+                            .attr( 'placeholder', '<?php echo esc_js( __( 'Arabic attribute name', 'tpplt' ) ); ?>' )
+                            .val( saved.name || '' )
+                        );
+                        $nameTd.append( $nameWrap );
+                    }
+
+                    const $valuesTd = $box.find( 'td[rowspan="3"], td.attribute_values' ).first();
+
+                    if ( $valuesTd.length ) {
+                        const $valuesWrap = $( '<div class="tpplt-ar-field tpplt-ar-field-values" />' );
+                        $valuesWrap.append( '<label><strong><?php echo esc_js( __( 'Arabic Value(s)', 'tpplt' ) ); ?></strong></label>' );
+                        $valuesWrap.append( $( '<textarea rows="4" class="widefat tpplt-attribute-values-ar"></textarea>' )
+                            .attr( 'name', 'attribute_values_ar[' + index + ']' )
+                            .attr( 'placeholder', '<?php echo esc_js( __( 'Use “|” to separate Arabic values.', 'tpplt' ) ); ?>' )
+                            .text( saved.values || '' )
+                        );
+                        $valuesTd.append( $valuesWrap );
+                    }
+                } );
+            }
+
+            const attributesContainer = document.querySelector( '.product_attributes' );
+
+            if ( attributesContainer ) {
+                const observer = new MutationObserver( function() {
+                    tppltAddArFields();
+                } );
+
+                observer.observe( attributesContainer, { childList: true, subtree: true } );
+            }
+
+            tppltAddArFields();
+            $( document.body ).on( 'click', '.add_custom_attribute', function() {
+                setTimeout( tppltAddArFields, 50 );
+            } );
+        } );
+    </script>
+    <style>
+        .tpplt-ar-field {
+            margin-top: 10px;
+        }
+
+        .tpplt-ar-field strong {
+            display: block;
+            margin-bottom: 4px;
+        }
+    </style>
+    <?php
+}
+add_action( 'admin_footer-post.php', 'tpplt_admin_attribute_fields_ar' );
+add_action( 'admin_footer-post-new.php', 'tpplt_admin_attribute_fields_ar' );
+
+/**
+ * Persist Arabic names/values for product attributes.
+ *
+ * @param int $post_id Post ID.
+ */
+function tpplt_save_product_attributes_ar( $post_id ) {
+    if ( ! isset( $_POST['tpplt_nonce'] ) || ! wp_verify_nonce( sanitize_key( $_POST['tpplt_nonce'] ), 'tpplt_save_meta' ) ) {
+        return;
+    }
+
+    if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+        return;
+    }
+
+    if ( isset( $_POST['post_type'] ) && 'product' !== $_POST['post_type'] ) {
+        return;
+    }
+
+    $attribute_names_ar  = isset( $_POST['attribute_names_ar'] ) ? (array) wp_unslash( $_POST['attribute_names_ar'] ) : array();
+    $attribute_values_ar = isset( $_POST['attribute_values_ar'] ) ? (array) wp_unslash( $_POST['attribute_values_ar'] ) : array();
+
+    $all_indexes     = array_unique( array_merge( array_keys( $attribute_names_ar ), array_keys( $attribute_values_ar ) ) );
+    $attributes_data = array();
+
+    foreach ( $all_indexes as $index ) {
+        $name_ar   = isset( $attribute_names_ar[ $index ] ) ? sanitize_text_field( $attribute_names_ar[ $index ] ) : '';
+        $values_ar = isset( $attribute_values_ar[ $index ] ) ? sanitize_textarea_field( $attribute_values_ar[ $index ] ) : '';
+
+        if ( '' === $name_ar && '' === $values_ar ) {
+            continue;
+        }
+
+        $attributes_data[ $index ] = array(
+            'name'   => $name_ar,
+            'values' => $values_ar,
+        );
+    }
+
+    if ( ! empty( $attributes_data ) ) {
+        update_post_meta( $post_id, '_tpplt_attributes_ar', $attributes_data );
+    } else {
+        delete_post_meta( $post_id, '_tpplt_attributes_ar' );
+    }
+}
+add_action( 'save_post_product', 'tpplt_save_product_attributes_ar', 15 );
+
+/**
  * Get current language code from TranslatePress.
  *
  * @return string
