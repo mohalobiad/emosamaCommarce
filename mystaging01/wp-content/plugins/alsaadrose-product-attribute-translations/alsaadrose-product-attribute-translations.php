@@ -12,6 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 const ASPATN_NAMES_META_KEY  = '_asp_at_names_ar';
 const ASPATN_VALUES_META_KEY = '_asp_at_values_ar';
+const ASPATN_VARIATION_DESCRIPTION_META_KEY = '_asp_at_variation_desc_ar';
 
 /**
  * Sanitize the attribute slug consistently with WooCommerce.
@@ -288,6 +289,28 @@ function aspatn_filter_variation_option_name( $term_name, $term, $attribute, $pr
 add_filter( 'woocommerce_variation_option_name', 'aspatn_filter_variation_option_name', 12, 4 );
 
 /**
+ * Filter variation descriptions on the frontend to use the Arabic version when available.
+ *
+ * @param string                $description Variation description.
+ * @param WC_Product_Variation  $variation   Variation object.
+ * @return string
+ */
+function aspatn_filter_variation_description( $description, $variation ) {
+    if ( ! aspatn_is_arabic_language() || ! ( $variation instanceof WC_Product_Variation ) ) {
+        return $description;
+    }
+
+    $saved = get_post_meta( $variation->get_id(), ASPATN_VARIATION_DESCRIPTION_META_KEY, true );
+
+    if ( is_string( $saved ) && '' !== trim( $saved ) ) {
+        return $saved;
+    }
+
+    return $description;
+}
+add_filter( 'woocommerce_product_variation_get_description', 'aspatn_filter_variation_description', 12, 2 );
+
+/**
  * Enqueue admin assets on the product editor.
  *
  * @param string $hook Current admin page hook.
@@ -329,3 +352,44 @@ function aspatn_enqueue_product_admin_assets( $hook ) {
     wp_enqueue_script( 'aspatn-product-attributes' );
 }
 add_action( 'admin_enqueue_scripts', 'aspatn_enqueue_product_admin_assets' );
+
+/**
+ * Add Arabic description input to each variation in the product editor.
+ *
+ * @param int                   $loop            Variation index.
+ * @param array<string, mixed>  $variation_data  Variation data.
+ * @param WP_Post               $variation       Variation post object.
+ */
+function aspatn_add_variation_arabic_description_field( $loop, $variation_data, $variation ) { // phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UnusedVariable
+    $value = get_post_meta( $variation->ID, ASPATN_VARIATION_DESCRIPTION_META_KEY, true );
+
+    woocommerce_wp_textarea_input(
+        array(
+            'id'          => 'aspatn_variation_description_ar[' . $variation->ID . ']',
+            'label'       => __( 'Arabic description', 'aspatn' ),
+            'value'       => $value,
+            'desc_tip'    => true,
+            'description' => __( 'Optional Arabic description for this variation (shown on Arabic storefront).', 'aspatn' ),
+            'wrapper_class' => 'form-row form-row-full',
+        )
+    );
+}
+add_action( 'woocommerce_product_after_variable_attributes', 'aspatn_add_variation_arabic_description_field', 20, 3 );
+
+/**
+ * Save Arabic description for each variation.
+ *
+ * @param int   $variation_id Variation ID.
+ * @param int   $i            Variation index.
+ */
+function aspatn_save_variation_arabic_description( $variation_id, $i ) { // phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UnusedVariable
+    $posted = isset( $_POST['aspatn_variation_description_ar'][ $variation_id ] ) ? wp_unslash( $_POST['aspatn_variation_description_ar'][ $variation_id ] ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Missing
+    $value  = is_string( $posted ) ? wp_kses_post( $posted ) : '';
+
+    if ( '' === trim( $value ) ) {
+        delete_post_meta( $variation_id, ASPATN_VARIATION_DESCRIPTION_META_KEY );
+    } else {
+        update_post_meta( $variation_id, ASPATN_VARIATION_DESCRIPTION_META_KEY, $value );
+    }
+}
+add_action( 'woocommerce_save_product_variation', 'aspatn_save_variation_arabic_description', 20, 2 );
