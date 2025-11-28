@@ -186,11 +186,17 @@ function aspatn_filter_attribute_label( $label, $name, $product ) {
         return $label;
     }
 
-    $slug       = aspatn_sanitize_attribute_slug( $name );
     $names_map  = aspatn_get_saved_attribute_names( $product->get_id() );
+    $slug       = wc_attribute_taxonomy_slug( $name );
 
     if ( isset( $names_map[ $slug ] ) && '' !== $names_map[ $slug ] ) {
         return $names_map[ $slug ];
+    }
+
+    $fallback_slug = aspatn_sanitize_attribute_slug( $name );
+
+    if ( $fallback_slug !== $slug && isset( $names_map[ $fallback_slug ] ) && '' !== $names_map[ $fallback_slug ] ) {
+        return $names_map[ $fallback_slug ];
     }
 
     return $label;
@@ -214,6 +220,7 @@ function aspatn_filter_display_product_attributes( $product_attributes, $product
 
     foreach ( $product_attributes as $key => &$attribute ) {
         $slug = str_replace( 'attribute_', '', $key );
+        $slug = wc_attribute_taxonomy_slug( $slug );
 
         if ( isset( $names_map[ $slug ] ) && '' !== $names_map[ $slug ] ) {
             $attribute['label'] = $names_map[ $slug ];
