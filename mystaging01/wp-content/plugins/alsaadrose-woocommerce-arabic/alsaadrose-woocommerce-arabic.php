@@ -240,6 +240,10 @@ function tpplt_filter_short_description( $content ) {
         return $content;
     }
 
+    if ( tpplt_is_variation_description_context() ) {
+        return $content;
+    }
+
     if ( ! tpplt_is_arabic_language() ) {
         return $content;
     }
@@ -253,6 +257,33 @@ function tpplt_filter_short_description( $content ) {
     return $content;
 }
 add_filter( 'woocommerce_short_description', 'tpplt_filter_short_description', 999 );
+
+/**
+ * Detect if the short description filter is running while formatting a variation description.
+ *
+ * WooCommerce passes each variation's description through `woocommerce_short_description`
+ * inside `wc_get_formatted_variation()`. In that context the global $product is the parent
+ * variable product, so the regular product type check cannot tell we are handling variation
+ * text. This helper inspects a small portion of the backtrace to spot variation formatting
+ * calls and prevent the Arabic short description from overwriting variation descriptions.
+ *
+ * @return bool
+ */
+function tpplt_is_variation_description_context() {
+    $trace = debug_backtrace( DEBUG_BACKTRACE_IGNORE_ARGS, 10 );
+
+    foreach ( $trace as $frame ) {
+        if ( isset( $frame['function'] ) && 'wc_get_formatted_variation' === $frame['function'] ) {
+            return true;
+        }
+
+        if ( isset( $frame['class'], $frame['function'] ) && 'WC_Product_Variation' === $frame['class'] && 'get_description' === $frame['function'] ) {
+            return true;
+        }
+    }
+
+    return false;
+}
 
 /**
  * Filter the main product description content when Arabic language is active.
