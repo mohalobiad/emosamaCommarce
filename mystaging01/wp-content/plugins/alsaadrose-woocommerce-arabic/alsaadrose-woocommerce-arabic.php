@@ -273,6 +273,14 @@ function tpplt_is_variation_description_context() {
     $trace = debug_backtrace( DEBUG_BACKTRACE_IGNORE_ARGS, 10 );
 
     foreach ( $trace as $frame ) {
+        if ( isset( $frame['class'], $frame['function'] ) && 'WC_Product_Variation' === $frame['class'] && 'get_available_variation' === $frame['function'] ) {
+            return true;
+        }
+
+        if ( isset( $frame['class'], $frame['function'] ) && 'WC_Product_Variable' === $frame['class'] && 'get_available_variations' === $frame['function'] ) {
+            return true;
+        }
+
         if ( isset( $frame['function'] ) && 'wc_get_formatted_variation' === $frame['function'] ) {
             return true;
         }
