@@ -178,18 +178,30 @@ function aspatn_is_arabic_language() {
  * @return string
  */
 function aspatn_filter_attribute_label( $label, $name, $product ) {
-    if ( is_admin() || ! ( $product instanceof WC_Product ) ) {
+    // ما نعدل شيء في لوحة التحكم
+    if ( is_admin() ) {
         return $label;
     }
 
-    if ( ! aspatn_is_arabic_language() ) {
+    // لو ما وصلنا منتج من الفلتر، جرّب نأخذه من الـ global $product
+    if ( ! ( $product instanceof WC_Product ) && isset( $GLOBALS['product'] ) && $GLOBALS['product'] instanceof WC_Product ) {
+        $product = $GLOBALS['product'];
+    }
+
+    // لو لسه ما في منتج أو اللغة مش عربية، نرجع الاسم الأصلي
+    if ( ! aspatn_is_arabic_language() || ! ( $product instanceof WC_Product ) ) {
         return $label;
     }
 
-    $names_map         = aspatn_get_saved_attribute_names( $product->get_id() );
-    $normalized_name   = 0 === strpos( $name, 'attribute_' ) ? substr( $name, strlen( 'attribute_' ) ) : $name;
-    $slug              = wc_attribute_taxonomy_slug( $normalized_name );
-    $fallback_slug     = aspatn_sanitize_attribute_slug( $normalized_name );
+    $names_map = aspatn_get_saved_attribute_names( $product->get_id() );
+
+    // في بعض الأماكن الاسم يكون "attribute_pa_xxx" فننظفه
+    $normalized_name = 0 === strpos( $name, 'attribute_' ) ? substr( $name, strlen( 'attribute_' ) ) : $name;
+
+    // slug بدون pa_ (مثلاً pa_color → color)
+    $slug          = wc_attribute_taxonomy_slug( $normalized_name );
+    // slug مثل ما خزّنّاه وقت الحفظ (pa_color أو material …)
+    $fallback_slug = aspatn_sanitize_attribute_slug( $normalized_name );
 
     if ( isset( $names_map[ $slug ] ) && '' !== $names_map[ $slug ] ) {
         return $names_map[ $slug ];
@@ -219,13 +231,18 @@ function aspatn_filter_display_product_attributes( $product_attributes, $product
     $names_map  = aspatn_get_saved_attribute_names( $product->get_id() );
 
     foreach ( $product_attributes as $key => &$attribute ) {
-        $slug = str_replace( 'attribute_', '', $key );
-        $slug = wc_attribute_taxonomy_slug( $slug );
+        $raw_slug      = str_replace( 'attribute_', '', $key );
+        $slug          = wc_attribute_taxonomy_slug( $raw_slug );
+        $fallback_slug = aspatn_sanitize_attribute_slug( $raw_slug );
 
+        // ترجمة الاسم
         if ( isset( $names_map[ $slug ] ) && '' !== $names_map[ $slug ] ) {
             $attribute['label'] = $names_map[ $slug ];
+        } elseif ( $fallback_slug !== $slug && isset( $names_map[ $fallback_slug ] ) && '' !== $names_map[ $fallback_slug ] ) {
+            $attribute['label'] = $names_map[ $fallback_slug ];
         }
 
+        // ترجمة القيم (نفس الكود القديم)
         if ( isset( $values_map[ $slug ] ) && ! empty( $values_map[ $slug ] ) ) {
             $translated_values = array();
             $value_map         = $values_map[ $slug ];
@@ -242,6 +259,7 @@ function aspatn_filter_display_product_attributes( $product_attributes, $product
 
     return $product_attributes;
 }
+
 add_filter( 'woocommerce_display_product_attributes', 'aspatn_filter_display_product_attributes', 12, 2 );
 
 /**
