@@ -10,8 +10,10 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-const ASATTR_OPTION_KEY      = 'asattr_attribute_names_ar';
-const ASATTR_TERM_OPTION_KEY = 'asattr_attribute_term_names_ar';
+const ASATTR_OPTION_KEY               = 'asattr_attribute_names_ar';
+const ASATTR_TERM_OPTION_KEY          = 'asattr_attribute_term_names_ar';
+const ASATTR_HINT_OPTION_KEY          = 'asattr_attribute_hints_ar';
+const ASATTR_TERM_HINT_OPTION_KEY     = 'asattr_attribute_term_hints_ar';
 
 /**
  * Get the saved Arabic attribute names.
@@ -35,6 +37,36 @@ function asattr_get_arabic_attribute_names() {
  */
 function asattr_get_arabic_attribute_term_names() {
     $stored = get_option( ASATTR_TERM_OPTION_KEY, array() );
+
+    if ( ! is_array( $stored ) ) {
+        return array();
+    }
+
+    return $stored;
+}
+
+/**
+ * Get the saved Arabic attribute hints.
+ *
+ * @return array<string, string>
+ */
+function asattr_get_arabic_attribute_hints() {
+    $stored = get_option( ASATTR_HINT_OPTION_KEY, array() );
+
+    if ( ! is_array( $stored ) ) {
+        return array();
+    }
+
+    return $stored;
+}
+
+/**
+ * Get the saved Arabic attribute term hints.
+ *
+ * @return array<string, array<string, string>>
+ */
+function asattr_get_arabic_attribute_term_hints() {
+    $stored = get_option( ASATTR_TERM_HINT_OPTION_KEY, array() );
 
     if ( ! is_array( $stored ) ) {
         return array();
@@ -74,6 +106,39 @@ function asattr_save_attribute_name( $slug, $value ) {
  */
 function asattr_remove_attribute_name( $slug ) {
     asattr_save_attribute_name( $slug, '' );
+}
+
+/**
+ * Save or remove an Arabic attribute hint by slug.
+ *
+ * @param string $slug  Attribute slug.
+ * @param string $value Arabic attribute hint content.
+ */
+function asattr_save_attribute_hint( $slug, $value ) {
+    $slug = wc_sanitize_taxonomy_name( $slug );
+
+    if ( '' === $slug ) {
+        return;
+    }
+
+    $hints = asattr_get_arabic_attribute_hints();
+
+    if ( '' === $value ) {
+        unset( $hints[ $slug ] );
+    } else {
+        $hints[ $slug ] = $value;
+    }
+
+    update_option( ASATTR_HINT_OPTION_KEY, $hints );
+}
+
+/**
+ * Remove an Arabic attribute hint by slug.
+ *
+ * @param string $slug Attribute slug.
+ */
+function asattr_remove_attribute_hint( $slug ) {
+    asattr_save_attribute_hint( $slug, '' );
 }
 
 /**
@@ -120,6 +185,49 @@ function asattr_remove_attribute_term_name( $taxonomy, $slug ) {
 }
 
 /**
+ * Save or remove an Arabic term hint for a given taxonomy/slug pair.
+ *
+ * @param string $taxonomy Taxonomy name.
+ * @param string $slug     Term slug.
+ * @param string $value    Arabic term hint content.
+ */
+function asattr_save_attribute_term_hint( $taxonomy, $slug, $value ) {
+    $taxonomy = sanitize_key( $taxonomy );
+    $slug     = sanitize_title( $slug );
+
+    if ( '' === $taxonomy || '' === $slug ) {
+        return;
+    }
+
+    $hints = asattr_get_arabic_attribute_term_hints();
+
+    if ( ! isset( $hints[ $taxonomy ] ) || ! is_array( $hints[ $taxonomy ] ) ) {
+        $hints[ $taxonomy ] = array();
+    }
+
+    if ( '' === $value ) {
+        unset( $hints[ $taxonomy ][ $slug ] );
+        if ( empty( $hints[ $taxonomy ] ) ) {
+            unset( $hints[ $taxonomy ] );
+        }
+    } else {
+        $hints[ $taxonomy ][ $slug ] = $value;
+    }
+
+    update_option( ASATTR_TERM_HINT_OPTION_KEY, $hints );
+}
+
+/**
+ * Remove stored Arabic term hint.
+ *
+ * @param string $taxonomy Taxonomy name.
+ * @param string $slug     Term slug.
+ */
+function asattr_remove_attribute_term_hint( $taxonomy, $slug ) {
+    asattr_save_attribute_term_hint( $taxonomy, $slug, '' );
+}
+
+/**
  * Render the Arabic name field when adding a new attribute.
  */
 function asattr_render_add_field() {
@@ -128,6 +236,11 @@ function asattr_render_add_field() {
         <label for="name_AR"><?php esc_html_e( 'Arabic name', 'asattr' ); ?></label>
         <input name="name_AR" id="name_AR" type="text" value="" />
         <p class="description"><?php esc_html_e( 'Optional Arabic label used when viewing the store in Arabic.', 'asattr' ); ?></p>
+    </div>
+    <div class="form-field">
+        <label for="hint_AR"><?php esc_html_e( 'Arabic hint content', 'asattr' ); ?></label>
+        <textarea name="hint_AR" id="hint_AR" rows="5"></textarea>
+        <p class="description"><?php esc_html_e( 'Optional Arabic hint used when viewing the store in Arabic.', 'asattr' ); ?></p>
     </div>
     <?php
 }
@@ -162,6 +275,8 @@ function asattr_render_edit_field() {
     $arabic     = '';
     $saved      = asattr_get_arabic_attribute_names();
     $has_saved  = isset( $saved[ $slug ] );
+    $hint_saved = asattr_get_arabic_attribute_hints();
+    $hint_value = isset( $hint_saved[ $slug ] ) ? $hint_saved[ $slug ] : '';
 
     if ( $has_saved ) {
         $arabic = $saved[ $slug ];
@@ -174,6 +289,15 @@ function asattr_render_edit_field() {
         <td>
             <input name="name_AR" id="name_AR" type="text" value="<?php echo esc_attr( $arabic ); ?>" />
             <p class="description"><?php esc_html_e( 'Optional Arabic label used when viewing the store in Arabic.', 'asattr' ); ?></p>
+        </td>
+    </tr>
+    <tr class="form-field">
+        <th scope="row" valign="top">
+            <label for="hint_AR"><?php esc_html_e( 'Arabic hint content', 'asattr' ); ?></label>
+        </th>
+        <td>
+            <textarea name="hint_AR" id="hint_AR" rows="5"><?php echo esc_textarea( $hint_value ); ?></textarea>
+            <p class="description"><?php esc_html_e( 'Optional Arabic hint used when viewing the store in Arabic.', 'asattr' ); ?></p>
         </td>
     </tr>
     <?php
@@ -206,6 +330,11 @@ function asattr_render_term_add_field( $taxonomy ) {
         <input name="name_AR" id="name_AR" type="text" value="" />
         <p class="description"><?php esc_html_e( 'Optional Arabic label used when viewing the store in Arabic.', 'asattr' ); ?></p>
     </div>
+    <div class="form-field">
+        <label for="hint_AR"><?php esc_html_e( 'Arabic hint content', 'asattr' ); ?></label>
+        <textarea name="hint_AR" id="hint_AR" rows="5"></textarea>
+        <p class="description"><?php esc_html_e( 'Optional Arabic hint used when viewing the store in Arabic.', 'asattr' ); ?></p>
+    </div>
     <?php
 }
 
@@ -222,9 +351,15 @@ function asattr_render_term_edit_field( $term, $taxonomy ) {
 
     $saved = asattr_get_arabic_attribute_term_names();
     $value = '';
+    $hints = asattr_get_arabic_attribute_term_hints();
+    $hint  = '';
 
     if ( isset( $saved[ $taxonomy ][ $term->slug ] ) ) {
         $value = $saved[ $taxonomy ][ $term->slug ];
+    }
+
+    if ( isset( $hints[ $taxonomy ][ $term->slug ] ) ) {
+        $hint = $hints[ $taxonomy ][ $term->slug ];
     }
     ?>
     <tr class="form-field">
@@ -232,6 +367,13 @@ function asattr_render_term_edit_field( $term, $taxonomy ) {
         <td>
             <input name="name_AR" id="name_AR" type="text" value="<?php echo esc_attr( $value ); ?>" />
             <p class="description"><?php esc_html_e( 'Optional Arabic label used when viewing the store in Arabic.', 'asattr' ); ?></p>
+        </td>
+    </tr>
+    <tr class="form-field">
+        <th scope="row" valign="top"><label for="hint_AR"><?php esc_html_e( 'Arabic hint content', 'asattr' ); ?></label></th>
+        <td>
+            <textarea name="hint_AR" id="hint_AR" rows="5"><?php echo esc_textarea( $hint ); ?></textarea>
+            <p class="description"><?php esc_html_e( 'Optional Arabic hint used when viewing the store in Arabic.', 'asattr' ); ?></p>
         </td>
     </tr>
     <?php
@@ -298,9 +440,10 @@ add_action( 'admin_enqueue_scripts', 'asattr_enqueue_product_admin_assets' );
  */
 function asattr_handle_attribute_added( $id, $data ) {
     $arabic_name = isset( $_POST['name_AR'] ) ? sanitize_text_field( wp_unslash( $_POST['name_AR'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Missing
+    $arabic_hint = isset( $_POST['hint_AR'] ) ? sanitize_textarea_field( wp_unslash( $_POST['hint_AR'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Missing
 
     if ( '' === $arabic_name ) {
-        return;
+        $arabic_name = '';
     }
 
     if ( empty( $data['attribute_name'] ) ) {
@@ -308,6 +451,7 @@ function asattr_handle_attribute_added( $id, $data ) {
     }
 
     asattr_save_attribute_name( $data['attribute_name'], $arabic_name );
+    asattr_save_attribute_hint( $data['attribute_name'], $arabic_hint );
 }
 add_action( 'woocommerce_attribute_added', 'asattr_handle_attribute_added', 10, 2 );
 
@@ -320,6 +464,7 @@ add_action( 'woocommerce_attribute_added', 'asattr_handle_attribute_added', 10, 
  */
 function asattr_handle_attribute_updated( $id, $data, $old_slug ) {
     $arabic_name = isset( $_POST['name_AR'] ) ? sanitize_text_field( wp_unslash( $_POST['name_AR'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Missing
+    $arabic_hint = isset( $_POST['hint_AR'] ) ? sanitize_textarea_field( wp_unslash( $_POST['hint_AR'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Missing
 
     if ( empty( $data['attribute_name'] ) ) {
         return;
@@ -328,9 +473,11 @@ function asattr_handle_attribute_updated( $id, $data, $old_slug ) {
     $slug = $data['attribute_name'];
 
     asattr_save_attribute_name( $slug, $arabic_name );
+    asattr_save_attribute_hint( $slug, $arabic_hint );
 
     if ( $old_slug && $old_slug !== $slug ) {
         asattr_remove_attribute_name( $old_slug );
+        asattr_remove_attribute_hint( $old_slug );
     }
 }
 add_action( 'woocommerce_attribute_updated', 'asattr_handle_attribute_updated', 10, 3 );
@@ -348,11 +495,13 @@ function asattr_handle_term_saved( $term_id, $tt_id, $taxonomy ) {
     }
 
     $arabic_name = isset( $_POST['name_AR'] ) ? sanitize_text_field( wp_unslash( $_POST['name_AR'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Missing
+    $arabic_hint = isset( $_POST['hint_AR'] ) ? sanitize_textarea_field( wp_unslash( $_POST['hint_AR'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Missing
 
     $term = get_term( $term_id, $taxonomy );
 
     if ( $term instanceof WP_Term ) {
         asattr_save_attribute_term_name( $taxonomy, $term->slug, $arabic_name );
+        asattr_save_attribute_term_hint( $taxonomy, $term->slug, $arabic_hint );
     }
 }
 add_action( 'created_term', 'asattr_handle_term_saved', 10, 3 );
@@ -368,12 +517,19 @@ add_action( 'edited_term', 'asattr_handle_term_saved', 10, 3 );
 function asattr_handle_attribute_deleted( $id, $name, $taxonomy ) {
     $slug = $taxonomy ? wc_attribute_taxonomy_slug( $taxonomy ) : wc_sanitize_taxonomy_name( $name );
     asattr_remove_attribute_name( $slug );
+    asattr_remove_attribute_hint( $slug );
 
     $terms = asattr_get_arabic_attribute_term_names();
+    $hints = asattr_get_arabic_attribute_term_hints();
 
     if ( isset( $terms[ $taxonomy ] ) ) {
         unset( $terms[ $taxonomy ] );
         update_option( ASATTR_TERM_OPTION_KEY, $terms );
+    }
+
+    if ( isset( $hints[ $taxonomy ] ) ) {
+        unset( $hints[ $taxonomy ] );
+        update_option( ASATTR_TERM_HINT_OPTION_KEY, $hints );
     }
 }
 add_action( 'woocommerce_attribute_deleted', 'asattr_handle_attribute_deleted', 10, 3 );
@@ -396,6 +552,7 @@ function asattr_handle_term_deleted( $term, $tt_id, $taxonomy, $deleted, $object
 
     if ( $term_obj instanceof WP_Term ) {
         asattr_remove_attribute_term_name( $taxonomy, $term_obj->slug );
+        asattr_remove_attribute_term_hint( $taxonomy, $term_obj->slug );
     }
 }
 add_action( 'delete_term', 'asattr_handle_term_deleted', 10, 5 );
@@ -439,6 +596,24 @@ function asattr_get_arabic_term_name( $taxonomy, $slug ) {
 }
 
 /**
+ * Lookup stored Arabic term hint for taxonomy/slug pair.
+ *
+ * @param string $taxonomy Taxonomy name.
+ * @param string $slug     Term slug.
+ *
+ * @return string
+ */
+function asattr_get_arabic_term_hint( $taxonomy, $slug ) {
+    $map = asattr_get_arabic_attribute_term_hints();
+
+    if ( isset( $map[ $taxonomy ][ $slug ] ) ) {
+        return $map[ $taxonomy ][ $slug ];
+    }
+
+    return '';
+}
+
+/**
  * Check if the current TranslatePress language is Arabic.
  *
  * @return bool
@@ -458,6 +633,37 @@ function asattr_is_arabic_language() {
 
     return 'ar' === $code || 0 === strpos( $code, 'ar_' ) || 0 === strpos( $code, 'ar-' );
 }
+
+/**
+ * Override Woodmart attribute hint options with Arabic values when available.
+ */
+function asattr_register_attribute_hint_filters() {
+    if ( is_admin() ) {
+        return;
+    }
+
+    if ( ! asattr_is_arabic_language() ) {
+        return;
+    }
+
+    foreach ( asattr_get_arabic_attribute_hints() as $slug => $hint ) {
+        if ( '' === $hint ) {
+            continue;
+        }
+
+        $option = 'woodmart_pa_' . $slug . '_hint';
+
+        add_filter(
+            "option_{$option}",
+            static function( $value ) use ( $hint ) {
+                return '' !== $hint ? $hint : $value;
+            },
+            10,
+            1
+        );
+    }
+}
+add_action( 'init', 'asattr_register_attribute_hint_filters', 25 );
 
 /**
  * Replace attribute labels with their Arabic equivalents on the frontend.
@@ -533,6 +739,42 @@ function asattr_filter_get_term( $term, $taxonomy ) {
     return asattr_maybe_apply_term_translation( $term );
 }
 add_filter( 'get_term', 'asattr_filter_get_term', 10, 2 );
+
+/**
+ * Swap Woodmart term hint meta with Arabic translation when available.
+ *
+ * @param mixed  $value    Meta value.
+ * @param int    $term_id  Term ID.
+ * @param string $meta_key Meta key.
+ * @param bool   $single   Whether a single value is requested.
+ * @param string $meta_type Meta type.
+ *
+ * @return mixed
+ */
+function asattr_filter_term_hint_meta( $value, $term_id, $meta_key, $single, $meta_type ) { // phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UnusedVariable
+    if ( 'pa_term_hint' !== $meta_key ) {
+        return $value;
+    }
+
+    if ( ! asattr_is_arabic_language() ) {
+        return $value;
+    }
+
+    $term = get_term( $term_id );
+
+    if ( ! ( $term instanceof WP_Term ) || ! asattr_is_attribute_taxonomy( $term->taxonomy ) ) {
+        return $value;
+    }
+
+    $arabic_hint = asattr_get_arabic_term_hint( $term->taxonomy, $term->slug );
+
+    if ( '' === $arabic_hint ) {
+        return $value;
+    }
+
+    return $single ? $arabic_hint : array( $arabic_hint );
+}
+add_filter( 'get_term_metadata', 'asattr_filter_term_hint_meta', 10, 5 );
 
 /**
  * Filter multiple term retrieval for attribute taxonomies.
