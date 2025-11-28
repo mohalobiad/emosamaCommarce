@@ -19,7 +19,14 @@ if ( ! function_exists( 'sanitize_textarea_field' ) ) {
      * @return string
      */
     function sanitize_textarea_field( $str ) {
-        return wp_kses_post( trim( $str ) );
+        $str = trim( $str );
+
+        if ( function_exists( 'wp_kses_post' ) ) {
+            return wp_kses_post( $str );
+        }
+
+        // Fallback when kses helpers are unavailable.
+        return filter_var( $str, FILTER_SANITIZE_STRING );
     }
 }
 
