@@ -788,3 +788,33 @@ function woodmart_child_force_reset_form_view() {
     exit;
 }
 add_action( 'template_redirect', 'woodmart_child_force_reset_form_view', 0 );
+// نقل نموذج الكوبون ليظهر تحت الـ Total في صفحة الـ Checkout
+add_action( 'init', function () {
+
+    // لو القسائم معطّلة ما نسوي شيء
+    if ( ! function_exists( 'wc_coupons_enabled' ) || ! wc_coupons_enabled() ) {
+        return;
+    }
+
+    // نضيف الفورم بعد صف الـ Total في جدول الطلب
+    add_action( 'woocommerce_review_order_after_order_total', 'alsaad_move_coupon_under_total', 20 );
+} );
+
+function alsaad_move_coupon_under_total() {
+
+    // تأكد مرة ثانية أن القسائم مفعّلة
+    if ( ! wc_coupons_enabled() ) {
+        return;
+    }
+
+    // نضيف صف جديد داخل <tfoot> بعد صف الـ Total
+    echo '<tr class="checkout-coupon-row"><td colspan="2">';
+
+    // نطبع قالب الكوبون الافتراضي (نفس المنطق اللي عندك: الـ div + form)
+    wc_get_template(
+        'checkout/form-coupon.php',
+        array( 'checkout' => WC()->checkout() )
+    );
+
+    echo '</td></tr>';
+}
