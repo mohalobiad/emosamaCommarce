@@ -230,9 +230,13 @@ function tpplt_filter_short_description( $content ) {
         return $content;
     }
 
-    global $post;
+    global $post, $product;
 
     if ( ! $post || 'product' !== $post->post_type ) {
+        return $content;
+    }
+
+    if ( $product instanceof WC_Product && 'product_variation' === $product->get_type() ) {
         return $content;
     }
 
