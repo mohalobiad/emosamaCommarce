@@ -253,6 +253,44 @@ function asattr_register_term_field_hooks() {
 add_action( 'init', 'asattr_register_term_field_hooks', 20 );
 
 /**
+ * Enqueue admin assets for the product edit screen.
+ *
+ * @param string $hook Current admin page.
+ */
+function asattr_enqueue_product_admin_assets( $hook ) {
+    if ( 'post.php' !== $hook && 'post-new.php' !== $hook ) {
+        return;
+    }
+
+    $screen = get_current_screen();
+
+    if ( empty( $screen ) || 'product' !== $screen->post_type ) {
+        return;
+    }
+
+    $script_handle = 'asattr-product-attributes';
+
+    wp_register_script(
+        $script_handle,
+        plugin_dir_url( __FILE__ ) . 'assets/js/product-attributes.js',
+        array( 'jquery', 'wc-admin-meta-boxes' ),
+        '1.0.0',
+        true
+    );
+
+    wp_localize_script(
+        $script_handle,
+        'asattrProductAttributes',
+        array(
+            'arabicPrompt' => __( 'Enter Arabic value (optional):', 'asattr' ),
+        )
+    );
+
+    wp_enqueue_script( $script_handle );
+}
+add_action( 'admin_enqueue_scripts', 'asattr_enqueue_product_admin_assets' );
+
+/**
  * Persist the Arabic name when a new attribute is created.
  *
  * @param int   $id   Attribute ID.
