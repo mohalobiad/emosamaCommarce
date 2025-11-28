@@ -13,6 +13,71 @@ if ( ! defined( 'ABSPATH' ) ) {
 const ASARAB_META_KEY = '_asarab_attribute_translations';
 
 /**
+ * Get current language code from TranslatePress.
+ *
+ * @return string
+ */
+function asarab_get_trp_current_language() {
+    static $lang = null;
+
+    if ( null !== $lang ) {
+        return $lang;
+    }
+
+    $lang = '';
+
+    if ( function_exists( 'trp_get_current_language' ) ) {
+        $l = trp_get_current_language();
+        if ( is_string( $l ) && '' !== $l ) {
+            $lang = trim( $l );
+        }
+    }
+
+    if ( '' === $lang && isset( $GLOBALS['TRP_LANGUAGE'] ) && is_string( $GLOBALS['TRP_LANGUAGE'] ) ) {
+        $lang = trim( $GLOBALS['TRP_LANGUAGE'] );
+    }
+
+    return $lang;
+}
+
+/**
+ * Check if current language is Arabic (any ar*, like ar, ar_AR, ar-sa).
+ *
+ * @return bool
+ */
+function asarab_is_arabic_language() {
+    if ( is_admin() ) {
+        return false;
+    }
+
+    if ( ! function_exists( 'trp_get_current_language' ) && ! isset( $GLOBALS['TRP_LANGUAGE'] ) ) {
+        return false;
+    }
+
+    $code = asarab_get_trp_current_language();
+
+    if ( '' === $code ) {
+        return false;
+    }
+
+    $code = strtolower( $code );
+
+    if ( 'ar' === $code ) {
+        return true;
+    }
+
+    if ( 0 === strpos( $code, 'ar_' ) ) {
+        return true;
+    }
+
+    if ( 0 === strpos( $code, 'ar-' ) ) {
+        return true;
+    }
+
+    return false;
+}
+
+/**
  * Get stored Arabic attribute map for a product.
  *
  * @param int $post_id Product ID.
@@ -143,3 +208,124 @@ function asarab_save_attribute_fields( $product ) {
     }
 }
 add_action( 'woocommerce_admin_process_product_object', 'asarab_save_attribute_fields' );
+
+/**
+ * Get the stored translation map for a product if available.
+ *
+ * @param WC_Product $product Product.
+ *
+ * @return array<string, array<string, mixed>>
+ */
+function asarab_get_product_translations( $product ) {
+    if ( ! $product instanceof WC_Product ) {
+        return array();
+    }
+
+    $map = asarab_get_attribute_map( $product->get_id() );
+
+    return is_array( $map ) ? $map : array();
+}
+
+/**
+ * Filter attribute label for Arabic language on the frontend.
+ *
+ * @param string     $label   The default label.
+ * @param string     $name    Attribute name key.
+ * @param WC_Product $product Product object.
+ *
+ * @return string
+ */
+function asarab_filter_attribute_label( $label, $name, $product ) {
+    if ( is_admin() || ! asarab_is_arabic_language() ) {
+        return $label;
+    }
+
+    $map = asarab_get_product_translations( $product );
+    $key = asarab_normalize_attribute_key( $name );
+
+    if ( isset( $map[ $key ]['name'] ) && '' !== $map[ $key ]['name'] ) {
+        return $map[ $key ]['name'];
+    }
+
+    return $label;
+}
+add_filter( 'woocommerce_attribute_label', 'asarab_filter_attribute_label', 30, 3 );
+
+/**
+ * Try to grab the WC_Product_Attribute object for a given raw key.
+ *
+ * @param WC_Product $product       Product object.
+ * @param string     $raw_attribute Attribute key passed to filters.
+ *
+ * @return WC_Product_Attribute|null
+ */
+function asarab_get_attribute_object( $product, $raw_attribute ) {
+    if ( ! $product instanceof WC_Product ) {
+        return null;
+    }
+
+    $attributes = $product->get_attributes();
+    $key        = asarab_normalize_attribute_key( $raw_attribute );
+
+    if ( isset( $attributes[ $key ] ) && $attributes[ $key ] instanceof WC_Product_Attribute ) {
+        return $attributes[ $key ];
+    }
+
+    foreach ( $attributes as $attr ) {
+        if ( ! $attr instanceof WC_Product_Attribute ) {
+            continue;
+        }
+
+        if ( $key === asarab_normalize_attribute_key( $attr->get_name() ) ) {
+            return $attr;
+        }
+    }
+
+    return null;
+}
+
+/**
+ * Filter attribute values for Arabic language on the frontend.
+ *
+ * @param string     $text          Rendered attribute value text.
+ * @param string     $raw_attribute Attribute key (slug).
+ * @param WC_Product $product       Product object.
+ *
+ * @return string
+ */
+function asarab_filter_attribute_values( $text, $raw_attribute, $product ) {
+    if ( is_admin() || ! asarab_is_arabic_language() ) {
+        return $text;
+    }
+
+    $map  = asarab_get_product_translations( $product );
+    $key  = asarab_normalize_attribute_key( $raw_attribute );
+    $vals = isset( $map[ $key ]['values'] ) && is_array( $map[ $key ]['values'] ) ? array_values( $map[ $key ]['values'] ) : array();
+
+    if ( empty( $vals ) ) {
+        return $text;
+    }
+
+    $attribute_obj = asarab_get_attribute_object( $product, $raw_attribute );
+
+    if ( $attribute_obj instanceof WC_Product_Attribute ) {
+        $options    = array_values( $attribute_obj->get_options() );
+        $reordered  = array();
+        $options_sz = count( $options );
+
+        for ( $i = 0; $i < $options_sz; $i++ ) {
+            if ( isset( $vals[ $i ] ) && '' !== $vals[ $i ] ) {
+                $reordered[] = $vals[ $i ];
+            } elseif ( isset( $vals[ $i ] ) ) {
+                $reordered[] = $options[ $i ];
+            }
+        }
+
+        if ( ! empty( $reordered ) ) {
+            return wc_implode_text_attributes( $reordered );
+        }
+    }
+
+    return wc_implode_text_attributes( $vals );
+}
+add_filter( 'woocommerce_attribute', 'asarab_filter_attribute_values', 30, 3 );
