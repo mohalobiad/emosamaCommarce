@@ -10,6 +10,19 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
+if ( ! function_exists( 'sanitize_textarea_field' ) ) {
+    /**
+     * Backward compatibility for sanitize_textarea_field on older WordPress versions.
+     *
+     * @param string $str Raw value.
+     *
+     * @return string
+     */
+    function sanitize_textarea_field( $str ) {
+        return wp_kses_post( trim( $str ) );
+    }
+}
+
 /**
  * Register meta box for Arabic product fields.
  */
@@ -466,6 +479,10 @@ function tpplt_wc_product_get_name_ar( $name, $product ) {
         return $name;
     }
 
+    if ( ! class_exists( 'WC_Product' ) ) {
+        return $name;
+    }
+
     if ( ! $product instanceof WC_Product ) {
         return $name;
     }
@@ -497,6 +514,10 @@ function tpplt_wc_product_get_short_desc_ar( $short, $product ) {
         return $short;
     }
 
+    if ( ! class_exists( 'WC_Product' ) ) {
+        return $short;
+    }
+
     if ( ! $product instanceof WC_Product ) {
         return $short;
     }
@@ -525,6 +546,10 @@ function tpplt_wc_product_get_desc_ar( $desc, $product ) {
     }
 
     if ( ! tpplt_is_arabic_language() ) {
+        return $desc;
+    }
+
+    if ( ! class_exists( 'WC_Product' ) ) {
         return $desc;
     }
 
@@ -565,6 +590,10 @@ add_filter( 'woocommerce_csv_product_import_valid_filetypes', 'tpplt_allow_xlsx_
  * @return string
  */
 function tpplt_register_xlsx_enabled_importer( $importer_class ) {
+    if ( ! class_exists( 'WooCommerce' ) ) {
+        return $importer_class;
+    }
+
     if ( ! class_exists( 'TPPLT_Product_Importer', false ) ) {
         $path = plugin_dir_path( __FILE__ ) . 'includes/class-tpplt-xlsx-importer.php';
 
@@ -589,6 +618,10 @@ add_filter( 'woocommerce_product_csv_importer_class', 'tpplt_register_xlsx_enabl
  * @return array
  */
 function tpplt_import_mapping_options( $options ) {
+    if ( ! class_exists( 'WooCommerce' ) ) {
+        return $options;
+    }
+
     $options['tpplt_title_ar'] = esc_html__( 'Arabic product title (plugin)', 'tpplt' );
     $options['tpplt_short_ar'] = esc_html__( 'Arabic short description (plugin)', 'tpplt' );
     $options['tpplt_desc_ar']  = esc_html__( 'Arabic description (plugin)', 'tpplt' );
@@ -605,6 +638,10 @@ add_filter( 'woocommerce_csv_product_import_mapping_options', 'tpplt_import_mapp
  * @return array
  */
 function tpplt_import_default_columns( $columns ) {
+    if ( ! class_exists( 'WooCommerce' ) ) {
+        return $columns;
+    }
+
     $columns['Name_ar']              = 'tpplt_title_ar';
     $columns['Short description_ar'] = 'tpplt_short_ar';
     $columns['Description_ar']       = 'tpplt_desc_ar';
@@ -625,6 +662,10 @@ add_filter( 'woocommerce_csv_product_import_mapping_default_columns', 'tpplt_imp
  * @return WC_Product
  */
 function tpplt_import_pre_insert_product_object( $product, $data ) {
+    if ( ! class_exists( 'WC_Product' ) ) {
+        return $product;
+    }
+
     if ( isset( $data['tpplt_title_ar'] ) && '' !== $data['tpplt_title_ar'] ) {
         $product->update_meta_data( '_tpplt_title_ar', wp_kses_post( $data['tpplt_title_ar'] ) );
     }
