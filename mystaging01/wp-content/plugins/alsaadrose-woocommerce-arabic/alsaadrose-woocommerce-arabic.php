@@ -270,7 +270,7 @@ add_filter( 'woocommerce_short_description', 'tpplt_filter_short_description', 9
  * @return bool
  */
 function tpplt_is_variation_description_context() {
-    $trace = debug_backtrace( DEBUG_BACKTRACE_IGNORE_ARGS, 10 );
+    $trace = debug_backtrace( DEBUG_BACKTRACE_IGNORE_ARGS, 50 );
 
     foreach ( $trace as $frame ) {
         if ( isset( $frame['class'], $frame['function'] ) && 'WC_Product_Variation' === $frame['class'] && 'get_available_variation' === $frame['function'] ) {
@@ -286,6 +286,18 @@ function tpplt_is_variation_description_context() {
         }
 
         if ( isset( $frame['class'], $frame['function'] ) && 'WC_Product_Variation' === $frame['class'] && 'get_description' === $frame['function'] ) {
+            return true;
+        }
+
+        if ( isset( $frame['class'], $frame['function'] ) && 'WC_Product_Variable' === $frame['class'] && 'get_available_variation' === $frame['function'] ) {
+            return true;
+        }
+
+        if ( isset( $frame['class'], $frame['function'] ) && 'WC_AJAX' === $frame['class'] && 'get_variation' === $frame['function'] ) {
+            return true;
+        }
+
+        if ( isset( $frame['class'], $frame['function'] ) && 'WC_Product_Data_Store_CPT' === $frame['class'] && 'get_product_type' === $frame['function'] ) {
             return true;
         }
     }
