@@ -13,6 +13,28 @@ if ( ! defined( 'ABSPATH' ) ) {
 const ASARAB_META_KEY = '_asarab_attribute_translations';
 
 /**
+ * Enqueue admin assets for product attribute Arabic fields.
+ */
+function asarab_enqueue_admin_assets( $hook ) {
+    global $post;
+
+    $is_product_screen = in_array( $hook, array( 'post.php', 'post-new.php' ), true ) && $post instanceof WP_Post && 'product' === $post->post_type;
+
+    if ( ! $is_product_screen ) {
+        return;
+    }
+
+    wp_enqueue_script(
+        'asarab-admin',
+        plugins_url( 'assets/admin.js', __FILE__ ),
+        array( 'jquery' ),
+        '1.0.0',
+        true
+    );
+}
+add_action( 'admin_enqueue_scripts', 'asarab_enqueue_admin_assets' );
+
+/**
  * Get current language code from TranslatePress.
  *
  * @return string
