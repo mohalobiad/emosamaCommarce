@@ -1,109 +1,166 @@
-(function ( $ ) {
-    function sanitizeSlug( slug ) {
-        if ( ! slug ) {
-            return '';
-        }
-
-        slug = slug.toString().trim().toLowerCase();
-        return slug.replace( /[^a-z0-9_-]+/g, '-' );
+/* global aspatnProductAttributes, woocommerce_admin_meta_boxes */
+jQuery(function ($) {
+    // نتأكد إن الأوبجكت موجود
+    if (typeof window.aspatnProductAttributes === 'undefined') {
+        window.aspatnProductAttributes = { names: {}, values: {} };
+    }
+    if (!aspatnProductAttributes.names) {
+        aspatnProductAttributes.names = {};
+    }
+    if (!aspatnProductAttributes.values) {
+        aspatnProductAttributes.values = {};
     }
 
-    function getAttributeIndex( $attribute ) {
-        var index = null;
-        var $nameInput = $attribute.find( 'input[name^="attribute_names["]' );
+    // نفس فكرة aspatn_sanitize_attribute_slug تقريباً (للـ ASCII)
+    function makeSlug(raw) {
+        var slug = $.trim(raw || '');
+        if (!slug) return '';
 
-        if ( $nameInput.length ) {
-            var match = $nameInput.first().attr( 'name' ).match( /attribute_names\[(\d+)\]/ );
-            if ( match && match[1] ) {
-                index = match[1];
-            }
+        slug = slug.toLowerCase();
+
+        // global attribute مثل pa_color
+        if (slug.indexOf('pa_') === 0) {
+            return slug.replace(/[^a-z0-9_]/g, '_');
         }
 
-        if ( null === index ) {
-            index = $attribute.index();
-        }
+        slug = slug.replace(/[^a-z0-9\s_-]/g, '');
+        slug = slug.replace(/\s+/g, '-');
+        slug = slug.replace(/-+/g, '-');
 
-        return index;
+        return slug;
     }
 
-    function getAttributeSlug( $attribute ) {
-        var slug = $attribute.data( 'taxonomy' ) || '';
-        var $nameInput = $attribute.find( 'input.attribute_name' );
+    // إضافة / تحديث الحقول العربية لسطر واحد
+    function ensureArabicFieldsForRow($row, overrides) {
+        var rawName = $row.find('input.attribute_name').val();
+        var slug    = makeSlug(rawName);
+        if (!slug) return;
 
-        if ( ! slug && $nameInput.length ) {
-            slug = $nameInput.first().val();
+        overrides = overrides || {};
+
+        var $nameCell   = $row.find('td.attribute_name');
+        var $valuesCell = $row.find('textarea[name^="attribute_values["]').closest('td');
+
+        if (!$nameCell.length || !$valuesCell.length) return;
+
+        var nameFieldSelector   = 'input[name^="attribute_names_ar["]';
+        var valuesFieldSelector = 'textarea[name^="attribute_values_ar["]';
+
+        var $nameAr   = $nameCell.find(nameFieldSelector);
+        var $valuesAr = $valuesCell.find(valuesFieldSelector);
+
+        var fromCacheName =
+            (overrides.names && overrides.names[slug]) ||
+            aspatnProductAttributes.names[slug] ||
+            '';
+
+        var fromCacheValues = null;
+
+        if (overrides.values && overrides.values[slug]) {
+            fromCacheValues = overrides.values[slug];
+        } else if (aspatnProductAttributes.values[slug]) {
+            fromCacheValues = aspatnProductAttributes.values[slug];
         }
 
-        if ( ! slug ) {
-            var $strong = $attribute.find( 'strong.attribute_name' );
-            if ( $strong.length ) {
-                slug = $strong.text();
-            }
+        var valuesString = '';
+        if (fromCacheValues && typeof fromCacheValues === 'object') {
+            valuesString = Object.values(fromCacheValues).join(' | ');
         }
 
-        return sanitizeSlug( slug );
+        // Arabic name
+        if (!$nameAr.length) {
+            var indexMatch = $nameCell.find('input.attribute_name').attr('name').match(/\[(\d+)\]/);
+            var index      = indexMatch ? indexMatch[1] : '';
+
+            var nameHtml =
+                '<div class="aspatn-field aspatn-name">' +
+                    '<label>Arabic name (optional):</label>' +
+                    '<input type="text" name="attribute_names_ar[' + index + ']" value="' + _.escape(fromCacheName) + '" />' +
+                '</div>';
+
+            $nameCell.append(nameHtml);
+            $nameAr = $nameCell.find(nameFieldSelector);
+        } else if (fromCacheName) {
+            $nameAr.val(fromCacheName);
+        }
+
+        // Arabic values
+        if (!$valuesAr.length) {
+            var indexMatch2 = $valuesCell.find('textarea[name^="attribute_values["]').attr('name').match(/\[(\d+)\]/);
+            var index2      = indexMatch2 ? indexMatch2[1] : '';
+
+            var valuesHtml =
+                '<div class="aspatn-field aspatn-values">' +
+                    '<label>Arabic value(s) (use | to separate options):</label>' +
+                    '<textarea name="attribute_values_ar[' + index2 + ']" rows="3">' + _.escape(valuesString || '') + '</textarea>' +
+                '</div>';
+
+            $valuesCell.append(valuesHtml);
+            $valuesAr = $valuesCell.find(valuesFieldSelector);
+        } else if (valuesString) {
+            $valuesAr.val(valuesString);
+        }
     }
 
-    function ensureArabicFields( $attribute ) {
-        if ( $attribute.data( 'aspatn-ready' ) ) {
-            return;
-        }
-
-        var index = getAttributeIndex( $attribute );
-        var slug = getAttributeSlug( $attribute );
-        var existingName = slug && aspatnProductAttributes.names[ slug ] ? aspatnProductAttributes.names[ slug ] : '';
-        var existingValues = slug && aspatnProductAttributes.values[ slug ] ? aspatnProductAttributes.values[ slug ] : {};
-        var existingValuesString = '';
-
-        if ( existingValues && 'object' === typeof existingValues ) {
-            existingValuesString = Object.values( existingValues ).join( ' | ' );
-        }
-
-        var $nameCell = $attribute.find( 'td.attribute_name' );
-        var $valuesCell = $attribute.find( 'td[rowspan="3"]' );
-
-        if ( ! $nameCell.length || ! $valuesCell.length ) {
-            return;
-        }
-
-        var $nameWrapper = $( '<div class="aspatn-field aspatn-name" />' );
-        $nameWrapper.append( '<label>' + aspatnProductAttributes.labelPrompt + ':</label>' );
-        $nameWrapper.append( '<input type="text" name="attribute_names_ar[' + index + ']" value="' + existingName + '" />' );
-        $nameCell.append( $nameWrapper );
-
-        var $valuesWrapper = $( '<div class="aspatn-field aspatn-values" />' );
-        $valuesWrapper.append( '<label>' + aspatnProductAttributes.valuesPrompt + ':</label>' );
-        $valuesWrapper.append( '<textarea name="attribute_values_ar[' + index + ']" rows="3">' + existingValuesString + '</textarea>' );
-        $valuesCell.append( $valuesWrapper );
-
-        $attribute.data( 'aspatn-ready', true );
+    function refreshArabicFields(overrides) {
+        $('.product_attributes .woocommerce_attribute').each(function () {
+            ensureArabicFieldsForRow($(this), overrides);
+        });
     }
 
-    function refreshArabicFields() {
-        $( '.product_attributes .woocommerce_attribute' ).each( function () {
-            ensureArabicFields( $( this ) );
-        } );
-    }
+    // أول تحميل للصفحة
+    refreshArabicFields();
 
-    $( function () {
-        if ( ! $( '.product_attributes' ).length ) {
-            return;
-        }
-
+    // لما يضيف attribute جديد عن طريق زر + (WooCommerce event)
+    $(document.body).on('woocommerce_added_attribute', function () {
         refreshArabicFields();
+    });
 
-        var observerTarget = document.querySelector( '.product_attributes' );
+    // نراقب أي تغيير كبير في .product_attributes (مثلاً لما WooCommerce يبدل الـ HTML)
+    var attrContainer = document.querySelector('.product_attributes');
+    if (attrContainer && window.MutationObserver) {
+        var mo = new MutationObserver(function (mutations) {
+            var needsRefresh = false;
 
-        if ( observerTarget ) {
-            var observer = new MutationObserver( function () {
+            mutations.forEach(function (m) {
+                if (m.addedNodes && m.addedNodes.length) {
+                    needsRefresh = true;
+                }
+            });
+
+            if (needsRefresh) {
                 refreshArabicFields();
-            } );
+            }
+        });
 
-            observer.observe( observerTarget, { childList: true, subtree: true } );
+        mo.observe(attrContainer, { childList: true, subtree: true });
+    }
+
+    // --------- حل مشكلة Save attributes: إعادة تحميل القيم العربية من الـ DB ---------
+    $(document.body).on('woocommerce_attributes_saved', function () {
+        // نتأكد إن الأوبجكت تبع WooCommerce admin موجود
+        if (typeof window.woocommerce_admin_meta_boxes === 'undefined') {
+            refreshArabicFields();
+            return;
         }
 
-        $( document.body ).on( 'woocommerce_attribute_added wc-backbone-modal-after-open', function () {
-            setTimeout( refreshArabicFields, 50 );
-        } );
-    } );
-})( jQuery );
+        $.post(
+            woocommerce_admin_meta_boxes.ajax_url,
+            {
+                action: 'aspatn_get_attribute_translations',
+                product_id: woocommerce_admin_meta_boxes.post_id
+            }
+        )
+        .done(function (response) {
+            if (response && response.success && response.data) {
+                aspatnProductAttributes.names  = response.data.names  || {};
+                aspatnProductAttributes.values = response.data.values || {};
+            }
+
+            refreshArabicFields();
+        })
+        .fail(function () {
+            refreshArabicFields();
+        });
+    });
+});

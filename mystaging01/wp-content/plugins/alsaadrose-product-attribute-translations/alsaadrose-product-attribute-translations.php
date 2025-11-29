@@ -306,6 +306,12 @@ function aspatn_filter_variation_description( $description, $variation ) {
         return $saved;
     }
 
+    // Avoid inheriting unrelated content (like the parent short description) when the
+    // variation doesn't have its own description or Arabic translation.
+    if ( '' === trim( (string) $description ) ) {
+        return '';
+    }
+
     return $description;
 }
 add_filter( 'woocommerce_product_variation_get_description', 'aspatn_filter_variation_description', 12, 2 );
@@ -393,3 +399,68 @@ function aspatn_save_variation_arabic_description( $variation_id, $i ) { // phpc
     }
 }
 add_action( 'woocommerce_save_product_variation', 'aspatn_save_variation_arabic_description', 20, 2 );
+
+
+/**
+ * Make the "Save attributes" AJAX also save Arabic attribute name/values.
+ *
+ * We reuse aspatn_save_attribute_arabic_fields() by faking $_POST
+ * from the serialized "data" sent by WooCommerce in the AJAX request.
+ */
+function aspatn_ajax_save_attribute_arabic_fields() {
+    // لازم يكون في post_id و data من طلب AJAX
+    if ( empty( $_POST['post_id'] ) || empty( $_POST['data'] ) ) {
+        return;
+    }
+
+    $product_id = absint( $_POST['post_id'] );
+
+    // WooCommerce يبعت الفورم في data كـ query string
+    $parsed = array();
+    parse_str( wp_unslash( $_POST['data'] ), $parsed );
+
+    if ( empty( $parsed['attribute_names'] ) || ! is_array( $parsed['attribute_names'] ) ) {
+        return;
+    }
+
+    // ننسخ $_POST الأصلي ونحقن البيانات الجديدة
+    $backup_post = $_POST;
+    foreach ( $parsed as $key => $value ) {
+        // نخلي aspatn_save_attribute_arabic_fields تشوف نفس هيكلة $_POST
+        $_POST[ $key ] = $value;
+    }
+
+    // نجيب الـ product object ونستعمل دالتك الأصلية
+    $product = wc_get_product( $product_id );
+    if ( $product instanceof WC_Product ) {
+        aspatn_save_attribute_arabic_fields( $product );
+    }
+
+    // نرجّع $_POST زي ما كان، عشان ما نخبّص أي AJAX ثاني
+    $_POST = $backup_post;
+}
+// نخليها تشتغل قبل دالة WooCommerce الافتراضية (اللي priority تبعها 10 عادة)
+add_action( 'wp_ajax_woocommerce_save_attributes', 'aspatn_ajax_save_attribute_arabic_fields', 5 );
+/**
+ * AJAX: رجّع الأسماء والقيم العربية الحالية من الـ DB
+ * عشان نحدّث الواجهة بعد Save attributes بدون ريفرش.
+ */
+function aspatn_ajax_get_attribute_translations() {
+    if ( empty( $_POST['product_id'] ) ) {
+        wp_send_json_error( array( 'message' => 'Missing product_id' ) );
+    }
+
+    $product_id = absint( $_POST['product_id'] );
+
+    $names  = aspatn_get_saved_attribute_names( $product_id );
+    $values = aspatn_get_saved_attribute_values( $product_id );
+
+    wp_send_json_success(
+        array(
+            'names'  => is_array( $names ) ? $names : array(),
+            'values' => is_array( $values ) ? $values : array(),
+        )
+    );
+}
+add_action( 'wp_ajax_aspatn_get_attribute_translations', 'aspatn_ajax_get_attribute_translations' );
+
