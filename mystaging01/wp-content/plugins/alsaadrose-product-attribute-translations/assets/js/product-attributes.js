@@ -165,7 +165,7 @@ jQuery(function ($) {
     }
 
     function extractAction(settings) {
-        if (!settings || !settings.data) return '';
+        if (!settings) return '';
 
         var data = settings.data;
 
@@ -177,7 +177,9 @@ jQuery(function ($) {
                 }
             });
 
-            return actionFromFormData;
+            if (actionFromFormData) {
+                return actionFromFormData;
+            }
         }
 
         if ($.isPlainObject(data) && data.action) {
@@ -191,11 +193,50 @@ jQuery(function ($) {
             }
         }
 
+        if (typeof settings.url === 'string') {
+            var urlMatch = settings.url.match(/(?:[?&])action=([^&]+)/);
+            if (urlMatch && urlMatch[1]) {
+                return decodeURIComponent(urlMatch[1].replace(/\+/g, ' '));
+            }
+        }
+
         return '';
     }
 
+    function runAfterAttributesHtmlIsReplaced(callback) {
+        var container = document.querySelector('.product_attributes');
+
+        if (!container || !window.MutationObserver) {
+            setTimeout(callback, 0);
+            return;
+        }
+
+        var fired = false;
+        var observer = new MutationObserver(function (mutations) {
+            var replaced = mutations.some(function (m) {
+                return (m.addedNodes && m.addedNodes.length) || (m.removedNodes && m.removedNodes.length);
+            });
+
+            if (replaced) {
+                fired = true;
+                observer.disconnect();
+                setTimeout(callback, 0);
+            }
+        });
+
+        observer.observe(container, { childList: true, subtree: true });
+
+        setTimeout(function () {
+            if (fired) return;
+            observer.disconnect();
+            callback();
+        }, 300);
+    }
+
     $(document).ajaxPrefilter(function (options, originalOptions, jqXHR) {
-        if (extractAction(originalOptions) !== 'woocommerce_save_attributes') {
+        var action = extractAction(originalOptions) || extractAction(options);
+
+        if (action !== 'woocommerce_save_attributes') {
             return;
         }
 
@@ -204,12 +245,12 @@ jQuery(function ($) {
             if (fetched) return;
             fetched = true;
 
-            // ننتظر الدورة التالية حتى يتم استبدال الـ HTML من WooCommerce أولاً
-            setTimeout(fetchTranslationsAndRefresh, 0);
+            // ننتظر لغاية ما WooCommerce يستبدل HTML الخصائص، ثم نجلب الترجمات
+            runAfterAttributesHtmlIsReplaced(fetchTranslationsAndRefresh);
         };
 
         // نضمن أننا نتشبّث بالـ Promise حتى بعد تهيئة WooCommerce للـ success
-        jqXHR.then(scheduleFetch);
+        jqXHR.done(scheduleFetch);
 
         if (typeof options.success === 'function') {
             var originalSuccess = options.success;
