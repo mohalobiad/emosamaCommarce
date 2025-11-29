@@ -230,9 +230,17 @@ function tpplt_filter_short_description( $content ) {
         return $content;
     }
 
-    global $post;
+    global $post, $product;
 
     if ( ! $post || 'product' !== $post->post_type ) {
+        return $content;
+    }
+
+    if ( $product instanceof WC_Product && 'product_variation' === $product->get_type() ) {
+        return $content;
+    }
+
+    if ( tpplt_is_variation_description_context() ) {
         return $content;
     }
 
@@ -249,6 +257,53 @@ function tpplt_filter_short_description( $content ) {
     return $content;
 }
 add_filter( 'woocommerce_short_description', 'tpplt_filter_short_description', 999 );
+
+/**
+ * Detect if the short description filter is running while formatting a variation description.
+ *
+ * WooCommerce passes each variation's description through `woocommerce_short_description`
+ * inside `wc_get_formatted_variation()`. In that context the global $product is the parent
+ * variable product, so the regular product type check cannot tell we are handling variation
+ * text. This helper inspects a small portion of the backtrace to spot variation formatting
+ * calls and prevent the Arabic short description from overwriting variation descriptions.
+ *
+ * @return bool
+ */
+function tpplt_is_variation_description_context() {
+    $trace = debug_backtrace( DEBUG_BACKTRACE_IGNORE_ARGS, 50 );
+
+    foreach ( $trace as $frame ) {
+        if ( isset( $frame['class'], $frame['function'] ) && 'WC_Product_Variation' === $frame['class'] && 'get_available_variation' === $frame['function'] ) {
+            return true;
+        }
+
+        if ( isset( $frame['class'], $frame['function'] ) && 'WC_Product_Variable' === $frame['class'] && 'get_available_variations' === $frame['function'] ) {
+            return true;
+        }
+
+        if ( isset( $frame['function'] ) && 'wc_get_formatted_variation' === $frame['function'] ) {
+            return true;
+        }
+
+        if ( isset( $frame['class'], $frame['function'] ) && 'WC_Product_Variation' === $frame['class'] && 'get_description' === $frame['function'] ) {
+            return true;
+        }
+
+        if ( isset( $frame['class'], $frame['function'] ) && 'WC_Product_Variable' === $frame['class'] && 'get_available_variation' === $frame['function'] ) {
+            return true;
+        }
+
+        if ( isset( $frame['class'], $frame['function'] ) && 'WC_AJAX' === $frame['class'] && 'get_variation' === $frame['function'] ) {
+            return true;
+        }
+
+        if ( isset( $frame['class'], $frame['function'] ) && 'WC_Product_Data_Store_CPT' === $frame['class'] && 'get_product_type' === $frame['function'] ) {
+            return true;
+        }
+    }
+
+    return false;
+}
 
 /**
  * Filter the main product description content when Arabic language is active.
