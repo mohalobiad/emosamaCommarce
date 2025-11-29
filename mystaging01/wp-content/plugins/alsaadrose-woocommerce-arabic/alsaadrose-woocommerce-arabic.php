@@ -127,11 +127,17 @@ add_action( 'save_post_product', 'tpplt_save_product_meta' );
  *
  * @return string
  */
-function tpplt_get_trp_current_language() {
-    static $lang = null;
+function tpplt_get_trp_current_language( $product = null, $post_id = 0 ) {
+    static $lang_cache = array();
 
-    if ( null !== $lang ) {
-        return $lang;
+    if ( $product instanceof WC_Product && ! $post_id ) {
+        $post_id = $product->get_id();
+    }
+
+    $cache_key = $post_id ? 'id_' . $post_id : 'global';
+
+    if ( isset( $lang_cache[ $cache_key ] ) ) {
+        return $lang_cache[ $cache_key ];
     }
 
     $lang = '';
@@ -143,8 +149,70 @@ function tpplt_get_trp_current_language() {
         }
     }
 
+    if ( '' === $lang && isset( $_REQUEST['TRP_LANGUAGE'] ) ) {
+        $request_lang = sanitize_text_field( wp_unslash( $_REQUEST['TRP_LANGUAGE'] ) );
+        if ( '' !== $request_lang ) {
+            $lang = $request_lang;
+        }
+    }
+
     if ( '' === $lang && isset( $GLOBALS['TRP_LANGUAGE'] ) && is_string( $GLOBALS['TRP_LANGUAGE'] ) ) {
         $lang = trim( $GLOBALS['TRP_LANGUAGE'] );
+    }
+
+    if ( '' === $lang && function_exists( 'rest_get_server' ) && defined( 'REST_REQUEST' ) && REST_REQUEST ) {
+        $server  = rest_get_server();
+        $request = $server && method_exists( $server, 'get_current_request' ) ? $server->get_current_request() : null;
+
+        if ( $request instanceof WP_REST_Request ) {
+            foreach ( array( 'trp_language', 'trp_lang', 'language', 'lang', 'locale', 'TRP_LANGUAGE' ) as $param ) {
+                $param_value = $request->get_param( $param );
+
+                if ( is_string( $param_value ) && '' !== $param_value ) {
+                    $lang = trim( $param_value );
+                    break;
+                }
+            }
+        }
+    }
+
+    if ( '' === $lang ) {
+        $cookie_candidates = array( 'trp_language', 'TRP_LANGUAGE', 'trp_language_user' );
+
+        foreach ( $cookie_candidates as $cookie_key ) {
+            if ( isset( $_COOKIE[ $cookie_key ] ) && '' !== $_COOKIE[ $cookie_key ] ) {
+                $lang = sanitize_text_field( wp_unslash( $_COOKIE[ $cookie_key ] ) );
+                break;
+            }
+        }
+    }
+
+    if ( '' === $lang ) {
+        $header_candidates = array( 'HTTP_TRP_LANGUAGE', 'HTTP_X_TRP_LANGUAGE' );
+
+        foreach ( $header_candidates as $header_key ) {
+            if ( isset( $_SERVER[ $header_key ] ) && '' !== $_SERVER[ $header_key ] ) {
+                $lang = sanitize_text_field( wp_unslash( $_SERVER[ $header_key ] ) );
+                break;
+            }
+        }
+    }
+
+    if ( '' === $lang && $post_id ) {
+        foreach ( array( '_trp_language', 'trp_language', 'language', 'lang', 'TRP_LANGUAGE' ) as $meta_key ) {
+            $meta_lang = get_post_meta( $post_id, $meta_key, true );
+
+            if ( is_string( $meta_lang ) && '' !== $meta_lang ) {
+                $lang = trim( $meta_lang );
+                break;
+            }
+        }
+    }
+
+    $lang_cache[ $cache_key ] = $lang;
+
+    if ( '' !== $lang ) {
+        wp_cache_set( 'tpplt_request_lang_' . $cache_key, $lang, 'tpplt', MINUTE_IN_SECONDS );
     }
 
     return $lang;
@@ -155,19 +223,27 @@ function tpplt_get_trp_current_language() {
  *
  * @return bool
  */
-function tpplt_is_arabic_language() {
+function tpplt_is_arabic_language( $product = null, $post_id = 0 ) {
     if ( is_admin() ) {
         return false;
     }
 
-    if ( ! function_exists( 'trp_get_current_language' ) && ! isset( $GLOBALS['TRP_LANGUAGE'] ) ) {
-        return false;
+    if ( $product instanceof WC_Product && ! $post_id ) {
+        $post_id = $product->get_id();
     }
 
-    $code = tpplt_get_trp_current_language();
+    if ( ! $post_id && isset( $GLOBALS['post'] ) && $GLOBALS['post'] instanceof WP_Post ) {
+        $post_id = $GLOBALS['post']->ID;
+    }
+
+    $code = tpplt_get_trp_current_language( $product, $post_id );
 
     if ( '' === $code ) {
-        return false;
+        $code = wp_cache_get( 'tpplt_request_lang_' . ( $post_id ? 'id_' . $post_id : 'global' ), 'tpplt' );
+    }
+
+    if ( '' === $code ) {
+        $code = tpplt_extract_arabic_route_language();
     }
 
     $code = strtolower( $code );
@@ -182,6 +258,86 @@ function tpplt_is_arabic_language() {
 
     if ( 0 === strpos( $code, 'ar-' ) ) {
         return true;
+    }
+
+    $has_arabic_meta = false;
+
+    if ( $post_id ) {
+        $has_arabic_meta = '' !== get_post_meta( $post_id, '_tpplt_desc_ar', true ) || '' !== get_post_meta( $post_id, '_asp_at_variation_desc_ar', true );
+    }
+
+    if ( $has_arabic_meta && tpplt_is_arabic_route_hint() ) {
+        return true;
+    }
+
+    return false;
+}
+
+/**
+ * Detect Arabic hints from the current route or referer.
+ *
+ * @return string
+ */
+function tpplt_extract_arabic_route_language() {
+    $paths = array();
+
+    if ( ! empty( $_SERVER['REQUEST_URI'] ) ) {
+        $paths[] = wp_unslash( $_SERVER['REQUEST_URI'] );
+    }
+
+    $referer = wp_get_referer();
+
+    if ( $referer ) {
+        $referer_path = wp_parse_url( $referer, PHP_URL_PATH );
+
+        if ( $referer_path ) {
+            $paths[] = $referer_path;
+        }
+    }
+
+    foreach ( $paths as $path ) {
+        if ( is_string( $path ) && preg_match( '#(^/ar(/|$))|(/ar/)|(/ar$)#i', $path ) ) {
+            return 'ar';
+        }
+    }
+
+    return '';
+}
+
+/**
+ * Determine whether current request hints at an Arabic context.
+ *
+ * @return bool
+ */
+function tpplt_is_arabic_route_hint() {
+    return '' !== tpplt_extract_arabic_route_language();
+}
+
+/**
+ * Determine if the current context refers to a product variation.
+ *
+ * @param WC_Product|mixed $product Optional product object.
+ * @param int              $post_id Optional post ID to check.
+ *
+ * @return bool
+ */
+function tpplt_is_variation_context( $product = null, $post_id = 0 ) {
+    if ( $product instanceof WC_Product && $product->is_type( 'variation' ) ) {
+        return true;
+    }
+
+    if ( ! $post_id && $product instanceof WC_Product ) {
+        $post_id = $product->get_id();
+    }
+
+    if ( $post_id && 'product_variation' === get_post_type( $post_id ) ) {
+        return true;
+    }
+
+    if ( empty( $post_id ) && isset( $GLOBALS['post'] ) && $GLOBALS['post'] instanceof WP_Post ) {
+        if ( 'product_variation' === $GLOBALS['post']->post_type ) {
+            return true;
+        }
     }
 
     return false;
@@ -204,7 +360,7 @@ function tpplt_filter_product_title( $title, $post_id ) {
         return $title;
     }
 
-    if ( ! tpplt_is_arabic_language() ) {
+    if ( ! tpplt_is_arabic_language( null, $post_id ) ) {
         return $title;
     }
 
@@ -232,11 +388,15 @@ function tpplt_filter_short_description( $content ) {
 
     global $post;
 
+    if ( tpplt_is_variation_context( null, $post ? $post->ID : 0 ) ) {
+        return $content;
+    }
+
     if ( ! $post || 'product' !== $post->post_type ) {
         return $content;
     }
 
-    if ( ! tpplt_is_arabic_language() ) {
+    if ( ! tpplt_is_arabic_language( null, $post ? $post->ID : 0 ) ) {
         return $content;
     }
 
@@ -266,13 +426,17 @@ function tpplt_filter_product_content( $content ) {
         return $content;
     }
 
-    if ( ! tpplt_is_arabic_language() ) {
-        return $content;
-    }
-
     $post_id = get_queried_object_id();
 
     if ( ! $post_id ) {
+        return $content;
+    }
+
+    if ( tpplt_is_variation_context( null, $post_id ) ) {
+        return $content;
+    }
+
+    if ( ! tpplt_is_arabic_language( null, $post_id ) ) {
         return $content;
     }
 
@@ -299,7 +463,7 @@ function tpplt_wc_product_get_name_ar( $name, $product ) {
         return $name;
     }
 
-    if ( ! tpplt_is_arabic_language() ) {
+    if ( ! tpplt_is_arabic_language( $product ) ) {
         return $name;
     }
 
@@ -330,11 +494,15 @@ function tpplt_wc_product_get_short_desc_ar( $short, $product ) {
         return $short;
     }
 
-    if ( ! tpplt_is_arabic_language() ) {
+    if ( ! $product instanceof WC_Product ) {
         return $short;
     }
 
-    if ( ! $product instanceof WC_Product ) {
+    if ( tpplt_is_variation_context( $product ) ) {
+        return $short;
+    }
+
+    if ( ! tpplt_is_arabic_language( $product ) ) {
         return $short;
     }
 
@@ -361,11 +529,15 @@ function tpplt_wc_product_get_desc_ar( $desc, $product ) {
         return $desc;
     }
 
-    if ( ! tpplt_is_arabic_language() ) {
+    if ( ! $product instanceof WC_Product ) {
         return $desc;
     }
 
-    if ( ! $product instanceof WC_Product ) {
+    if ( tpplt_is_variation_context( $product ) ) {
+        return $desc;
+    }
+
+    if ( ! tpplt_is_arabic_language( $product ) ) {
         return $desc;
     }
 
