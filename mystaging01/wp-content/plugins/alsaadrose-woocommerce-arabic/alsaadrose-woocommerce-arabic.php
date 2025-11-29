@@ -156,7 +156,7 @@ function tpplt_get_trp_current_language() {
  * @return bool
  */
 function tpplt_is_arabic_language() {
-    if ( is_admin() ) {
+    if ( is_admin() && ( ! function_exists( 'wp_doing_ajax' ) || ! wp_doing_ajax() ) ) {
         return false;
     }
 
@@ -230,6 +230,19 @@ function tpplt_filter_short_description( $content ) {
         return $content;
     }
 
+    if ( function_exists( 'wp_doing_ajax' ) && wp_doing_ajax() ) {
+        $action  = isset( $_REQUEST['action'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['action'] ) ) : '';
+        $wc_ajax = isset( $_REQUEST['wc-ajax'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['wc-ajax'] ) ) : '';
+
+        if ( in_array( $action, array( 'woocommerce_get_variation' ), true ) || in_array( $wc_ajax, array( 'get_variation', 'get_variations' ), true ) ) {
+            return $content;
+        }
+    }
+
+    if ( function_exists( 'is_product' ) && ! is_product() ) {
+        return $content;
+    }
+
     global $post;
 
     if ( ! $post || 'product' !== $post->post_type ) {
@@ -249,6 +262,53 @@ function tpplt_filter_short_description( $content ) {
     return $content;
 }
 add_filter( 'woocommerce_short_description', 'tpplt_filter_short_description', 999 );
+
+/**
+ * Filter variation data to use Arabic descriptions when available and prevent
+ * empty variations from inheriting the parent description.
+ *
+ * @param array               $variation_data Variation data array.
+ * @param WC_Product          $product        Parent product object.
+ * @param WC_Product_Variation $variation     Variation product object.
+ *
+ * @return array
+ */
+function tpplt_filter_available_variation( $variation_data, $product, $variation ) {
+    if ( ! $variation instanceof WC_Product_Variation ) {
+        return $variation_data;
+    }
+
+    if ( ! tpplt_is_arabic_language() ) {
+        return $variation_data;
+    }
+
+    $variation_id       = $variation->get_id();
+    $arabic_description = get_post_meta( $variation_id, '_tpplt_desc_ar', true );
+
+    $fields_to_filter = array( 'variation_description', 'variation_description_raw' );
+
+    if ( '' !== $arabic_description ) {
+        foreach ( $fields_to_filter as $field_key ) {
+            if ( 'variation_description' === $field_key ) {
+                $variation_data[ $field_key ] = wc_format_content( $arabic_description );
+                continue;
+            }
+
+            $variation_data[ $field_key ] = $arabic_description;
+        }
+
+        return $variation_data;
+    }
+
+    foreach ( $fields_to_filter as $field_key ) {
+        if ( array_key_exists( $field_key, $variation_data ) ) {
+            $variation_data[ $field_key ] = '';
+        }
+    }
+
+    return $variation_data;
+}
+add_filter( 'woocommerce_available_variation', 'tpplt_filter_available_variation', 999, 3 );
 
 /**
  * Filter the main product description content when Arabic language is active.
