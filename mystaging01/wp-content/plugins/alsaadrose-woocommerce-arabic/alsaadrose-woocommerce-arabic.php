@@ -338,6 +338,11 @@ function tpplt_wc_product_get_short_desc_ar( $short, $product ) {
         return $short;
     }
 
+    // Avoid altering variation objects; we only want to override the parent product.
+    if ( $product->is_type( 'variation' ) ) {
+        return $short;
+    }
+
     $arabic_short = get_post_meta( $product->get_id(), '_tpplt_short_ar', true );
 
     if ( ! empty( $arabic_short ) ) {
@@ -366,6 +371,11 @@ function tpplt_wc_product_get_desc_ar( $desc, $product ) {
     }
 
     if ( ! $product instanceof WC_Product ) {
+        return $desc;
+    }
+
+    // Avoid altering variation objects; we only want to override the parent product.
+    if ( $product->is_type( 'variation' ) ) {
         return $desc;
     }
 

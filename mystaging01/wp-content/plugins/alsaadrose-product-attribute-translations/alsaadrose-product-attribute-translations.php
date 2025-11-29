@@ -306,6 +306,12 @@ function aspatn_filter_variation_description( $description, $variation ) {
         return $saved;
     }
 
+    // Avoid inheriting unrelated content (like the parent short description) when the
+    // variation doesn't have its own description or Arabic translation.
+    if ( '' === trim( (string) $description ) ) {
+        return '';
+    }
+
     return $description;
 }
 add_filter( 'woocommerce_product_variation_get_description', 'aspatn_filter_variation_description', 12, 2 );
