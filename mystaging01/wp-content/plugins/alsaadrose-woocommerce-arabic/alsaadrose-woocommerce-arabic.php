@@ -380,6 +380,59 @@ function tpplt_wc_product_get_desc_ar( $desc, $product ) {
 add_filter( 'woocommerce_product_get_description', 'tpplt_wc_product_get_desc_ar', 9999, 2 );
 
 /**
+ * Filter variation data to include Arabic description when available.
+ *
+ * @param array                 $data      Variation data.
+ * @param WC_Product_Variable   $product   Parent product.
+ * @param WC_Product_Variation  $variation Variation object.
+ *
+ * @return array
+ */
+function tpplt_filter_available_variation( $data, $product, $variation ) {
+    if ( is_admin() ) {
+        return $data;
+    }
+
+    if ( ! tpplt_is_arabic_language() ) {
+        return $data;
+    }
+
+    if ( ! $variation instanceof WC_Product_Variation ) {
+        return $data;
+    }
+
+    $variation_id = $variation->get_id();
+
+    // Use shared meta from the attribute translations plugin before legacy data.
+    $arabic_desc_new    = get_post_meta( $variation_id, '_asp_at_variation_desc_ar', true );
+    $arabic_desc_legacy = get_post_meta( $variation_id, '_tpplt_desc_ar', true );
+
+    $arabic_desc = '';
+
+    if ( '' !== $arabic_desc_new ) {
+        $arabic_desc = $arabic_desc_new;
+    } elseif ( '' !== $arabic_desc_legacy ) {
+        $arabic_desc = $arabic_desc_legacy;
+
+        if ( '' === $arabic_desc_new ) {
+            update_post_meta( $variation_id, '_asp_at_variation_desc_ar', $arabic_desc_legacy );
+        }
+    }
+
+    if ( '' === $arabic_desc ) {
+        return $data;
+    }
+
+    $arabic_desc = wp_kses_post( $arabic_desc );
+
+    $data['variation_description_raw'] = $arabic_desc;
+    $data['variation_description']     = wc_format_content( $arabic_desc );
+
+    return $data;
+}
+add_filter( 'woocommerce_available_variation', 'tpplt_filter_available_variation', 9999, 3 );
+
+/**
  * Allow XLSX uploads wherever WooCommerce expects CSV files.
  *
  * @param array $filetypes Allowed file types.
