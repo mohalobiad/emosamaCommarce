@@ -67,6 +67,11 @@ jQuery(function ($) {
             valuesString = Object.values(fromCacheValues).join(' | ');
         }
 
+        console.log('[aspatn] ensureArabicFieldsForRow', slug, {
+            name: fromCacheName,
+            values: fromCacheValues
+        });
+
         // Arabic name
         if (!$nameAr.length) {
             var indexMatch = $nameCell.find('input.attribute_name').attr('name').match(/\[(\d+)\]/);
@@ -103,6 +108,8 @@ jQuery(function ($) {
     }
 
     function refreshArabicFields(overrides) {
+        console.log('[aspatn] refreshArabicFields');
+
         $('.product_attributes .woocommerce_attribute').each(function () {
             ensureArabicFieldsForRow($(this), overrides);
         });
@@ -137,21 +144,35 @@ jQuery(function ($) {
     }
 
     // --------- حل مشكلة Save attributes: إعادة تحميل القيم العربية من الـ DB ---------
-    $(document.body).on('woocommerce_attributes_saved', function () {
+    var fetchInFlight = false;
+
+    function fetchTranslationsAndRefresh(reason) {
+        console.log('[aspatn] fetchTranslationsAndRefresh triggered', reason);
+
+        if (fetchInFlight) {
+            console.log('[aspatn] fetch already running, skip', reason);
+            return;
+        }
+
         // نتأكد إن الأوبجكت تبع WooCommerce admin موجود
         if (typeof window.woocommerce_admin_meta_boxes === 'undefined') {
             refreshArabicFields();
             return;
         }
 
+        fetchInFlight = true;
+
         $.post(
             woocommerce_admin_meta_boxes.ajax_url,
             {
                 action: 'aspatn_get_attribute_translations',
-                product_id: woocommerce_admin_meta_boxes.post_id
+                product_id: woocommerce_admin_meta_boxes.post_id,
+                nonce: aspatnProductAttributes.nonce || ''
             }
         )
         .done(function (response) {
+            console.log('[aspatn] translations response', response);
+
             if (response && response.success && response.data) {
                 aspatnProductAttributes.names  = response.data.names  || {};
                 aspatnProductAttributes.values = response.data.values || {};
@@ -159,8 +180,22 @@ jQuery(function ($) {
 
             refreshArabicFields();
         })
-        .fail(function () {
+        .fail(function (xhr) {
+            console.log('[aspatn] translations ajax failed', xhr);
             refreshArabicFields();
+        })
+        .always(function () {
+            fetchInFlight = false;
         });
+    }
+
+    $(document.body).on('woocommerce_attributes_saved', function () {
+        fetchTranslationsAndRefresh('woocommerce_attributes_saved');
+    });
+
+    $(document).ajaxSuccess(function (event, xhr, settings) {
+        if (settings && typeof settings.data === 'string' && settings.data.indexOf('action=woocommerce_save_attributes') !== -1) {
+            fetchTranslationsAndRefresh('ajaxSuccess woocommerce_save_attributes');
+        }
     });
 });

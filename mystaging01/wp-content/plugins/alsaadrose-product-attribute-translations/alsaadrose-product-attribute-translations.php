@@ -352,6 +352,7 @@ function aspatn_enqueue_product_admin_assets( $hook ) {
             'values'       => $values_map,
             'labelPrompt'  => __( 'Arabic name (optional)', 'aspatn' ),
             'valuesPrompt' => __( 'Arabic value(s) (use | to separate options)', 'aspatn' ),
+            'nonce'        => wp_create_nonce( 'aspatn_get_attribute_translations' ),
         )
     );
 
@@ -446,11 +447,17 @@ add_action( 'wp_ajax_woocommerce_save_attributes', 'aspatn_ajax_save_attribute_a
  * عشان نحدّث الواجهة بعد Save attributes بدون ريفرش.
  */
 function aspatn_ajax_get_attribute_translations() {
+    check_ajax_referer( 'aspatn_get_attribute_translations', 'nonce' );
+
     if ( empty( $_POST['product_id'] ) ) {
         wp_send_json_error( array( 'message' => 'Missing product_id' ) );
     }
 
     $product_id = absint( $_POST['product_id'] );
+
+    if ( ! current_user_can( 'edit_post', $product_id ) ) {
+        wp_send_json_error( array( 'message' => 'Insufficient permissions' ) );
+    }
 
     $names  = aspatn_get_saved_attribute_names( $product_id );
     $values = aspatn_get_saved_attribute_values( $product_id );
