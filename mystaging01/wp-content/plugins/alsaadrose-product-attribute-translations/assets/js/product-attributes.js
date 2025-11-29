@@ -137,7 +137,7 @@ jQuery(function ($) {
     }
 
     // --------- حل مشكلة Save attributes: إعادة تحميل القيم العربية من الـ DB ---------
-    $(document.body).on('woocommerce_attributes_saved', function () {
+    function fetchTranslationsAndRefresh() {
         // نتأكد إن الأوبجكت تبع WooCommerce admin موجود
         if (typeof window.woocommerce_admin_meta_boxes === 'undefined') {
             refreshArabicFields();
@@ -162,5 +162,66 @@ jQuery(function ($) {
         .fail(function () {
             refreshArabicFields();
         });
+    }
+
+    function extractAction(settings) {
+        if (!settings || !settings.data) return '';
+
+        var data = settings.data;
+
+        if (data instanceof FormData) {
+            var actionFromFormData = '';
+            data.forEach(function (value, key) {
+                if (key === 'action') {
+                    actionFromFormData = value;
+                }
+            });
+
+            return actionFromFormData;
+        }
+
+        if ($.isPlainObject(data) && data.action) {
+            return data.action;
+        }
+
+        if (typeof data === 'string') {
+            var match = data.match(/(?:^|&)action=([^&]+)/);
+            if (match && match[1]) {
+                return decodeURIComponent(match[1].replace(/\+/g, ' '));
+            }
+        }
+
+        return '';
+    }
+
+    $(document).ajaxPrefilter(function (options, originalOptions, jqXHR) {
+        if (extractAction(originalOptions) !== 'woocommerce_save_attributes') {
+            return;
+        }
+
+        var fetched = false;
+        var scheduleFetch = function () {
+            if (fetched) return;
+            fetched = true;
+
+            // ننتظر الدورة التالية حتى يتم استبدال الـ HTML من WooCommerce أولاً
+            setTimeout(fetchTranslationsAndRefresh, 0);
+        };
+
+        // نضمن أننا نتشبّث بالـ Promise حتى بعد تهيئة WooCommerce للـ success
+        jqXHR.then(scheduleFetch);
+
+        if (typeof options.success === 'function') {
+            var originalSuccess = options.success;
+            options.success = function () {
+                var result = originalSuccess.apply(this, arguments);
+                scheduleFetch();
+                return result;
+            };
+        }
+    });
+
+    $(document.body).on('woocommerce_attributes_saved', function () {
+        fetchTranslationsAndRefresh();
     });
 });
