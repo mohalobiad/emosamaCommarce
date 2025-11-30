@@ -685,13 +685,11 @@ function tpplt_handle_xlsx_product_export() {
         $csv_filename = $exporter->get_filename();
         $csv_path     = trailingslashit( $upload_dir['basedir'] ) . $csv_filename;
 
-        $exporter->set_filename( $xlsx_name );
-        $xlsx_filename = $exporter->get_filename();
+        $xlsx_filename = $xlsx_name;
         $xlsx_path     = trailingslashit( $upload_dir['basedir'] ) . $xlsx_filename;
 
         try {
             TPPLT_XLSX_Exporter::convert_csv_to_xlsx( $csv_path, $xlsx_path );
-            $exporter->set_filename( $xlsx_filename );
             @unlink( $csv_path );
             @unlink( $csv_path . '.headers' );
         } catch ( Exception $e ) {
@@ -703,7 +701,7 @@ function tpplt_handle_xlsx_product_export() {
             array(
                 'nonce'    => wp_create_nonce( 'product-csv' ),
                 'action'   => 'tpplt_download_product_export',
-                'filename' => $exporter->get_filename(),
+                'filename' => $xlsx_filename,
             )
         );
 
