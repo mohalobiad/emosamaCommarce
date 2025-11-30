@@ -156,7 +156,7 @@ function tpplt_get_trp_current_language() {
  * @return bool
  */
 function tpplt_is_arabic_language() {
-    if ( is_admin() ) {
+    if ( is_admin() && ( ! function_exists( 'wp_doing_ajax' ) || ! wp_doing_ajax() ) ) {
         return false;
     }
 
@@ -230,6 +230,19 @@ function tpplt_filter_short_description( $content ) {
         return $content;
     }
 
+    if ( function_exists( 'wp_doing_ajax' ) && wp_doing_ajax() ) {
+        $action  = isset( $_REQUEST['action'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['action'] ) ) : '';
+        $wc_ajax = isset( $_REQUEST['wc-ajax'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['wc-ajax'] ) ) : '';
+
+        if ( in_array( $action, array( 'woocommerce_get_variation' ), true ) || in_array( $wc_ajax, array( 'get_variation', 'get_variations' ), true ) ) {
+            return $content;
+        }
+    }
+
+    if ( function_exists( 'is_product' ) && ! is_product() ) {
+        return $content;
+    }
+
     global $post;
 
     if ( ! $post || 'product' !== $post->post_type ) {
@@ -249,6 +262,68 @@ function tpplt_filter_short_description( $content ) {
     return $content;
 }
 add_filter( 'woocommerce_short_description', 'tpplt_filter_short_description', 999 );
+
+/**
+ * Filter variation data to use Arabic descriptions when available and prevent
+ * empty variations from inheriting the parent description.
+ *
+ * @param array               $variation_data Variation data array.
+ * @param WC_Product          $product        Parent product object.
+ * @param WC_Product_Variation $variation     Variation product object.
+ *
+ * @return array
+ */
+/**
+ * ضبط بيانات الـ variation حتى لا ترث الـ short description،
+ * وتستخدم الوصف العربي للـ variation (من أي بلغن ثاني مثل aspatn).
+ *
+ * @param array                $variation_data Variation data array.
+ * @param WC_Product           $product        Parent product object.
+ * @param WC_Product_Variation $variation      Variation product object.
+ *
+ * @return array
+ */
+function tpplt_filter_available_variation( $variation_data, $product, $variation ) {
+    if ( ! $variation instanceof WC_Product_Variation ) {
+        return $variation_data;
+    }
+
+    // نشتغل بس لما اللغة عربي
+    if ( ! tpplt_is_arabic_language() ) {
+        return $variation_data;
+    }
+
+    // هذا يرجّع وصف الـ variation (والبلغن aspatn يعدله للعربي لو موجود)
+    $arabic_description = $variation->get_description();
+
+    $fields_to_filter = array( 'variation_description', 'variation_description_raw' );
+
+    // لو ما في وصف للـ variation، نتأكد إنه ما يرث الـ short description
+    if ( '' === trim( $arabic_description ) ) {
+        foreach ( $fields_to_filter as $field_key ) {
+            if ( array_key_exists( $field_key, $variation_data ) ) {
+                $variation_data[ $field_key ] = '';
+            }
+        }
+
+        return $variation_data;
+    }
+
+    // هنا بدنا نفرمت الوصف بدون ما فلتر الـ short description تبع البلغن يتدخل
+    remove_filter( 'woocommerce_short_description', 'tpplt_filter_short_description', 999 );
+
+    $formatted = wc_format_content( $arabic_description );
+
+    add_filter( 'woocommerce_short_description', 'tpplt_filter_short_description', 999 );
+
+    // نحقن القيم الصحيحة في بيانات الـ variation اللي تروح للـ JS
+    $variation_data['variation_description_raw'] = $arabic_description;
+    $variation_data['variation_description']     = $formatted;
+
+    return $variation_data;
+}
+add_filter( 'woocommerce_available_variation', 'tpplt_filter_available_variation', 999, 3 );
+
 
 /**
  * Filter the main product description content when Arabic language is active.

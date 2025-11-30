@@ -1,8 +1,0 @@
-{
-  "apiVersion": 2,
-  "title": "Countdown timer",
-  "name": "wd/countdown-timer",
-  "description": "Counts down in seconds, minutes, hours and days to the given date.",
-  "category": "xtemos",
-  "textdomain": "woodmart"
-}

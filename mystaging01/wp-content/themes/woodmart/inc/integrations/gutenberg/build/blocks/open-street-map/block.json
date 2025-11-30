@@ -1,8 +1,0 @@
-{
-  "apiVersion": 2,
-  "title": "Open street map",
-  "name": "wd/open-street-map",
-  "description": "Display Open street map with size, marker and designs settings.",
-  "category": "xtemos",
-  "textdomain": "woodmart"
-}

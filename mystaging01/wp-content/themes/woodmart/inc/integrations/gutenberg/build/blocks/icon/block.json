@@ -1,8 +1,0 @@
-{
-  "apiVersion": 2,
-  "title": "Icon",
-  "name": "wd/icon",
-  "description": "Vector, bitmap or text icon with color and size settings.",
-  "category": "xtemos",
-  "textdomain": "woodmart"
-}

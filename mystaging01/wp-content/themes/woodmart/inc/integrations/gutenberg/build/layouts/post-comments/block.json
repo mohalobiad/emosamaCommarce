@@ -1,8 +1,0 @@
-{
-  "apiVersion": 2,
-  "title": "Post comments",
-  "name": "wd/post-comments",
-  "description": "List of the post user comments",
-  "category": "xtemos_posts_elements",
-  "textdomain": "woodmart"
-}

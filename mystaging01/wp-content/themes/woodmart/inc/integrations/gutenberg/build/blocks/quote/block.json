@@ -1,8 +1,0 @@
-{
-  "apiVersion": 2,
-  "title": "Quote",
-  "name": "wd/quote",
-  "description": "Quoted text with visual emphasis.",
-  "category": "xtemos",
-  "textdomain": "woodmart"
-}

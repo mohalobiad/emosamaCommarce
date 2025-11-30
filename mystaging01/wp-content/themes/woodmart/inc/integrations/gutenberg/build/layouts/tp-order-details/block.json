@@ -1,8 +1,0 @@
-{
-  "apiVersion": 2,
-  "title": "Order details",
-  "name": "wd/tp-order-details",
-  "description": "Detailed information about the order",
-  "category": "xtemos_thank_you_page_elements",
-  "textdomain": "woodmart"
-}

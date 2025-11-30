@@ -1,8 +1,0 @@
-{
-  "apiVersion": 2,
-  "title": "Products",
-  "name": "wd/products",
-  "description": "Showcases product loop in a grid, list, or carousel layout.",
-  "category": "xtemos",
-  "textdomain": "woodmart"
-}

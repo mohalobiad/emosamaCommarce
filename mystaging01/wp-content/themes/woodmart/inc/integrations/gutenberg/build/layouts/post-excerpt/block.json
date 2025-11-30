@@ -1,8 +1,0 @@
-{
-  "apiVersion": 2,
-  "title": "Post excerpt",
-  "name": "wd/post-excerpt",
-  "description": "Short summary of the post content",
-  "category": "xtemos_posts_elements",
-  "textdomain": "woodmart"
-}

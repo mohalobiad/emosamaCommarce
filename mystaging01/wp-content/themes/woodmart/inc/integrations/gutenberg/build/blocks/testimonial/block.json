@@ -1,8 +1,0 @@
-{
-  "apiVersion": 2,
-  "title": "Testimonial",
-  "name": "wd/testimonial",
-  "description": "Short review with authors name and optional star rating.",
-  "category": "xtemos",
-  "textdomain": "woodmart"
-}

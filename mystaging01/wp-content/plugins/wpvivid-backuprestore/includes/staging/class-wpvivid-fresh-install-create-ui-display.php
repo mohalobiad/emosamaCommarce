@@ -668,56 +668,36 @@ class WPvivid_Fresh_Install_Create_UI_Display_Free
                         }
                         else
                         {
-                            var ajax_data =
-                                {
-                                    'action': 'wpvividstg_check_filesystem_permissions_free',
-                                    'root_dir':staging_root_dir,
-                                    'path': path
-                                };
+                            var custom_dir_json = wpvivid_get_custom_create_new_wp_option();
+                            var custom_dir = JSON.stringify(custom_dir_json);
+
+                            var ajax_data = {
+                                'action': 'wpvividstg_start_staging_free',
+                                'create_new_wp':true,
+                                'path': path,
+                                'table_prefix': table_prefix,
+                                'custom_dir': custom_dir,
+                                'additional_db': additional_database_info,
+                                'root_dir':staging_root_dir,
+                            };
+
+
+                            jQuery('#wpvivid_create_new_wp_content').hide();
+                            jQuery('#wpvivid_create_new_wp_progress').show();
+
                             wpvivid_post_request(ajax_data, function (data)
                             {
-                                var jsonarray = jQuery.parseJSON(data);
-                                if (jsonarray.result === 'failed')
+                                setTimeout(function ()
                                 {
-                                    alert(jsonarray.error);
-                                }
-                                else
-                                {
-                                    var custom_dir_json = wpvivid_get_custom_create_new_wp_option();
-                                    var custom_dir = JSON.stringify(custom_dir_json);
-
-                                    var ajax_data = {
-                                        'action': 'wpvividstg_start_staging_free',
-                                        'create_new_wp':true,
-                                        'path': path,
-                                        'table_prefix': table_prefix,
-                                        'custom_dir': custom_dir,
-                                        'additional_db': additional_database_info,
-                                        'root_dir':staging_root_dir,
-                                    };
-
-
-                                    jQuery('#wpvivid_create_new_wp_content').hide();
-                                    jQuery('#wpvivid_create_new_wp_progress').show();
-
-                                    wpvivid_post_request(ajax_data, function (data)
-                                    {
-                                        setTimeout(function ()
-                                        {
-                                            wpvivid_get_create_new_wp_progress();
-                                        }, staging_requet_timeout);
-                                    }, function (XMLHttpRequest, textStatus, errorThrown)
-                                    {
-                                        jQuery('#wpvivid_create_new_wp_content').hide();
-                                        jQuery('#wpvivid_create_new_wp_progress').show();
-                                        setTimeout(function () {
-                                            wpvivid_get_create_new_wp_progress();
-                                        }, staging_requet_timeout);
-                                    });
-                                }
-                            }, function (XMLHttpRequest, textStatus, errorThrown) {
-                                var error_message = wpvivid_output_ajaxerror('creating staging site', textStatus, errorThrown);
-                                alert(error_message);
+                                    wpvivid_get_create_new_wp_progress();
+                                }, staging_requet_timeout);
+                            }, function (XMLHttpRequest, textStatus, errorThrown)
+                            {
+                                jQuery('#wpvivid_create_new_wp_content').hide();
+                                jQuery('#wpvivid_create_new_wp_progress').show();
+                                setTimeout(function () {
+                                    wpvivid_get_create_new_wp_progress();
+                                }, staging_requet_timeout);
                             });
                         }
                     }, function (XMLHttpRequest, textStatus, errorThrown) {

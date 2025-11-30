@@ -1,1 +1,0 @@
-const htmlElement=document.getElementsByTagName("html")[0],windowWidth=window.innerWidth;if(1024<windowWidth&&windowWidth>htmlElement.offsetWidth){const a=window.innerWidth-htmlElement.offsetWidth,b=document.createElement("style");b.textContent=`:root {--wd-scroll-w: ${a}px;}`,document.head.appendChild(b)}

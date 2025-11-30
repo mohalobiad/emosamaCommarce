@@ -1,8 +1,0 @@
-{
-  "apiVersion": 2,
-  "title": "Infobox",
-  "name": "wd/infobox",
-  "description": "Display clickable brief information with an icon and button.",
-  "category": "xtemos",
-  "textdomain": "woodmart"
-}

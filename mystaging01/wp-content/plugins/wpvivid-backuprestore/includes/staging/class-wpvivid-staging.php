@@ -204,7 +204,6 @@ class WPvivid_Staging_Free
         add_action('wp_ajax_wpvividstg_delete_site_free', array($this, 'delete_site'));
         add_action('wp_ajax_wpvividstg_delete_cancel_staging_site_free', array($this, 'delete_cancel_staging_site'));
         add_action('wp_ajax_wpvividstg_check_staging_dir_free', array($this, 'check_staging_dir'));
-        add_action('wp_ajax_wpvividstg_check_filesystem_permissions_free', array($this, 'check_filesystem_permissions'));
         //
         add_action('wp_ajax_wpvividstg_get_custom_database_tables_info_free',array($this, 'get_custom_database_tables_info'));
 
@@ -1471,7 +1470,21 @@ class WPvivid_Staging_Free
             {
                 if (mkdir($path, 0755, true))
                 {
-                    rmdir($path);
+                    $test_file_name = 'wpvividstg_test_file.txt';
+                    $test_file_path = $path.DIRECTORY_SEPARATOR.$test_file_name;
+                    $mk_res = fopen($test_file_path, 'wb');
+                    if (!$mk_res)
+                    {
+                        if(file_exists($path))
+                            @rmdir($path);
+                        $ret['result']='failed';
+                        $ret['error']='The directory where the staging site will be installed is not writable. Please set the permissions of the directory to 755 then try it again.';
+                        echo wp_json_encode($ret);
+                        die();
+                    }
+                    fclose($mk_res);
+                    @wp_delete_file($test_file_path);
+                    @rmdir($path);
                 } else {
                     $ret['result'] = 'failed';
                     $ret['error'] = 'Create directory is not allowed in ' . $path . '.Please check the directory permissions and try again';

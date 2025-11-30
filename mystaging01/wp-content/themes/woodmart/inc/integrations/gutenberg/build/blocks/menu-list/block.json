@@ -1,8 +1,0 @@
-{
-  "apiVersion": 2,
-  "title": "Menu list",
-  "name": "wd/menu-list",
-  "description": "Vertical navigation for use in mega menu dropdowns.",
-  "category": "xtemos",
-  "textdomain": "woodmart"
-}

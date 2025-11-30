@@ -1,8 +1,0 @@
-{
-  "apiVersion": 2,
-  "title": "Tabs",
-  "name": "wd/tabs",
-  "description": "Hide large amounts of custom content behind switchable tabs.",
-  "category": "xtemos",
-  "textdomain": "woodmart"
-}

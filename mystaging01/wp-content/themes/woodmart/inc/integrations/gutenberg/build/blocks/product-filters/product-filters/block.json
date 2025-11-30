@@ -1,8 +1,0 @@
-{
-  "apiVersion": 2,
-  "title": "Product filters",
-  "name": "wd/product-filters",
-  "description": "Filter products by attribute, category, stock status, or price.",
-  "category": "xtemos",
-  "textdomain": "woodmart"
-}

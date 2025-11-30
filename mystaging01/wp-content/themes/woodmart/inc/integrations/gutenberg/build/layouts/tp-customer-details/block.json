@@ -1,8 +1,0 @@
-{
-  "apiVersion": 2,
-  "title": "Customer details",
-  "name": "wd/tp-customer-details",
-  "description": "Customer billing and shipping details",
-  "category": "xtemos_thank_you_page_elements",
-  "textdomain": "woodmart"
-}

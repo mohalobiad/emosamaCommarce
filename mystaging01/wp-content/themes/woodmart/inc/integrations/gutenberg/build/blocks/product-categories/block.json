@@ -1,8 +1,0 @@
-{
-  "apiVersion": 2,
-  "title": "Product categories",
-  "name": "wd/product-categories",
-  "description": "Presents product categories for user navigation.",
-  "category": "xtemos",
-  "textdomain": "woodmart"
-}
