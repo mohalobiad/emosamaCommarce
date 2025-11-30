@@ -39,8 +39,11 @@ if ( ! class_exists( 'TPPLT_XLSX_Exporter' ) ) {
 
             $zip->addFromString( '[Content_Types].xml', self::content_types_xml() );
             $zip->addFromString( '_rels/.rels', self::package_relationships_xml() );
+            $zip->addFromString( 'docProps/app.xml', self::app_properties_xml() );
+            $zip->addFromString( 'docProps/core.xml', self::core_properties_xml() );
             $zip->addFromString( 'xl/workbook.xml', self::workbook_xml() );
             $zip->addFromString( 'xl/_rels/workbook.xml.rels', self::workbook_relationships_xml() );
+            $zip->addFromString( 'xl/styles.xml', self::styles_xml() );
             $zip->addFromString( 'xl/worksheets/sheet1.xml', self::worksheet_xml( $rows ) );
 
             $zip->close();
@@ -81,8 +84,11 @@ if ( ! class_exists( 'TPPLT_XLSX_Exporter' ) ) {
                 . '<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">'
                 . '<Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/>'
                 . '<Default Extension="xml" ContentType="application/xml"/>'
+                . '<Override PartName="/docProps/app.xml" ContentType="application/vnd.openxmlformats-officedocument.extended-properties+xml"/>'
+                . '<Override PartName="/docProps/core.xml" ContentType="application/vnd.openxmlformats-package.core-properties+xml"/>'
                 . '<Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/>'
                 . '<Override PartName="/xl/worksheets/sheet1.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/>'
+                . '<Override PartName="/xl/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.styles+xml"/>'
                 . '</Types>';
         }
 
@@ -95,6 +101,8 @@ if ( ! class_exists( 'TPPLT_XLSX_Exporter' ) ) {
             return '<?xml version="1.0" encoding="UTF-8"?>'
                 . '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">'
                 . '<Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="xl/workbook.xml"/>'
+                . '<Relationship Id="rId2" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/extended-properties" Target="docProps/app.xml"/>'
+                . '<Relationship Id="rId3" Type="http://schemas.openxmlformats.org/package/2006/relationships/metadata/core-properties" Target="docProps/core.xml"/>'
                 . '</Relationships>';
         }
 
@@ -121,7 +129,63 @@ if ( ! class_exists( 'TPPLT_XLSX_Exporter' ) ) {
             return '<?xml version="1.0" encoding="UTF-8"?>'
                 . '<Relationships xmlns="http://schemas.openxmlformats.org/officeDocument/2006/relationships">'
                 . '<Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet1.xml"/>'
+                . '<Relationship Id="rId2" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/>'
                 . '</Relationships>';
+        }
+
+        /**
+         * Build minimal app properties part required by Excel.
+         *
+         * @return string
+         */
+        protected static function app_properties_xml() {
+            return '<?xml version="1.0" encoding="UTF-8"?>'
+                . '<Properties xmlns="http://schemas.openxmlformats.org/officeDocument/2006/extended-properties" xmlns:vt="http://schemas.openxmlformats.org/officeDocument/2006/docPropsVTypes">'
+                . '<Application>WooCommerce</Application>'
+                . '<DocSecurity>0</DocSecurity>'
+                . '<ScaleCrop>false</ScaleCrop>'
+                . '<HeadingPairs><vt:vector size="2" baseType="variant"><vt:variant><vt:lpstr>Worksheets</vt:lpstr></vt:variant><vt:variant><vt:i4>1</vt:i4></vt:variant></vt:vector></HeadingPairs>'
+                . '<TitlesOfParts><vt:vector size="1" baseType="lpstr"><vt:lpstr>Products</vt:lpstr></vt:vector></TitlesOfParts>'
+                . '<Company></Company>'
+                . '<LinksUpToDate>false</LinksUpToDate>'
+                . '<SharedDoc>false</SharedDoc>'
+                . '<HyperlinksChanged>false</HyperlinksChanged>'
+                . '<AppVersion>16.0000</AppVersion>'
+                . '</Properties>';
+        }
+
+        /**
+         * Build minimal core properties for the package.
+         *
+         * @return string
+         */
+        protected static function core_properties_xml() {
+            $created = gmdate( 'Y-m-d\TH:i:s\Z' );
+
+            return '<?xml version="1.0" encoding="UTF-8"?>'
+                . '<cp:coreProperties xmlns:cp="http://schemas.openxmlformats.org/package/2006/metadata/core-properties" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:dcmitype="http://purl.org/dc/dcmitype/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">'
+                . '<dc:creator>WooCommerce</dc:creator>'
+                . '<cp:lastModifiedBy>WooCommerce</cp:lastModifiedBy>'
+                . '<dcterms:created xsi:type="dcterms:W3CDTF">' . $created . '</dcterms:created>'
+                . '<dcterms:modified xsi:type="dcterms:W3CDTF">' . $created . '</dcterms:modified>'
+                . '</cp:coreProperties>';
+        }
+
+        /**
+         * Provide a minimal styles part so Excel avoids recovery warnings.
+         *
+         * @return string
+         */
+        protected static function styles_xml() {
+            return '<?xml version="1.0" encoding="UTF-8"?>'
+                . '<styleSheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main">'
+                . '<fonts count="1"><font><sz val="11"/><color theme="1"/><name val="Calibri"/><family val="2"/><scheme val="minor"/></font></fonts>'
+                . '<fills count="2"><fill><patternFill patternType="none"/></fill><fill><patternFill patternType="gray125"/></fill></fills>'
+                . '<borders count="1"><border><left/><right/><top/><bottom/><diagonal/></border></borders>'
+                . '<cellStyleXfs count="1"><xf numFmtId="0" fontId="0" fillId="0" borderId="0"/></cellStyleXfs>'
+                . '<cellXfs count="1"><xf numFmtId="0" fontId="0" fillId="0" borderId="0" xfId="0"/></cellXfs>'
+                . '<cellStyles count="1"><cellStyle name="Normal" xfId="0" builtinId="0"/></cellStyles>'
+                . '</styleSheet>';
         }
 
         /**
