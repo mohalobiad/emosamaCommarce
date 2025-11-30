@@ -552,3 +552,203 @@ function tpplt_import_pre_insert_product_object( $product, $data ) {
     return $product;
 }
 add_filter( 'woocommerce_product_import_pre_insert_product_object', 'tpplt_import_pre_insert_product_object', 10, 2 );
+
+/**
+ * Render an export option to choose between CSV and XLSX formats.
+ */
+function tpplt_export_format_selector() {
+    ?>
+    <tr>
+        <th scope="row">
+            <label for="tpplt-export-format"><?php echo esc_html__( 'Which file format should be exported?', 'tpplt' ); ?></label>
+        </th>
+        <td>
+            <select id="tpplt-export-format" name="tpplt_export_format" class="wc-enhanced-select" style="width:100%;">
+                <option value="csv" selected><?php echo esc_html__( 'CSV', 'tpplt' ); ?></option>
+                <option value="xlsx"><?php echo esc_html__( 'XLSX', 'tpplt' ); ?></option>
+            </select>
+        </td>
+    </tr>
+    <?php
+}
+add_action( 'woocommerce_product_export_row', 'tpplt_export_format_selector' );
+
+/**
+ * Parse the requested export format from the serialized form string.
+ *
+ * @return string
+ */
+function tpplt_get_requested_export_format() {
+    if ( empty( $_POST['form'] ) ) {
+        return '';
+    }
+
+    $form_data = array();
+    parse_str( wp_unslash( $_POST['form'] ), $form_data );
+
+    if ( empty( $form_data['tpplt_export_format'] ) ) {
+        return '';
+    }
+
+    $format = strtolower( sanitize_key( $form_data['tpplt_export_format'] ) );
+
+    return in_array( $format, array( 'csv', 'xlsx' ), true ) ? $format : '';
+}
+
+/**
+ * Normalize an export filename to ensure it uses the desired extension.
+ *
+ * @param string $filename  Original filename from the request.
+ * @param string $extension Target extension with leading dot.
+ *
+ * @return string
+ */
+function tpplt_normalize_export_filename( $filename, $extension ) {
+    $filename = sanitize_file_name( $filename );
+
+    if ( '' === $filename ) {
+        $filename = 'wc-product-export' . $extension;
+    }
+
+    return preg_replace( '/\.[^.]+$/', $extension, $filename );
+}
+
+/**
+ * Handle XLSX generation when the product exporter runs.
+ */
+function tpplt_handle_xlsx_product_export() {
+    $format = tpplt_get_requested_export_format();
+
+    if ( 'xlsx' !== $format ) {
+        return;
+    }
+
+    check_ajax_referer( 'wc-product-export', 'security' );
+
+    if ( ! current_user_can( 'edit_products' ) || ! current_user_can( 'export' ) ) {
+        wp_send_json_error( array( 'message' => __( 'Insufficient privileges to export products.', 'tpplt' ) ) );
+    }
+
+    include_once WC_ABSPATH . 'includes/export/class-wc-product-csv-exporter.php';
+    $xlsx_helper = plugin_dir_path( __FILE__ ) . 'includes/class-tpplt-xlsx-exporter.php';
+
+    if ( file_exists( $xlsx_helper ) ) {
+        require_once $xlsx_helper;
+    }
+
+    if ( ! class_exists( 'TPPLT_XLSX_Exporter', false ) ) {
+        wp_send_json_error( array( 'message' => __( 'Unable to generate XLSX exports because the helper class is missing.', 'tpplt' ) ) );
+    }
+
+    $step         = isset( $_POST['step'] ) ? absint( $_POST['step'] ) : 1; // WPCS: input var ok, sanitization ok.
+    $exporter     = new WC_Product_CSV_Exporter();
+    $upload_dir   = wp_upload_dir();
+    $xlsx_name    = ! empty( $_POST['filename'] ) ? wp_unslash( $_POST['filename'] ) : 'wc-product-export.xlsx'; // WPCS: input var ok.
+    $xlsx_name    = tpplt_normalize_export_filename( $xlsx_name, '.xlsx' );
+    $csv_filename = tpplt_normalize_export_filename( $xlsx_name, '.csv' );
+
+    if ( ! empty( $_POST['columns'] ) ) { // WPCS: input var ok.
+        $exporter->set_column_names( wp_unslash( $_POST['columns'] ) ); // WPCS: input var ok, sanitization ok.
+    }
+
+    if ( ! empty( $_POST['selected_columns'] ) ) { // WPCS: input var ok.
+        $exporter->set_columns_to_export( wp_unslash( $_POST['selected_columns'] ) ); // WPCS: input var ok, sanitization ok.
+    }
+
+    if ( ! empty( $_POST['export_meta'] ) ) { // WPCS: input var ok.
+        $exporter->enable_meta_export( true );
+    }
+
+    if ( ! empty( $_POST['export_types'] ) ) { // WPCS: input var ok.
+        $exporter->set_product_types_to_export( wp_unslash( $_POST['export_types'] ) ); // WPCS: input var ok, sanitization ok.
+    }
+
+    if ( ! empty( $_POST['export_category'] ) && is_array( $_POST['export_category'] ) ) { // WPCS: input var ok.
+        $exporter->set_product_category_to_export( wp_unslash( array_values( $_POST['export_category'] ) ) ); // WPCS: input var ok, sanitization ok.
+    }
+
+    if ( ! empty( $_POST['export_product_ids'] ) ) { // WPCS: input var ok.
+        $ids_raw = explode( ',', sanitize_text_field( wp_unslash( $_POST['export_product_ids'] ) ) ); // WPCS: input var ok, sanitization ok.
+
+        if ( ! empty( $ids_raw ) ) {
+            $exporter->set_product_ids_to_export( $ids_raw );
+        }
+    }
+
+    $exporter->set_filename( $csv_filename );
+    $exporter->set_page( $step );
+    $exporter->generate_file();
+
+    if ( 100 === $exporter->get_percent_complete() ) {
+        $csv_path  = trailingslashit( $upload_dir['basedir'] ) . $csv_filename;
+        $xlsx_path = trailingslashit( $upload_dir['basedir'] ) . $xlsx_name;
+
+        try {
+            TPPLT_XLSX_Exporter::convert_csv_to_xlsx( $csv_path, $xlsx_path );
+            $exporter->set_filename( $xlsx_name );
+            @unlink( $csv_path );
+            @unlink( $csv_path . '.headers' );
+        } catch ( Exception $e ) {
+            wp_send_json_error( array( 'message' => $e->getMessage() ) );
+        }
+
+        $query_args = apply_filters(
+            'woocommerce_export_get_ajax_query_args',
+            array(
+                'nonce'    => wp_create_nonce( 'product-csv' ),
+                'action'   => 'tpplt_download_product_export',
+                'filename' => $exporter->get_filename(),
+            )
+        );
+
+        wp_send_json_success(
+            array(
+                'step'       => 'done',
+                'percentage' => 100,
+                'url'        => add_query_arg( $query_args, admin_url( 'edit.php?post_type=product&page=product_exporter' ) ),
+            )
+        );
+    }
+
+    wp_send_json_success(
+        array(
+            'step'       => ++$step,
+            'percentage' => $exporter->get_percent_complete(),
+            'columns'    => $exporter->get_column_names(),
+        )
+    );
+}
+add_action( 'wp_ajax_woocommerce_do_ajax_product_export', 'tpplt_handle_xlsx_product_export', 0 );
+
+/**
+ * Serve the generated XLSX file using a custom download action.
+ */
+function tpplt_maybe_download_xlsx_export() {
+    if ( empty( $_GET['action'] ) || 'tpplt_download_product_export' !== $_GET['action'] ) { // WPCS: input var ok, sanitization ok.
+        return;
+    }
+
+    if ( empty( $_GET['filename'] ) || ! wp_verify_nonce( wp_unslash( $_GET['nonce'] ?? '' ), 'product-csv' ) ) { // WPCS: input var ok.
+        wp_die( esc_html__( 'Invalid export download request.', 'tpplt' ) );
+    }
+
+    $filename   = basename( sanitize_text_field( wp_unslash( $_GET['filename'] ) ) );
+    $upload_dir = wp_upload_dir();
+    $file_path  = trailingslashit( $upload_dir['basedir'] ) . $filename;
+
+    if ( ! file_exists( $file_path ) ) {
+        wp_die( esc_html__( 'The requested export file is not available.', 'tpplt' ) );
+    }
+
+    header( 'Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' );
+    header( 'Content-Disposition: attachment; filename="' . $filename . '"' );
+    header( 'Content-Transfer-Encoding: binary' );
+
+    readfile( $file_path );
+
+    @unlink( $file_path );
+    @unlink( $file_path . '.headers' );
+
+    exit;
+}
+add_action( 'admin_init', 'tpplt_maybe_download_xlsx_export', 1 );
