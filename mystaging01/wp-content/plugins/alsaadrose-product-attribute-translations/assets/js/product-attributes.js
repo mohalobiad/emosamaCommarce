@@ -157,7 +157,7 @@ jQuery(function ($) {
     attachMutationObserver();
 
     // --------- حل مشكلة Save attributes: إعادة تحميل القيم العربية من الـ DB ---------
-    $(document.body).on('woocommerce_attributes_saved', function () {
+    function fetchTranslationsAndRefresh() {
         // نتأكد إن الأوبجكت تبع WooCommerce admin موجود
         if (typeof window.woocommerce_admin_meta_boxes === 'undefined') {
             attachMutationObserver();
@@ -185,5 +185,107 @@ jQuery(function ($) {
             attachMutationObserver();
             refreshArabicFields();
         });
+    }
+
+    function extractAction(settings) {
+        if (!settings) return '';
+
+        var data = settings.data;
+
+        if (data instanceof FormData) {
+            var actionFromFormData = '';
+            data.forEach(function (value, key) {
+                if (key === 'action') {
+                    actionFromFormData = value;
+                }
+            });
+
+            if (actionFromFormData) {
+                return actionFromFormData;
+            }
+        }
+
+        if ($.isPlainObject(data) && data.action) {
+            return data.action;
+        }
+
+        if (typeof data === 'string') {
+            var match = data.match(/(?:^|&)action=([^&]+)/);
+            if (match && match[1]) {
+                return decodeURIComponent(match[1].replace(/\+/g, ' '));
+            }
+        }
+
+        if (typeof settings.url === 'string') {
+            var urlMatch = settings.url.match(/(?:[?&])action=([^&]+)/);
+            if (urlMatch && urlMatch[1]) {
+                return decodeURIComponent(urlMatch[1].replace(/\+/g, ' '));
+            }
+        }
+
+        return '';
+    }
+
+    function runAfterAttributesHtmlIsReplaced(callback) {
+        var container = document.querySelector('.product_attributes');
+
+        if (!container || !window.MutationObserver) {
+            setTimeout(callback, 0);
+            return;
+        }
+
+        var fired = false;
+        var observer = new MutationObserver(function (mutations) {
+            var replaced = mutations.some(function (m) {
+                return (m.addedNodes && m.addedNodes.length) || (m.removedNodes && m.removedNodes.length);
+            });
+
+            if (replaced) {
+                fired = true;
+                observer.disconnect();
+                setTimeout(callback, 0);
+            }
+        });
+
+        observer.observe(container, { childList: true, subtree: true });
+
+        setTimeout(function () {
+            if (fired) return;
+            observer.disconnect();
+            callback();
+        }, 300);
+    }
+
+    $(document).ajaxPrefilter(function (options, originalOptions, jqXHR) {
+        var action = extractAction(originalOptions) || extractAction(options);
+
+        if (action !== 'woocommerce_save_attributes') {
+            return;
+        }
+
+        var fetched = false;
+        var scheduleFetch = function () {
+            if (fetched) return;
+            fetched = true;
+
+            // ننتظر لغاية ما WooCommerce يستبدل HTML الخصائص، ثم نجلب الترجمات
+            runAfterAttributesHtmlIsReplaced(fetchTranslationsAndRefresh);
+        };
+
+        // نضمن أننا نتشبّث بالـ Promise حتى بعد تهيئة WooCommerce للـ success
+        jqXHR.done(scheduleFetch);
+
+        if (typeof options.success === 'function') {
+            var originalSuccess = options.success;
+            options.success = function () {
+                var result = originalSuccess.apply(this, arguments);
+                scheduleFetch();
+                return result;
+            };
+        }
+    });
+
+    $(document.body).on('woocommerce_attributes_saved', function () {
+        fetchTranslationsAndRefresh();
     });
 });
