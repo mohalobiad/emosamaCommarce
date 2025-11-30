@@ -640,11 +640,13 @@ function tpplt_handle_xlsx_product_export() {
         wp_send_json_error( array( 'message' => __( 'Unable to generate XLSX exports because the helper class is missing.', 'tpplt' ) ) );
     }
 
-    $step         = isset( $_POST['step'] ) ? absint( $_POST['step'] ) : 1; // WPCS: input var ok, sanitization ok.
-    $exporter     = new WC_Product_CSV_Exporter();
-    $upload_dir   = wp_upload_dir();
+    $step       = isset( $_POST['step'] ) ? absint( $_POST['step'] ) : 1; // WPCS: input var ok, sanitization ok.
+    $exporter   = new WC_Product_CSV_Exporter();
+    $upload_dir = wp_upload_dir();
+
     $xlsx_name    = ! empty( $_POST['filename'] ) ? wp_unslash( $_POST['filename'] ) : 'wc-product-export.xlsx'; // WPCS: input var ok.
     $xlsx_name    = tpplt_normalize_export_filename( $xlsx_name, '.xlsx' );
+    $xlsx_name    = wp_unique_filename( $upload_dir['basedir'], $xlsx_name );
     $csv_filename = tpplt_normalize_export_filename( $xlsx_name, '.csv' );
 
     if ( ! empty( $_POST['columns'] ) ) { // WPCS: input var ok.
@@ -680,12 +682,16 @@ function tpplt_handle_xlsx_product_export() {
     $exporter->generate_file();
 
     if ( 100 === $exporter->get_percent_complete() ) {
-        $csv_path  = trailingslashit( $upload_dir['basedir'] ) . $csv_filename;
-        $xlsx_path = trailingslashit( $upload_dir['basedir'] ) . $xlsx_name;
+        $csv_filename = $exporter->get_filename();
+        $csv_path     = trailingslashit( $upload_dir['basedir'] ) . $csv_filename;
+
+        $exporter->set_filename( $xlsx_name );
+        $xlsx_filename = $exporter->get_filename();
+        $xlsx_path     = trailingslashit( $upload_dir['basedir'] ) . $xlsx_filename;
 
         try {
             TPPLT_XLSX_Exporter::convert_csv_to_xlsx( $csv_path, $xlsx_path );
-            $exporter->set_filename( $xlsx_name );
+            $exporter->set_filename( $xlsx_filename );
             @unlink( $csv_path );
             @unlink( $csv_path . '.headers' );
         } catch ( Exception $e ) {
