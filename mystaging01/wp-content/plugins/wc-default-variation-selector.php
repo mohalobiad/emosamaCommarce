@@ -28,9 +28,14 @@ add_action( 'plugins_loaded', function () {
             }
 
             add_filter( 'woocommerce_product_get_default_attributes', [ $this, 'filter_default_attributes' ], 10, 2 );
-            add_filter( 'woocommerce_variable_price_html', [ $this, 'filter_price_html' ], 10, 2 );
-            add_filter( 'woocommerce_variable_sale_price_html', [ $this, 'filter_price_html' ], 10, 2 );
+            add_filter( 'woocommerce_get_price_html', [ $this, 'filter_price_html' ], 20, 2 );
+            add_filter( 'woocommerce_variable_price_html', [ $this, 'filter_price_html' ], 20, 2 );
+            add_filter( 'woocommerce_variable_sale_price_html', [ $this, 'filter_price_html' ], 20, 2 );
             add_filter( 'woocommerce_product_get_image_id', [ $this, 'filter_image_id' ], 10, 2 );
+            add_filter( 'woocommerce_product_get_price', [ $this, 'filter_product_price' ], 10, 2 );
+            add_filter( 'woocommerce_product_get_regular_price', [ $this, 'filter_product_regular_price' ], 10, 2 );
+            add_filter( 'woocommerce_product_get_sale_price', [ $this, 'filter_product_sale_price' ], 10, 2 );
+            add_filter( 'woocommerce_available_variation', [ $this, 'filter_available_variation' ], 10, 3 );
         }
 
         public function render_selector_field( $loop, $variation_data ) {
@@ -154,6 +159,64 @@ add_action( 'plugins_loaded', function () {
             }
 
             return $variation->get_price_html();
+        }
+
+        public function filter_product_price( $price, $product ) {
+            if ( ! $product instanceof WC_Product_Variable ) {
+                return $price;
+            }
+
+            $variation = $this->get_selected_variation( $product );
+            if ( ! $variation ) {
+                return $price;
+            }
+
+            return $variation->get_price( 'edit' );
+        }
+
+        public function filter_product_regular_price( $price, $product ) {
+            if ( ! $product instanceof WC_Product_Variable ) {
+                return $price;
+            }
+
+            $variation = $this->get_selected_variation( $product );
+            if ( ! $variation ) {
+                return $price;
+            }
+
+            return $variation->get_regular_price( 'edit' );
+        }
+
+        public function filter_product_sale_price( $price, $product ) {
+            if ( ! $product instanceof WC_Product_Variable ) {
+                return $price;
+            }
+
+            $variation = $this->get_selected_variation( $product );
+            if ( ! $variation ) {
+                return $price;
+            }
+
+            return $variation->get_sale_price( 'edit' );
+        }
+
+        public function filter_available_variation( $data, $product, $variation ) {
+            if ( ! $product instanceof WC_Product_Variable ) {
+                return $data;
+            }
+
+            $selected_variation = $this->get_selected_variation( $product );
+            if ( ! $selected_variation ) {
+                return $data;
+            }
+
+            $is_selected = (int) $selected_variation->get_id() === (int) $variation->get_id();
+
+            if ( $is_selected ) {
+                $data['price_html'] = '';
+            }
+
+            return $data;
         }
 
         public function filter_image_id( $image_id, $product ) {
