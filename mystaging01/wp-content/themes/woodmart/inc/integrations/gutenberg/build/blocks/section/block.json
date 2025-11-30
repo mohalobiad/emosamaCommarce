@@ -1,8 +1,0 @@
-{
-  "apiVersion": 2,
-  "title": "Full width section",
-  "name": "wd/section",
-  "description": "Stretches inner content outside the site container.",
-  "category": "xtemos",
-  "textdomain": "woodmart"
-}

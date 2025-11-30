@@ -1,8 +1,0 @@
-{
-  "apiVersion": 2,
-  "title": "Accordion",
-  "name": "wd/accordion",
-  "description": "Allows to collapse and expand content for convenient navigation.",
-  "category": "xtemos",
-  "textdomain": "woodmart"
-}

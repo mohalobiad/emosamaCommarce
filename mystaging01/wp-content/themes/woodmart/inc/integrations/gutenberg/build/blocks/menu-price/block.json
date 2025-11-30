@@ -1,8 +1,0 @@
-{
-  "apiVersion": 2,
-  "title": "Menu price",
-  "name": "wd/menu-price",
-  "description": "Displays menu with item image, description, and price.",
-  "category": "xtemos",
-  "textdomain": "woodmart"
-}

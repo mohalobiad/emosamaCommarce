@@ -1,8 +1,0 @@
-{
-  "apiVersion": 2,
-  "title": "Order meta",
-  "name": "wd/tp-order-meta",
-  "description": "Shows order details or custom metadata",
-  "category": "xtemos_thank_you_page_elements",
-  "textdomain": "woodmart"
-}

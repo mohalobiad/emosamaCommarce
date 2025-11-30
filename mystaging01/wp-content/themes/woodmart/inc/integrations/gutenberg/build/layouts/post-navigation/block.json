@@ -1,8 +1,0 @@
-{
-  "apiVersion": 2,
-  "title": "Post navigation",
-  "name": "wd/post-navigation",
-  "description": "Links to previous and next posts",
-  "category": "xtemos_posts_elements",
-  "textdomain": "woodmart"
-}

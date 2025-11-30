@@ -1,8 +1,0 @@
-{
-  "apiVersion": 2,
-  "title": "Custom table",
-  "name": "wd/table",
-  "description": "Create structured content in rows and columns.",
-  "category": "xtemos",
-  "textdomain": "woodmart"
-}

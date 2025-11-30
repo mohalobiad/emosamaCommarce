@@ -1,8 +1,0 @@
-{
-  "apiVersion": 2,
-  "title": "Mailchimp",
-  "name": "wd/mailchimp",
-  "description": "Newsletter signup form powered by MailChimp plugin.",
-  "category": "xtemos",
-  "textdomain": "woodmart"
-}

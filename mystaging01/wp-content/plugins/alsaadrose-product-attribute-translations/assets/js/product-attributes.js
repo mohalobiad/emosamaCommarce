@@ -117,9 +117,26 @@ jQuery(function ($) {
     });
 
     // نراقب أي تغيير كبير في .product_attributes (مثلاً لما WooCommerce يبدل الـ HTML)
-    var attrContainer = document.querySelector('.product_attributes');
-    if (attrContainer && window.MutationObserver) {
-        var mo = new MutationObserver(function (mutations) {
+    var attrContainer = null;
+    var mo = null;
+
+    function attachMutationObserver() {
+        if (!window.MutationObserver) return;
+
+        var newContainer = document.querySelector('.product_attributes');
+
+        // لو تم تبديل العنصر بعد حفظ الـ attributes نحتاج نعيد الربط
+        if (!newContainer || newContainer === attrContainer) {
+            return;
+        }
+
+        // نفصل المراقب القديم قبل الربط الجديد
+        if (mo) {
+            mo.disconnect();
+        }
+
+        attrContainer = newContainer;
+        mo            = new MutationObserver(function (mutations) {
             var needsRefresh = false;
 
             mutations.forEach(function (m) {
@@ -136,10 +153,14 @@ jQuery(function ($) {
         mo.observe(attrContainer, { childList: true, subtree: true });
     }
 
+    // مراقبة أولية
+    attachMutationObserver();
+
     // --------- حل مشكلة Save attributes: إعادة تحميل القيم العربية من الـ DB ---------
     $(document.body).on('woocommerce_attributes_saved', function () {
         // نتأكد إن الأوبجكت تبع WooCommerce admin موجود
         if (typeof window.woocommerce_admin_meta_boxes === 'undefined') {
+            attachMutationObserver();
             refreshArabicFields();
             return;
         }
@@ -157,9 +178,11 @@ jQuery(function ($) {
                 aspatnProductAttributes.values = response.data.values || {};
             }
 
+            attachMutationObserver();
             refreshArabicFields();
         })
         .fail(function () {
+            attachMutationObserver();
             refreshArabicFields();
         });
     });

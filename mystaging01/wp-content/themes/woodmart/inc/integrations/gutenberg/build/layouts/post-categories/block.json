@@ -1,8 +1,0 @@
-{
-  "apiVersion": 2,
-  "title": "Post categories",
-  "name": "wd/post-categories",
-  "description": "This post belongs to the following categories",
-  "category": "xtemos_posts_elements",
-  "textdomain": "woodmart"
-}

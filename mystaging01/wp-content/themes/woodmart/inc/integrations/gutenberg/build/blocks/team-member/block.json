@@ -1,8 +1,0 @@
-{
-  "apiVersion": 2,
-  "title": "Team member",
-  "name": "wd/team-member",
-  "description": "Block with person's photo, name, position, and contact information.",
-  "category": "xtemos",
-  "textdomain": "woodmart"
-}
